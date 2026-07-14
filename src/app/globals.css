@@ -1,0 +1,35 @@
+:root {
+  --saffron: #ff9933;
+  --green: #138808;
+  --navy: #041e42;
+  --ink: #0f172a;
+  --muted: #64748b;
+  --surface: #ffffff;
+  --bg: #f1f5f9;
+  --border: #e2e8f0;
+  --radius: 14px;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+  color: var(--ink);
+  background: var(--bg);
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font: inherit;
+  cursor: pointer;
+}

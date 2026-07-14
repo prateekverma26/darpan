@@ -1,0 +1,854 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NGO DARPAN — Redesign v2 · Emerald & Gold</title>
+<link rel="icon" type="image/png" href="/assets/fab_icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700&family=Noto+Sans+Devanagari:wght@400;500;600;700;800&family=Noto+Sans+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    /* palette: deep navy blue + warm gold (variable names kept for compatibility) */
+    --forest-ink:#051726;   /* darkest */
+    --forest:#0E3A63;       /* primary drench */
+    --forest-2:#154A7C;
+    --forest-3:#1E5E96;     /* glow / hover */
+    --gold:#F2C94C;         /* action + accent */
+    --gold-2:#E5B73C;
+    --gold-soft:#F7DE93;
+    --ivory:#EAF0F7;        /* relief bg, blue-tinted (not warm cream) */
+    --ivory-2:#F3F7FC;
+    --surface:#FFFFFF;
+    --ink:#10263F;          /* text on light */
+    --muted:#4B5B6E;        /* secondary on light */
+    --on-forest:#EAF2FB;    /* text on navy */
+    --on-forest-dim:#A6BFDA;/* secondary on navy */
+    --line:#D3DEEB;
+    --line-forest:rgba(255,255,255,.12);
+
+    --serif:'Noto Sans',system-ui,-apple-system,sans-serif;
+    --sans:'Noto Sans',system-ui,-apple-system,sans-serif;
+    --deva:'Noto Sans Devanagari',var(--sans);
+    --mono:'Noto Sans',system-ui,sans-serif;
+
+    --maxw:1180px;
+    --r:16px;
+    --r-lg:22px;
+    --shadow:0 2px 4px rgba(5,23,43,.08), 0 24px 50px -28px rgba(5,23,43,.5);
+    --gold-glow:0 0 0 1px rgba(242,201,76,.35), 0 16px 40px -18px rgba(242,201,76,.45);
+    --fs:16px;
+
+    /* subtle chevron texture used on forest surfaces */
+    --chevron:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='44' height='26' viewBox='0 0 44 26'%3E%3Cpath d='M0 24 L11 4 L22 24 L33 4 L44 24' fill='none' stroke='%23ffffff' stroke-opacity='0.035' stroke-width='2'/%3E%3C/svg%3E");
+  }
+
+  html.contrast{
+    --ivory:#FFFFFF; --ivory-2:#FFFFFF; --surface:#FFFFFF;
+    --muted:#12243B; --on-forest-dim:#EAF2FB; --line:#0E3A63;
+  }
+  html.contrast .np-tile{outline:1px solid #051726;}
+
+  *{box-sizing:border-box;}
+  html{font-size:var(--fs);scroll-behavior:smooth;}
+  body{
+    margin:0;font-family:var(--sans);color:var(--ink);background:var(--ivory);
+    line-height:1.6;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;
+  }
+  a{color:inherit;text-decoration:none;}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 26px;}
+  .deva{font-family:var(--deva);}
+  .mono{font-family:var(--mono);font-variant-numeric:tabular-nums;letter-spacing:-.01em;}
+  :focus-visible{outline:3px solid var(--gold);outline-offset:3px;border-radius:6px;}
+
+  h1,h2,h3{margin:0;}
+  .serif{font-family:var(--serif);font-weight:700;}
+
+  /* ---------- top glow + chevron helper for forest blocks ---------- */
+  .forest{
+    background:
+      radial-gradient(900px 460px at 50% -160px, rgba(242,201,76,.13), transparent 62%),
+      linear-gradient(180deg,var(--forest) 0%, var(--forest-ink) 140%);
+    color:var(--on-forest);position:relative;
+  }
+  .forest::before{content:"";position:absolute;inset:0;background-image:var(--chevron);opacity:.9;pointer-events:none;}
+  .forest .wrap{position:relative;z-index:1;}
+
+  /* ---------- Tricolour hairline (thin, gold-forward) ---------- */
+  .rule-top{height:4px;display:flex;}
+  .rule-top i{flex:1;}
+  .rule-top i:nth-child(1){background:var(--gold);}
+  .rule-top i:nth-child(2){background:#fff;}
+  .rule-top i:nth-child(3){background:var(--forest-3);}
+
+  /* ---------- Utility / accessibility bar ---------- */
+  .util{background:var(--forest-ink);color:var(--on-forest-dim);font-size:.8rem;position:relative;z-index:41;}
+  .util .wrap{display:flex;align-items:center;gap:16px;min-height:40px;flex-wrap:wrap;}
+  .util .gov{letter-spacing:.05em;text-transform:uppercase;font-weight:700;color:#E8F1E9;font-size:.72rem;}
+  .util .spring{margin-left:auto;}
+  .util-grp{display:flex;align-items:center;gap:8px;}
+  .a11y-btn{background:transparent;border:1px solid rgba(255,255,255,.16);color:var(--on-forest-dim);
+    border-radius:8px;padding:3px 9px;font:inherit;font-size:.78rem;cursor:pointer;line-height:1.4;transition:.15s;}
+  .a11y-btn:hover{background:rgba(255,255,255,.08);color:#fff;}
+  .a11y-btn.on{background:var(--gold);border-color:var(--gold);color:var(--forest-ink);font-weight:700;}
+  .lang-sep{color:rgba(255,255,255,.18);}
+  .lang-btn{background:none;border:0;color:#89A695;font:inherit;cursor:pointer;padding:2px 4px;font-size:.82rem;}
+  .lang-btn.on{color:var(--gold);font-weight:700;}
+
+  /* ---------- Header ---------- */
+  .head{background:rgba(14,58,99,.86);backdrop-filter:saturate(140%) blur(10px);
+    border-bottom:1px solid var(--line-forest);position:sticky;top:0;z-index:40;color:var(--on-forest);}
+  .head .wrap{display:flex;align-items:center;gap:22px;min-height:76px;}
+  .brand{display:flex;align-items:center;gap:13px;}
+  .emblem-badge{width:46px;height:46px;flex:0 0 auto;border-radius:50%;background:var(--gold);
+    display:grid;place-items:center;box-shadow:0 8px 20px -8px rgba(242,201,76,.6);}
+  .brand-txt small{display:block;font-size:.64rem;letter-spacing:.22em;text-transform:uppercase;color:var(--on-forest-dim);font-weight:600;}
+  .brand-txt b{font-family:var(--serif);font-weight:700;font-size:1.5rem;letter-spacing:.01em;color:#fff;line-height:1;}
+  .brand-txt b span{color:var(--gold);}
+  nav.main{margin-left:6px;display:flex;gap:2px;}
+  nav.main a{padding:9px 13px;border-radius:9px;font-weight:500;font-size:.92rem;color:var(--on-forest);opacity:.86;transition:.15s;}
+  nav.main a:hover{opacity:1;background:rgba(255,255,255,.07);}
+  nav.main a.active{opacity:1;color:var(--gold);font-weight:600;}
+  .head .spring{margin-left:auto;}
+  .head-cta{display:flex;gap:10px;align-items:center;}
+  .btn{font:inherit;font-weight:700;border-radius:12px;padding:11px 20px;cursor:pointer;border:1.5px solid transparent;
+    display:inline-flex;align-items:center;gap:9px;font-size:.92rem;transition:transform .08s ease, background .18s, box-shadow .18s, border-color .18s;}
+  .btn:active{transform:translateY(1px);}
+  .btn-primary{background:var(--gold);color:var(--forest-ink);}
+  .btn-primary:hover{background:var(--gold-2);box-shadow:0 10px 26px -10px rgba(242,201,76,.6);}
+  .btn-ghost{background:transparent;color:var(--on-forest);border-color:rgba(255,255,255,.24);}
+  .btn-ghost:hover{border-color:var(--gold);color:#fff;}
+  .btn-lg{padding:15px 28px;font-size:1.02rem;border-radius:14px;}
+  .menu-toggle{display:none;}
+
+  /* real-site style white top strip */
+  .topbar{background:#fff;border-bottom:1px solid #E3E9E0;}
+  .topbar-inner{display:flex;align-items:center;gap:18px;min-height:70px;flex-wrap:wrap;padding-top:8px;padding-bottom:8px;}
+  .logo-row{display:flex;align-items:center;gap:16px;}
+  .logo-row .lg{display:block;width:auto;}
+  .lg-niti{height:42px;} .lg-ngo{height:42px;} .lg-darpan{height:44px;}
+  .lg-div{width:1px;height:40px;background:#DCE4D8;flex:0 0 auto;}
+  .topbar-util{margin-left:auto;display:flex;align-items:center;gap:12px;flex-wrap:wrap;font-size:.82rem;}
+  .tb-link{color:var(--forest);font-weight:600;}
+  .tb-link:hover{color:var(--gold-2);}
+  .tb-sep{color:#CDD6C9;}
+  .tb-grp{display:flex;align-items:center;gap:4px;}
+  .tb-btn{background:#fff;border:1px solid #D3DEEB;color:var(--forest);border-radius:8px;padding:3px 9px;font:inherit;font-size:.8rem;cursor:pointer;line-height:1.4;}
+  .tb-btn:hover{border-color:var(--forest);}
+  .tb-btn.on{background:var(--gold);border-color:var(--gold);color:var(--forest-ink);font-weight:700;}
+  .tb-lang{background:none;border:0;color:var(--muted);font:inherit;cursor:pointer;padding:2px 4px;font-size:.84rem;}
+  .tb-lang.on{color:var(--forest);font-weight:700;}
+  .btn-login{background:var(--gold);color:var(--forest-ink);border:1.5px solid var(--gold);border-radius:11px;padding:8px 18px;font-weight:800;font:inherit;font-size:.88rem;cursor:pointer;transition:.15s;}
+  .btn-login:hover{background:var(--gold-2);border-color:var(--gold-2);}
+  @media(max-width:900px){ .topbar-util .tb-link,.topbar-util .tb-sep{display:none;} }
+
+  /* ---------- Official logo plates (dark logos on white, for legibility over forest) ---------- */
+  .logo-plate{background:#fff;border-radius:11px;padding:6px 12px;display:inline-flex;align-items:center;box-shadow:0 4px 14px -5px rgba(5,23,43,.5);}
+  .brand .logo-plate img{height:40px;width:auto;display:block;}
+  .util-logo{background:#fff;border-radius:8px;padding:4px 9px;display:inline-flex;align-items:center;box-shadow:0 2px 7px rgba(0,0,0,.28);}
+  .util-logo img{height:24px;width:auto;display:block;}
+  .idc-logo{height:24px;width:auto;display:block;}
+  .foot-brand .logo-plate img{height:38px;width:auto;display:block;}
+
+  /* ---------- Hero ---------- */
+  .hero{padding:0;overflow:hidden;
+    background:
+      radial-gradient(900px 460px at 50% -160px, rgba(242,201,76,.16), transparent 62%),
+      linear-gradient(180deg, rgba(5,23,43,.88) 0%, rgba(5,23,43,.70) 52%, rgba(14,58,99,.82) 100%),
+      url('/assets/hero_img.png') center/cover no-repeat;
+  }
+  .hero .wrap{display:grid;grid-template-columns:1.06fr .94fr;gap:52px;padding:76px 26px 92px;align-items:center;}
+  .eyebrow{display:inline-flex;align-items:center;gap:9px;font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--gold);font-weight:700;background:rgba(242,201,76,.1);border:1px solid rgba(242,201,76,.3);padding:7px 14px;border-radius:100px;}
+  .eyebrow .dot{width:7px;height:7px;border-radius:50%;background:var(--gold);box-shadow:0 0 0 4px rgba(242,201,76,.22);}
+  h1.hero-h{font-family:var(--serif);font-weight:700;font-size:clamp(2.5rem,5vw,4rem);line-height:1.05;letter-spacing:-.01em;margin:22px 0 0;color:#fff;text-wrap:balance;}
+  h1.hero-h em{font-style:italic;color:var(--gold);}
+  .hero-sub{margin:22px 0 0;max-width:46ch;color:var(--on-forest-dim);font-size:1.1rem;line-height:1.7;}
+  .hero-actions{display:flex;gap:14px;margin-top:34px;flex-wrap:wrap;}
+  .hero-trust{display:flex;gap:14px;margin-top:40px;flex-wrap:wrap;}
+  .hero-trust .ht{flex:1;min-width:120px;background:rgba(255,255,255,.05);border:1px solid var(--line-forest);border-radius:14px;padding:14px 16px;}
+  .hero-trust .ht b{font-family:var(--mono);font-size:1.35rem;color:#fff;display:block;}
+  .hero-trust .ht span{font-size:.76rem;color:var(--on-forest-dim);letter-spacing:.02em;}
+
+  .hero-visual{position:relative;display:flex;justify-content:center;align-items:center;min-height:380px;}
+  .chakra{position:absolute;width:440px;height:440px;opacity:.35;animation:spin 100s linear infinite;color:var(--gold);}
+  @keyframes spin{to{transform:rotate(360deg);}}
+  .idcard{position:relative;width:min(400px,100%);
+    background:linear-gradient(158deg,#FBFDF9 0%, #EFF4EA 100%);color:var(--ink);
+    border-radius:20px;padding:24px 26px;box-shadow:0 40px 70px -30px rgba(0,0,0,.6);border:1px solid rgba(255,255,255,.7);}
+  .idcard::before{content:"";position:absolute;inset:0;border-radius:20px;padding:1.5px;
+    background:linear-gradient(150deg,var(--gold),transparent 40%,transparent 60%,var(--gold-2));
+    -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none;}
+  .idc-top{display:flex;justify-content:space-between;align-items:flex-start;}
+  .idc-top small{font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);font-weight:600;}
+  .idc-top b{font-family:var(--serif);font-weight:700;font-size:1.16rem;color:var(--forest);display:block;margin-top:3px;}
+  .idc-badge{font-size:.66rem;font-weight:700;color:var(--forest);background:var(--gold-soft);border:1px solid var(--gold);border-radius:100px;padding:5px 11px;display:inline-flex;gap:6px;align-items:center;}
+  .idc-id{font-family:var(--mono);font-size:1.55rem;font-weight:600;letter-spacing:.04em;margin:22px 0 4px;color:var(--forest);}
+  .idc-row{display:flex;justify-content:space-between;font-size:.8rem;color:var(--muted);border-top:1px dashed var(--line);padding-top:13px;margin-top:15px;}
+  .idc-row b{display:block;color:var(--forest);font-size:.92rem;font-weight:700;}
+  .idc-seal{position:absolute;bottom:20px;right:22px;width:52px;height:52px;opacity:.9;color:var(--gold-2);}
+  .idc-live{position:absolute;top:-14px;right:-12px;background:var(--gold);color:var(--forest-ink);font-size:.72rem;font-weight:800;padding:8px 13px;border-radius:100px;box-shadow:0 10px 24px -8px rgba(242,201,76,.7);display:inline-flex;gap:6px;align-items:center;}
+  .idc-live .pulse{width:7px;height:7px;border-radius:50%;background:var(--forest);animation:pulse 1.6s ease-in-out infinite;}
+  @keyframes pulse{0%,100%{opacity:.35;}50%{opacity:1;}}
+
+  /* ---------- Section scaffolding ---------- */
+  section{padding:82px 0;}
+  .sec-head{display:flex;align-items:flex-end;justify-content:space-between;gap:24px;margin-bottom:44px;flex-wrap:wrap;}
+  .sec-kick{display:inline-flex;align-items:center;gap:10px;font-size:.74rem;letter-spacing:.16em;text-transform:uppercase;color:var(--gold-2);font-weight:700;}
+  .sec-kick .seal{width:20px;height:20px;color:var(--forest-3);}
+  .forest .sec-kick{color:var(--gold);}
+  .forest .sec-kick .seal{color:var(--gold);}
+  h2.sec-h{font-family:var(--serif);font-weight:700;font-size:clamp(1.9rem,3.4vw,2.7rem);letter-spacing:-.01em;margin:14px 0 0;color:var(--forest);line-height:1.1;text-wrap:balance;max-width:20ch;}
+  .forest h2.sec-h{color:#fff;}
+  .sec-lead{max-width:52ch;color:var(--muted);margin:0;font-size:1.02rem;}
+  .forest .sec-lead{color:var(--on-forest-dim);}
+
+  /* ---------- Registry stats (ivory relief) ---------- */
+  .registry{background:var(--ivory-2);border-top:1px solid var(--line);border-bottom:1px solid var(--line);}
+  .stat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+  .stat{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:26px;position:relative;overflow:hidden;}
+  .stat .cap{display:flex;align-items:center;gap:10px;}
+  .stat .chip{width:34px;height:34px;border-radius:9px;display:grid;place-items:center;background:var(--forest);color:var(--gold);}
+  .stat.active .chip{background:var(--gold);color:var(--forest);}
+  .stat.black .chip{background:#8A1C1C;color:#fff;}
+  .stat .lbl{font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:700;}
+  .stat .num{font-family:var(--mono);font-weight:600;font-size:2.7rem;line-height:1;margin-top:16px;color:var(--forest);letter-spacing:-.02em;}
+  .stat .delta{font-size:.82rem;color:var(--forest-3);margin-top:9px;font-weight:600;}
+  .stat.black .delta{color:#8A1C1C;}
+
+  .breakdown{margin-top:26px;background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:26px 28px;}
+  .breakdown h3{margin:0 0 20px;font-size:.82rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:700;}
+  .btype{display:flex;align-items:center;gap:18px;margin:16px 0;}
+  .btype .bname{width:190px;flex:0 0 auto;font-weight:700;color:var(--forest);}
+  .btype .bname span{display:block;font-size:.76rem;color:var(--muted);font-weight:400;}
+  .btrack{flex:1;height:14px;background:var(--ivory);border:1px solid var(--line);border-radius:100px;overflow:hidden;}
+  .bfill{height:100%;border-radius:100px;width:0;transition:width 1.2s cubic-bezier(.2,.7,.2,1);}
+  .btype .bval{width:150px;text-align:right;font-family:var(--mono);color:var(--forest);font-weight:600;}
+  .btype .bval em{font-style:normal;color:var(--muted);font-size:.82rem;}
+
+  /* ---------- State tilemap ---------- */
+  .np-layout{display:grid;grid-template-columns:1.12fr .88fr;gap:42px;align-items:start;}
+  .np-mapwrap{background:rgba(255,255,255,.045);border:1px solid var(--line-forest);border-radius:var(--r-lg);padding:26px;}
+  .india-map{position:relative;}
+  .india-map svg{width:100%;height:auto;display:block;max-width:500px;margin:0 auto;filter:drop-shadow(0 20px 34px rgba(0,0,0,.4));}
+  .india-map svg path{stroke:#0A2E1F;stroke-width:.6;transition:fill .16s ease, transform .16s ease;}
+  .india-map svg path:hover{fill:#fff;}
+  html.contrast .india-map svg path{stroke:#052018;stroke-width:.9;}
+  .np-controls{display:flex;align-items:center;gap:14px;margin-top:22px;flex-wrap:wrap;}
+  .np-controls .lbl-txt{font-size:.82rem;color:var(--on-forest-dim);font-weight:700;letter-spacing:.02em;}
+  .state-select{font:inherit;font-weight:600;color:#fff;background:var(--forest-2);border:1px solid var(--line-forest);
+    border-radius:11px;padding:10px 15px;cursor:pointer;min-width:210px;appearance:none;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%23F2C94C' stroke-width='2'/%3E%3C/svg%3E");
+    background-repeat:no-repeat;background-position:right 14px center;padding-right:38px;}
+  .state-select:hover{border-color:var(--gold);}
+  .np-controls .illus{margin-left:auto;font-style:italic;opacity:.7;font-size:.8rem;color:var(--on-forest-dim);}
+
+  .np-panel{border-radius:var(--r-lg);padding:30px;position:sticky;top:96px;overflow:hidden;}
+  .np-panel .pstate{font-family:var(--serif);font-weight:700;font-size:1.7rem;color:#fff;}
+  .np-panel .pmeta{font-size:.82rem;color:var(--on-forest-dim);margin-top:3px;}
+  .np-big{font-family:var(--mono);font-size:2.9rem;font-weight:600;color:#fff;margin:20px 0 2px;letter-spacing:-.02em;}
+  .np-big-l{font-size:.76rem;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);font-weight:700;}
+  .np-mini{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:24px;}
+  .np-mini div{background:rgba(255,255,255,.06);border:1px solid var(--line-forest);border-radius:12px;padding:13px 15px;}
+  .np-mini b{display:block;font-family:var(--mono);font-size:1.25rem;color:#fff;}
+  .np-mini span{font-size:.72rem;color:var(--on-forest-dim);}
+  .np-panel .prank{margin-top:22px;font-size:.84rem;color:var(--on-forest-dim);border-top:1px solid var(--line-forest);padding-top:18px;}
+  .np-panel .prank b{color:var(--gold);}
+
+  /* ---------- How to register ---------- */
+  .reg{background:var(--ivory-2);border-top:1px solid var(--line);}
+  .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:0;counter-reset:step;}
+  .step{position:relative;padding:0 26px;}
+  .step:first-child{padding-left:0;}
+  .step:not(:last-child)::after{content:"";position:absolute;top:28px;left:calc(56px);right:0;height:2px;
+    background:repeating-linear-gradient(90deg,var(--gold) 0 8px,transparent 8px 16px);opacity:.5;}
+  .step .snum{counter-increment:step;width:56px;height:56px;border-radius:16px;background:var(--surface);
+    border:2px solid var(--gold);color:var(--forest);font-family:var(--serif);font-weight:700;font-size:1.4rem;
+    display:flex;align-items:center;justify-content:center;position:relative;z-index:1;box-shadow:0 8px 20px -12px rgba(242,201,76,.7);}
+  .step .snum::before{content:counter(step,decimal-leading-zero);}
+  .step h3{font-family:var(--sans);font-weight:800;font-size:1.14rem;margin:22px 0 8px;color:var(--forest);}
+  .step p{margin:0;color:var(--muted);font-size:.94rem;}
+
+  /* ---------- Grant portals (forest) ---------- */
+  .gcard-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;}
+  .gcard{background:rgba(255,255,255,.045);border:1px solid var(--line-forest);border-radius:var(--r);padding:24px;
+    transition:border-color .18s, transform .12s, background .18s;display:flex;flex-direction:column;gap:12px;}
+  .gcard:hover{border-color:var(--gold);transform:translateY(-4px);background:rgba(255,255,255,.07);}
+  .gcard .gtag{font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;color:var(--gold-2);font-weight:700;}
+  .gcard .ghi{font-family:var(--deva);font-weight:600;font-size:1.08rem;color:#fff;line-height:1.4;}
+  .gcard .gen{font-size:.88rem;color:var(--on-forest-dim);}
+  .gcard .glink{margin-top:auto;font-size:.86rem;font-weight:700;color:var(--gold);display:inline-flex;align-items:center;gap:7px;}
+  .gcard.more{border-style:dashed;justify-content:center;align-items:center;text-align:center;}
+  .gcard.more .ghi{font-family:var(--sans);color:var(--gold);}
+
+  /* ---------- Why / trust ---------- */
+  .why-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:22px;}
+  .why{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:26px;transition:transform .12s, box-shadow .18s;}
+  .why:hover{transform:translateY(-4px);box-shadow:var(--shadow);}
+  .why .wicon{width:52px;height:52px;border-radius:50%;background:var(--gold);color:var(--forest);
+    display:flex;align-items:center;justify-content:center;margin-bottom:18px;box-shadow:0 10px 22px -12px rgba(242,201,76,.7);}
+  .why h3{font-family:var(--sans);font-weight:800;font-size:1.1rem;margin:0 0 7px;color:var(--forest);}
+  .why p{margin:0;font-size:.92rem;color:var(--muted);}
+
+  /* ---------- CTA band (gold drench, forest ink) ---------- */
+  .ctaband{background:linear-gradient(120deg,var(--gold) 0%, var(--gold-2) 100%);color:var(--forest-ink);
+    border-radius:var(--r-lg);padding:48px 52px;display:flex;align-items:center;justify-content:space-between;gap:32px;flex-wrap:wrap;position:relative;overflow:hidden;}
+  .ctaband::after{content:"";position:absolute;right:-60px;top:-60px;width:280px;height:280px;border-radius:50%;
+    background:radial-gradient(circle,rgba(255,255,255,.35),transparent 60%);}
+  .ctaband h2{font-family:var(--serif);font-weight:700;font-size:clamp(1.7rem,2.8vw,2.3rem);margin:0;letter-spacing:-.01em;max-width:22ch;position:relative;z-index:1;}
+  .ctaband .btn-primary{background:var(--forest);color:#fff;position:relative;z-index:1;}
+  .ctaband .btn-primary:hover{background:var(--forest-ink);}
+
+  /* ---------- Footer (channels the reference) ---------- */
+  footer.forest{padding:64px 0 0;}
+  .foot-grid{display:grid;grid-template-columns:1.5fr 1fr 1.2fr 1.1fr;gap:38px;}
+  .foot-brand .fb-mark{display:flex;align-items:center;gap:12px;margin-bottom:18px;}
+  .foot-brand b{font-family:var(--serif);font-weight:700;font-size:1.5rem;color:#fff;}
+  .foot-brand b span{color:var(--gold);}
+  .foot-brand p{font-size:.9rem;max-width:38ch;margin:0;color:var(--on-forest-dim);line-height:1.7;}
+  footer h4{color:#fff;font-size:.82rem;letter-spacing:.14em;text-transform:uppercase;margin:0 0 18px;font-weight:700;}
+  footer ul{list-style:none;padding:0;margin:0;}
+  footer ul li{margin:12px 0;font-size:.92rem;color:var(--on-forest-dim);display:flex;align-items:center;gap:10px;}
+  footer ul li::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--gold);flex:0 0 auto;}
+  footer ul li a{transition:color .15s;}
+  footer ul li a:hover{color:var(--gold);}
+  .foot-loc{display:flex;gap:12px;align-items:flex-start;color:var(--on-forest-dim);font-size:.92rem;line-height:1.6;}
+  .foot-loc .pin{width:34px;height:34px;flex:0 0 auto;border-radius:50%;border:1.5px solid var(--gold);color:var(--gold);display:grid;place-items:center;}
+  .socials{display:flex;gap:12px;margin-top:22px;}
+  .socials a{width:42px;height:42px;border-radius:50%;border:1.5px solid var(--line-forest);color:var(--on-forest);display:grid;place-items:center;transition:.18s;}
+  .socials a:hover{border-color:var(--gold);color:var(--gold);transform:translateY(-2px);}
+
+  .foot-cta{border-top:1px solid var(--line-forest);margin-top:48px;padding:30px 0;display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:26px;align-items:center;}
+  .subscribe{display:flex;gap:0;border-radius:12px;overflow:hidden;border:1px solid var(--line-forest);background:rgba(255,255,255,.05);max-width:420px;}
+  .subscribe input{flex:1;background:transparent;border:0;color:#fff;font:inherit;padding:14px 16px;outline:none;}
+  .subscribe input::placeholder{color:#7E9A88;}
+  .subscribe button{background:var(--gold);color:var(--forest-ink);border:0;font:inherit;font-weight:800;padding:0 22px;cursor:pointer;display:inline-flex;align-items:center;gap:8px;transition:.15s;}
+  .subscribe button:hover{background:var(--gold-2);}
+  .foot-contact{display:flex;gap:13px;align-items:center;}
+  .foot-contact .cic{width:46px;height:46px;flex:0 0 auto;border-radius:50%;background:var(--gold);color:var(--forest);display:grid;place-items:center;}
+  .foot-contact .cic.wht{background:#fff;color:var(--forest);}
+  .foot-contact small{display:block;font-weight:700;color:#fff;font-size:.95rem;}
+  .foot-contact span{font-size:.86rem;color:var(--gold);}
+  .foot-bottom{border-top:1px solid var(--line-forest);padding:20px 0;font-size:.82rem;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;color:var(--on-forest-dim);}
+  .foot-bottom b{color:#E8F1E9;}
+
+  /* ---------- reveal ---------- */
+  .rv{opacity:0;transform:translateY(18px);transition:opacity .7s ease, transform .7s cubic-bezier(.2,.7,.2,1);}
+  .rv.in{opacity:1;transform:none;}
+
+  /* ---------- responsive ---------- */
+  @media(max-width:980px){
+    nav.main,.head-cta .btn-ghost{display:none;}
+    .menu-toggle{display:inline-flex;}
+    .hero .wrap{grid-template-columns:1fr;gap:44px;padding:56px 26px 72px;}
+    .hero-visual{min-height:340px;}
+    .stat-grid{grid-template-columns:1fr;}
+    .np-layout{grid-template-columns:1fr;}
+    .np-panel{position:static;}
+    .steps{grid-template-columns:1fr 1fr;gap:40px 0;}
+    .step:not(:last-child)::after{display:none;}
+    .gcard-grid{grid-template-columns:1fr 1fr;}
+    .why-grid{grid-template-columns:1fr 1fr;}
+    .foot-grid{grid-template-columns:1fr 1fr;}
+    .foot-cta{grid-template-columns:1fr;gap:22px;}
+  }
+  @media(max-width:600px){
+    .btype .bname{width:118px;}.btype .bval{width:104px;}
+    .gcard-grid,.why-grid,.foot-grid{grid-template-columns:1fr;}
+    .ctaband{padding:34px 28px;}
+    .idc-id{font-size:1.24rem;}
+    .hero-trust .ht{min-width:0;}
+  }
+  @media(prefers-reduced-motion:reduce){
+    .chakra{animation:none;} *{scroll-behavior:auto;}
+    .bfill{transition:none;}
+    .rv{opacity:1;transform:none;transition:none;}
+    .idc-live .pulse{animation:none;}
+  }
+</style>
+</head>
+<body>
+
+<div class="rule-top"><i></i><i></i><i></i></div>
+
+<!-- ============ UTILITY / ACCESSIBILITY BAR ============ -->
+<div class="topbar" id="top">
+  <div class="wrap topbar-inner">
+    <a href="#top" class="logo-row" aria-label="NGO DARPAN — a NITI Aayog initiative">
+      <img src="/assets/niti.png" class="lg lg-niti" alt="NITI Aayog, Government of India" width="126" height="44">
+      <span class="lg-div" aria-hidden="true"></span>
+      <img src="/assets/ngo-globe.gif" class="lg lg-ngo" alt="NGO" width="100" height="49">
+      <img src="/assets/darpan.png" class="lg lg-darpan" alt="DARPAN" width="126" height="46">
+    </a>
+    <div class="topbar-util">
+      <a href="#" class="tb-link" data-en="Screen Reader Access" data-hi="स्क्रीन रीडर एक्सेस">Screen Reader Access</a>
+      <span class="tb-sep">|</span>
+      <a href="#registry" class="tb-link" data-en="Skip to Main Content" data-hi="मुख्य सामग्री पर जाएँ">Skip to Main Content</a>
+      <div class="tb-grp" aria-label="Text size">
+        <button class="tb-btn" id="fsMinus" aria-label="Decrease text size">A−</button>
+        <button class="tb-btn on" id="fsReset" aria-label="Reset text size">A</button>
+        <button class="tb-btn" id="fsPlus" aria-label="Increase text size">A+</button>
+      </div>
+      <button class="tb-btn" id="contrastBtn" aria-pressed="false" data-en="High contrast" data-hi="हाई कॉन्ट्रास्ट">High contrast</button>
+      <div class="tb-grp" aria-label="Language">
+        <button class="tb-lang on" data-lang="en">English</button>
+        <button class="tb-lang deva" data-lang="hi">हिन्दी</button>
+      </div>
+      <button class="btn-login" data-en="Login / Signup" data-hi="लॉग इन / साइन अप">Login / Signup</button>
+    </div>
+  </div>
+</div>
+
+<!-- ============ HEADER ============ -->
+<header class="head">
+  <div class="wrap">
+    <nav class="main" aria-label="Primary">
+      <a href="#" class="active" data-en="Home" data-hi="मुखपृष्ठ">Home</a>
+      <a href="#" data-en="About" data-hi="परिचय">About</a>
+      <a href="#registry" data-en="NPO Directory" data-hi="एनपीओ निर्देशिका">NPO Directory</a>
+      <a href="#grants" data-en="Grants" data-hi="अनुदान">Grants</a>
+      <a href="#" data-en="Blacklist" data-hi="काली सूची">Blacklist</a>
+      <a href="#" data-en="Resources" data-hi="संसाधन">Resources</a>
+      <a href="#" data-en="Contact" data-hi="संपर्क">Contact</a>
+    </nav>
+    <div class="spring"></div>
+    <div class="head-cta">
+      <button class="btn btn-primary" data-en="Register your NPO" data-hi="एनपीओ पंजीकरण">Register your NPO</button>
+      <button class="btn btn-ghost menu-toggle" aria-label="Menu">☰</button>
+    </div>
+  </div>
+</header>
+
+<!-- ============ HERO ============ -->
+<section class="hero forest">
+  <div class="wrap">
+    <div class="hero-copy">
+      <h1 class="hero-h" data-en='A Digital Platform To Obtain DARPAN <em>Unique ID</em>' data-hi='दर्पण <em>विशिष्ट आईडी</em> प्राप्त करने के लिए एक डिजिटल मंच'>A Digital Platform To Obtain DARPAN <em>Unique ID</em></h1>
+      <p class="hero-sub" data-en="DARPAN is the mirror between NGOs and the government — a single, transparent record that unlocks a unique ID, grant eligibility and ministry recognition. Register once, be recognised everywhere." data-hi="दर्पण एनजीओ और सरकार के बीच का आईना है — एक पारदर्शी रिकॉर्ड जो विशिष्ट आईडी, अनुदान पात्रता और मंत्रालय मान्यता देता है। एक बार पंजीकरण करें, हर जगह पहचाने जाएँ।">DARPAN is the mirror between NGOs and the government — a single, transparent record that unlocks a unique ID, grant eligibility and ministry recognition. Register once, be recognised everywhere.</p>
+      <div class="hero-actions">
+        <button class="btn btn-primary btn-lg" data-en="Start registration →" data-hi="पंजीकरण शुरू करें →">Start registration →</button>
+        <button class="btn btn-ghost btn-lg" data-en="Search the directory" data-hi="निर्देशिका खोजें">Search the directory</button>
+      </div>
+      <div class="hero-trust">
+        <div class="ht"><b class="mono">5.86 L+</b><span data-en="NPOs registered" data-hi="पंजीकृत एनपीओ">NPOs registered</span></div>
+        <div class="ht"><b class="mono">36</b><span data-en="States & UTs" data-hi="राज्य और केंद्रशासित">States &amp; UTs</span></div>
+        <div class="ht"><b class="mono">100%</b><span data-en="Self-declared, e-signed" data-hi="स्व-घोषित, ई-हस्ताक्षरित">Self-declared, e-signed</span></div>
+      </div>
+    </div>
+
+    <div class="hero-visual">
+      <svg class="chakra" viewBox="0 0 400 400" aria-hidden="true">
+        <circle cx="200" cy="200" r="180" fill="none" stroke="currentColor" stroke-width="1"/>
+        <circle cx="200" cy="200" r="150" fill="none" stroke="currentColor" stroke-width=".7"/>
+        <circle cx="200" cy="200" r="18" fill="none" stroke="currentColor" stroke-width="3"/>
+        <g id="chakraSpokes" stroke="currentColor" stroke-width="1.4"></g>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<!-- ============ REGISTRY STATS ============ -->
+<section class="registry" id="registry">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <div>
+        <div class="sec-kick"><svg class="seal" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="1.5"/><g id="k1"></g></svg><span data-en="Live registry" data-hi="लाइव रजिस्ट्री">Live registry</span></div>
+        <h2 class="sec-h" data-en="The state of NPOs, updated in real time" data-hi="एनपीओ की स्थिति, वास्तविक समय में">The state of NPOs, updated in real time</h2>
+      </div>
+      <p class="sec-lead" data-en="Every number below is drawn from the public DARPAN registry. Transparency is the point — anyone can look." data-hi="नीचे दिया हर आँकड़ा सार्वजनिक दर्पण रजिस्ट्री से है। पारदर्शिता ही उद्देश्य है — कोई भी देख सकता है।">Every number below is drawn from the public DARPAN registry. Transparency is the point — anyone can look.</p>
+    </div>
+
+    <div class="stat-grid rv">
+      <div class="stat">
+        <div class="cap"><span class="chip"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7h16M4 12h16M4 17h10"/></svg></span><span class="lbl" data-en="Total DARPAN IDs" data-hi="कुल दर्पण आईडी">Total DARPAN IDs</span></div>
+        <div class="num" data-count="586863">0</div>
+        <div class="delta">▲ 1,204 <span data-en="this week" data-hi="इस सप्ताह">this week</span></div>
+      </div>
+      <div class="stat active">
+        <div class="cap"><span class="chip"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M20 6L9 17l-5-5"/></svg></span><span class="lbl" data-en="Active IDs" data-hi="सक्रिय आईडी">Active IDs</span></div>
+        <div class="num" data-count="586778">0</div>
+        <div class="delta">99.98% <span data-en="in good standing" data-hi="अच्छी स्थिति में">in good standing</span></div>
+      </div>
+      <div class="stat black">
+        <div class="cap"><span class="chip"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 9v4m0 4h.01M10.3 3.9L1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/></svg></span><span class="lbl" data-en="Blacklisted IDs" data-hi="काली सूची आईडी">Blacklisted IDs</span></div>
+        <div class="num" data-count="85">0</div>
+        <div class="delta" data-en="Flagged for review" data-hi="समीक्षा हेतु चिह्नित">Flagged for review</div>
+      </div>
+    </div>
+
+    <div class="breakdown rv">
+      <h3 data-en="Registered organisations by type" data-hi="प्रकार अनुसार पंजीकृत संगठन">Registered organisations by type</h3>
+      <div class="btype">
+        <div class="bname" data-en="Trust" data-hi="ट्रस्ट">Trust<span data-en="Charitable / religious" data-hi="धर्मार्थ / धार्मिक">Charitable / religious</span></div>
+        <div class="btrack"><div class="bfill" data-w="49.88" style="background:linear-gradient(90deg,var(--forest),var(--forest-3))"></div></div>
+        <div class="bval">2,92,669 <em>49.88%</em></div>
+      </div>
+      <div class="btype">
+        <div class="bname" data-en="Society" data-hi="सोसायटी">Society<span data-en="Registered societies" data-hi="पंजीकृत सोसायटी">Registered societies</span></div>
+        <div class="btrack"><div class="bfill" data-w="41.13" style="background:linear-gradient(90deg,var(--gold-2),var(--gold))"></div></div>
+        <div class="bval">2,41,316 <em>41.13%</em></div>
+      </div>
+      <div class="btype">
+        <div class="bname" data-en="Section 8 Company" data-hi="धारा 8 कंपनी">Section 8 Company<span data-en="Not-for-profit companies" data-hi="गैर-लाभकारी कंपनियाँ">Not-for-profit companies</span></div>
+        <div class="btrack"><div class="bfill" data-w="9.00" style="background:linear-gradient(90deg,#8A6D1F,var(--gold-2))"></div></div>
+        <div class="bval">52,793 <em>9.00%</em></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ STATE TILEMAP (forest) ============ -->
+<section class="forest">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <div>
+        <div class="sec-kick"><svg class="seal" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="1.5"/></svg><span data-en="Across the country" data-hi="देश भर में">Across the country</span></div>
+        <h2 class="sec-h" data-en="Registrations, state by state" data-hi="राज्यवार पंजीकरण">Registrations, state by state</h2>
+      </div>
+      <p class="sec-lead" data-en="An interactive map of India — choose any state to see its registration numbers alongside." data-hi="भारत का इंटरैक्टिव मानचित्र — किसी भी राज्य को चुनें और उसके पंजीकरण आँकड़े देखें।">An interactive map of India — choose any state to see its registration numbers alongside.</p>
+    </div>
+
+    <div class="np-layout">
+      <div class="np-mapwrap rv">
+        <div class="india-map" id="indiaMap" role="img" aria-label="Map of India showing states with registered NPOs"></div>
+        <div class="np-controls">
+          <span class="lbl-txt" data-en="Select a state" data-hi="राज्य चुनें">Select a state</span>
+          <select class="state-select" id="stateSelect" aria-label="Select a state to view its registrations"></select>
+          <span class="illus" data-en="Illustrative data" data-hi="उदाहरण डेटा">Illustrative data</span>
+        </div>
+      </div>
+
+      <aside class="np-panel rv" aria-live="polite" style="background:linear-gradient(160deg,var(--forest-2),var(--forest-ink));border:1px solid var(--line-forest);">
+        <div class="pstate" id="pState">All India</div>
+        <div class="pmeta" id="pMeta">Aggregate across 36 States &amp; UTs</div>
+        <div class="np-big-l" data-en="Registered NPOs" data-hi="पंजीकृत एनपीओ">Registered NPOs</div>
+        <div class="np-big mono" id="pTotal">5,86,863</div>
+        <div class="np-mini">
+          <div><b class="mono" id="pActive">5,86,778</b><span data-en="Active" data-hi="सक्रिय">Active</span></div>
+          <div><b class="mono" id="pTrust">2,92,669</b><span data-en="Trusts" data-hi="ट्रस्ट">Trusts</span></div>
+          <div><b class="mono" id="pSociety">2,41,316</b><span data-en="Societies" data-hi="सोसायटी">Societies</span></div>
+          <div><b class="mono" id="pSec8">52,793</b><span data-en="Section 8" data-hi="धारा 8">Section 8</span></div>
+        </div>
+        <div class="prank" id="pRank" data-en="Select a tile to view a single state, or keep the national view." data-hi="किसी राज्य के लिए टाइल चुनें, या राष्ट्रीय दृश्य रखें।">Select a tile to view a single state, or keep the national view.</div>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<!-- ============ HOW TO REGISTER ============ -->
+<section class="reg">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <div>
+        <div class="sec-kick"><svg class="seal" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="1.5"/></svg><span data-en="Four steps" data-hi="चार चरण">Four steps</span></div>
+        <h2 class="sec-h" data-en="From sign-up to unique ID" data-hi="साइन-अप से विशिष्ट आईडी तक">From sign-up to unique ID</h2>
+      </div>
+      <p class="sec-lead" data-en="The whole process is online and typically completed in one sitting, ending with an e-signed affidavit." data-hi="पूरी प्रक्रिया ऑनलाइन है और आमतौर पर एक बार में पूरी हो जाती है, ई-हस्ताक्षरित शपथ-पत्र के साथ।">The whole process is online and typically completed in one sitting, ending with an e-signed affidavit.</p>
+    </div>
+
+    <div class="steps rv">
+      <div class="step">
+        <div class="snum"></div>
+        <h3 data-en="Create an account" data-hi="खाता बनाएं">Create an account</h3>
+        <p data-en="Register with your PAN, verify email and mobile by OTP, then set a password and 4-digit mPIN." data-hi="पैन से पंजीकरण करें, ओटीपी सत्यापन करें, फिर पासवर्ड और एमपिन सेट करें।">Register with your PAN, verify email and mobile by OTP, then set a password and 4-digit mPIN.</p>
+      </div>
+      <div class="step">
+        <div class="snum"></div>
+        <h3 data-en="Add details & documents" data-hi="विवरण व दस्तावेज़">Add details &amp; documents</h3>
+        <p data-en="Fill NPO details, members, working areas, past projects and activities. Upload the required proofs." data-hi="एनपीओ विवरण, सदस्य, कार्यक्षेत्र और परियोजनाएँ भरें। दस्तावेज़ अपलोड करें।">Fill NPO details, members, working areas, past projects and activities. Upload the required proofs.</p>
+      </div>
+      <div class="step">
+        <div class="snum"></div>
+        <h3 data-en="Review & e-sign" data-hi="समीक्षा व ई-हस्ताक्षर">Review &amp; e-sign</h3>
+        <p data-en="Check every section, add witness details, then e-sign the draft affidavit with an OTP to your chief functionary." data-hi="हर अनुभाग जाँचें, गवाह विवरण जोड़ें, फिर ओटीपी से शपथ-पत्र ई-हस्ताक्षरित करें।">Check every section, add witness details, then e-sign the draft affidavit with an OTP to your chief functionary.</p>
+      </div>
+      <div class="step">
+        <div class="snum"></div>
+        <h3 data-en="Receive your DARPAN ID" data-hi="अपनी दर्पण आईडी पाएं">Receive your DARPAN ID</h3>
+        <p data-en="Your unique ID is generated instantly. Start applying for grants and exemptions across ministries." data-hi="आपकी विशिष्ट आईडी तुरंत बनती है। मंत्रालयों में अनुदान हेतु आवेदन शुरू करें।">Your unique ID is generated instantly. Start applying for grants and exemptions across ministries.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ GRANT PORTALS (forest) ============ -->
+<section class="forest" id="grants">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <div>
+        <div class="sec-kick"><svg class="seal" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="1.5"/></svg><span data-en="Grant-in-aid" data-hi="अनुदान सहायता">Grant-in-aid</span></div>
+        <h2 class="sec-h" data-en="Apply for grants across ministries" data-hi="मंत्रालयों में अनुदान हेतु आवेदन">Apply for grants across ministries</h2>
+      </div>
+      <p class="sec-lead" data-en="Once you hold a DARPAN ID, these official portals are open to you for online grant applications." data-hi="दर्पण आईडी मिलने पर ये आधिकारिक पोर्टल आपके लिए खुल जाते हैं।">Once you hold a DARPAN ID, these official portals are open to you for online grant applications.</p>
+    </div>
+
+    <div class="gcard-grid rv">
+      <a class="gcard" href="#">
+        <span class="gtag">Ministry</span>
+        <span class="ghi">नीति आयोग</span>
+        <span class="gen">Atal Innovation Mission — NITI Aayog</span>
+        <span class="glink" data-en="Open portal →" data-hi="पोर्टल खोलें →">Open portal →</span>
+      </a>
+      <a class="gcard" href="#">
+        <span class="gtag">Ministry</span>
+        <span class="ghi">नवीन एवं नवीकरणीय ऊर्जा मंत्रालय</span>
+        <span class="gen">PM-KUSUM — New &amp; Renewable Energy</span>
+        <span class="glink" data-en="Open portal →" data-hi="पोर्टल खोलें →">Open portal →</span>
+      </a>
+      <a class="gcard" href="#">
+        <span class="gtag">Ministry</span>
+        <span class="ghi">सूचना एवं प्रसारण मंत्रालय</span>
+        <span class="gen">Information &amp; Broadcasting</span>
+        <span class="glink" data-en="Open portal →" data-hi="पोर्टल खोलें →">Open portal →</span>
+      </a>
+      <a class="gcard" href="#">
+        <span class="gtag">Department</span>
+        <span class="ghi">आर्थिक कार्य विभाग</span>
+        <span class="gen">Department of Economic Affairs</span>
+        <span class="glink" data-en="Open portal →" data-hi="पोर्टल खोलें →">Open portal →</span>
+      </a>
+      <a class="gcard" href="#">
+        <span class="gtag">Cabinet</span>
+        <span class="ghi">रासायनिक हथियार अन्वेषण सचिवालय</span>
+        <span class="gen">National Authority CWC — Cabinet Secretariat</span>
+        <span class="glink" data-en="Open portal →" data-hi="पोर्टल खोलें →">Open portal →</span>
+      </a>
+      <a class="gcard more" href="#">
+        <span class="ghi" data-en="+ 40 more ministries" data-hi="+ 40 अन्य मंत्रालय">+ 40 more ministries</span>
+        <span class="gen" data-en="Browse every grant portal" data-hi="सभी पोर्टल देखें">Browse every grant portal</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ WHY DARPAN ============ -->
+<section>
+  <div class="wrap">
+    <div class="sec-head rv">
+      <div>
+        <div class="sec-kick"><svg class="seal" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="1.5"/></svg><span data-en="Why register" data-hi="पंजीकरण क्यों">Why register</span></div>
+        <h2 class="sec-h" data-en="Recognition that travels with you" data-hi="मान्यता जो हर जगह साथ जाए">Recognition that travels with you</h2>
+      </div>
+    </div>
+    <div class="why-grid rv">
+      <div class="why">
+        <div class="wicon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l2.4 7.4H22l-6 4.4 2.3 7.2L12 16.6 5.7 21l2.3-7.2-6-4.4h7.6z"/></svg></div>
+        <h3 data-en="One unique ID" data-hi="एक विशिष्ट आईडी">One unique ID</h3>
+        <p data-en="A single identity ministries and departments recognise — no repeating your credentials everywhere." data-hi="एक ही पहचान जिसे सभी मंत्रालय मानते हैं।">A single identity ministries and departments recognise — no repeating your credentials everywhere.</p>
+      </div>
+      <div class="why">
+        <div class="wicon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h7l-1 8 10-12h-7z"/></svg></div>
+        <h3 data-en="Faster grant access" data-hi="तेज़ अनुदान पहुँच">Faster grant access</h3>
+        <p data-en="Your verified profile pre-fills applications across dozens of grant-in-aid portals." data-hi="आपका सत्यापित प्रोफ़ाइल आवेदनों को पहले से भर देता है।">Your verified profile pre-fills applications across dozens of grant-in-aid portals.</p>
+      </div>
+      <div class="why">
+        <div class="wicon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg></div>
+        <h3 data-en="Public transparency" data-hi="सार्वजनिक पारदर्शिता">Public transparency</h3>
+        <p data-en="Listed in an open, searchable directory that donors and citizens can verify at any time." data-hi="एक खुली, खोजने योग्य निर्देशिका में सूचीबद्ध।">Listed in an open, searchable directory that donors and citizens can verify at any time.</p>
+      </div>
+      <div class="why">
+        <div class="wicon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l8 3v6c0 5-3.5 8.5-8 11-4.5-2.5-8-6-8-11V5z"/><path d="M9 12l2 2 4-4"/></svg></div>
+        <h3 data-en="Trusted record" data-hi="विश्वसनीय रिकॉर्ड">Trusted record</h3>
+        <p data-en="An e-signed, self-declared affidavit gives your organisation a credible government-held record." data-hi="ई-हस्ताक्षरित शपथ-पत्र आपके संगठन को विश्वसनीय रिकॉर्ड देता है।">An e-signed, self-declared affidavit gives your organisation a credible government-held record.</p>
+      </div>
+    </div>
+
+    <div class="ctaband rv" style="margin-top:60px">
+      <h2 data-en="Your organisation deserves to be recognised. Start today." data-hi="आपका संगठन मान्यता का हकदार है। आज ही शुरू करें।">Your organisation deserves to be recognised. Start today.</h2>
+      <button class="btn btn-primary btn-lg" data-en="Register your NPO →" data-hi="एनपीओ पंजीकरण →">Register your NPO →</button>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer class="forest">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <div class="fb-mark">
+          <span class="logo-plate"><img src="/assets/darpan.png" alt="NGO DARPAN" width="126" height="46"></span>
+        </div>
+        <p data-en="A NITI Aayog initiative creating an open interface between voluntary organisations and the Government of India." data-hi="स्वैच्छिक संगठनों और सरकार के बीच खुला इंटरफ़ेस बनाने की नीति आयोग की पहल।">A NITI Aayog initiative creating an open interface between voluntary organisations and the Government of India.</p>
+        <div class="socials">
+          <a href="#" aria-label="Twitter / X"><svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M18.9 2H22l-7 8 8.3 12H17l-5-7-6 7H2.9l7.5-8.6L2 2h6.3l4.5 6.3zM17 20h1.7L7 4H5.2z"/></svg></a>
+          <a href="#" aria-label="Facebook"><svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M14 9h3V6h-3c-2 0-3.5 1.5-3.5 3.5V12H8v3h2.5v7h3v-7H16l.5-3h-3V9.5c0-.3.2-.5.5-.5z"/></svg></a>
+          <a href="#" aria-label="Instagram"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a>
+          <a href="#" aria-label="YouTube"><svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M23 12s0-3.2-.4-4.7a2.5 2.5 0 0 0-1.7-1.7C19.4 5.2 12 5.2 12 5.2s-7.4 0-8.9.4A2.5 2.5 0 0 0 1.4 7.3C1 8.8 1 12 1 12s0 3.2.4 4.7a2.5 2.5 0 0 0 1.7 1.7c1.5.4 8.9.4 8.9.4s7.4 0 8.9-.4a2.5 2.5 0 0 0 1.7-1.7C23 15.2 23 12 23 12zM9.8 15.3V8.7l5.7 3.3z"/></svg></a>
+        </div>
+      </div>
+      <div>
+        <h4 data-en="Explore" data-hi="खोजें">Explore</h4>
+        <ul>
+          <li><a href="#" data-en="NPO Directory" data-hi="एनपीओ निर्देशिका">NPO Directory</a></li>
+          <li><a href="#" data-en="Grant Portals" data-hi="अनुदान पोर्टल">Grant Portals</a></li>
+          <li><a href="#" data-en="Blacklisted NPOs" data-hi="काली सूची">Blacklisted NPOs</a></li>
+          <li><a href="#" data-en="Statistics" data-hi="आँकड़े">Statistics</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 data-en="Support" data-hi="सहायता">Support</h4>
+        <ul>
+          <li><a href="#" data-en="How to register" data-hi="पंजीकरण कैसे करें">How to register</a></li>
+          <li><a href="#" data-en="FAQs" data-hi="सामान्य प्रश्न">FAQs</a></li>
+          <li><a href="#" data-en="Contact us" data-hi="संपर्क करें">Contact us</a></li>
+          <li><a href="#" data-en="Resources" data-hi="संसाधन">Resources</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 data-en="Our Location" data-hi="हमारा पता">Our Location</h4>
+        <div class="foot-loc">
+          <span class="pin"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s7-6 7-12a7 7 0 1 0-14 0c0 6 7 12 7 12z"/><circle cx="12" cy="10" r="2.5"/></svg></span>
+          <span data-en="NITI Aayog, Sansad Marg, New Delhi — 110001" data-hi="नीति आयोग, संसद मार्ग, नई दिल्ली — 110001">NITI Aayog, Sansad Marg, New Delhi — 110001</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="foot-cta">
+      <form class="subscribe" onsubmit="return false;">
+        <input type="email" placeholder="Enter email address*" aria-label="Email address" data-en-ph="Enter email address*" data-hi-ph="ईमेल पता दर्ज करें*">
+        <button type="submit" data-en="Subscribe ↗" data-hi="सदस्यता ↗">Subscribe ↗</button>
+      </form>
+      <div class="foot-contact">
+        <span class="cic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg></span>
+        <div><small data-en="Email Address" data-hi="ईमेल पता">Email Address</small><span>support@ngodarpan.gov.in</span></div>
+      </div>
+      <div class="foot-contact">
+        <span class="cic wht"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3-8.6A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.4-1.2a2 2 0 0 1 2.1-.5c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></svg></span>
+        <div><small data-en="Helpline" data-hi="हेल्पलाइन">Helpline</small><span>+91 (11) 2309-6788</span></div>
+      </div>
+    </div>
+
+    <div class="foot-bottom">
+      <span data-en="© 2026 ngodarpan.gov.in — NITI Aayog, Government of India" data-hi="© 2026 ngodarpan.gov.in — नीति आयोग, भारत सरकार">© 2026 ngodarpan.gov.in — NITI Aayog, Government of India</span>
+      <span>
+        <span data-en="Last updated" data-hi="अंतिम अद्यतन">Last updated</span>: <b>15-04-2026</b>
+        &nbsp;·&nbsp; <span data-en="Visitors" data-hi="आगंतुक">Visitors</span>: <b class="mono">50,07,335</b>
+      </span>
+    </div>
+  </div>
+  <div class="rule-top" style="margin-top:10px"><i></i><i></i><i></i></div>
+</footer>
+
+<script>
+/* ---------- Ashoka chakra spokes ---------- */
+function spokeLines(cx,cy,r1,r2,n){
+  let s='';
+  for(let i=0;i<n;i++){const a=(i/n)*Math.PI*2;
+    s+=`<line x1="${cx+Math.cos(a)*r1}" y1="${cy+Math.sin(a)*r1}" x2="${cx+Math.cos(a)*r2}" y2="${cy+Math.sin(a)*r2}"/>`;}
+  return s;
+}
+{const g=document.getElementById('chakraSpokes'); if(g) g.innerHTML=spokeLines(200,200,18,150,24);}
+{const g=document.getElementById('k1'); if(g) g.innerHTML=spokeLines(12,12,3,9,12).replace(/<line /g,'<line stroke="currentColor" stroke-width="1" ');}
+
+/* ---------- Accessibility: text size + contrast ---------- */
+let fs=16;
+const setFs=v=>{fs=Math.max(13,Math.min(21,v));document.documentElement.style.fontSize=fs+'px';};
+document.getElementById('fsPlus').onclick=()=>setFs(fs+1);
+document.getElementById('fsMinus').onclick=()=>setFs(fs-1);
+document.getElementById('fsReset').onclick=()=>setFs(16);
+const cb=document.getElementById('contrastBtn');
+cb.onclick=()=>{const on=document.documentElement.classList.toggle('contrast');cb.classList.toggle('on',on);cb.setAttribute('aria-pressed',on);};
+
+/* ---------- Language toggle ---------- */
+document.querySelectorAll('.lang-btn').forEach(b=>{
+  b.onclick=()=>{
+    const lang=b.dataset.lang;
+    document.querySelectorAll('.lang-btn').forEach(x=>x.classList.toggle('on',x===b));
+    document.querySelectorAll('[data-en]').forEach(el=>{
+      const t=lang==='hi'?el.dataset.hi:el.dataset.en;
+      if(t!=null) el.innerHTML=t;
+      if(!el.classList.contains('brand-txt')) el.classList.toggle('deva',lang==='hi');
+    });
+    document.querySelectorAll('[data-en-ph]').forEach(el=>{
+      el.placeholder = lang==='hi'?el.dataset.hiPh:el.dataset.enPh;
+    });
+    document.documentElement.lang=lang;
+  };
+});
+
+/* ---------- Count-up + bar fill + reveal on view ---------- */
+const reduce=window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+function countUp(el){
+  const target=+el.dataset.count;const dur=1500;const start=performance.now();
+  if(reduce){el.textContent=target.toLocaleString('en-IN');return;}
+  function tick(now){const p=Math.min(1,(now-start)/dur);const e=1-Math.pow(1-p,3);
+    el.textContent=Math.round(target*e).toLocaleString('en-IN');
+    if(p<1)requestAnimationFrame(tick);}
+  requestAnimationFrame(tick);
+}
+const statIO=new IntersectionObserver((es)=>{es.forEach(en=>{
+  if(!en.isIntersecting)return;
+  en.target.querySelectorAll('[data-count]').forEach(countUp);
+  en.target.querySelectorAll('.bfill').forEach(b=>{b.style.width=b.dataset.w+'%';});
+  statIO.unobserve(en.target);
+});},{threshold:.3});
+document.querySelectorAll('.registry').forEach(s=>statIO.observe(s));
+
+const rvIO=new IntersectionObserver((es)=>{es.forEach(en=>{
+  if(en.isIntersecting){en.target.classList.add('in');rvIO.unobserve(en.target);}
+});},{threshold:.12});
+document.querySelectorAll('.rv').forEach(el=>rvIO.observe(el));
+
+/* ---------- Live ID ticker ---------- */
+(function(){
+  const el=document.getElementById('liveId');if(!el)return;const states=['DL','MH','KA','TN','UP','WB','GJ','RJ'];
+  let i=0;
+  setInterval(()=>{
+    i++;const st=states[i%states.length];
+    const n=(400000+((i*48271)%180000)).toString().padStart(7,'0'); // deterministic-ish, no Math.random flicker
+    el.textContent=`${st}/2026/${n}`;
+  },2600);
+})();
+
+/* ---------- State tile map ---------- */
+const STATES=[
+ {n:'Jammu & Kashmir',ab:'JK',c:3,r:1,v:3800},{n:'Ladakh',ab:'LA',c:4,r:1,v:600},
+ {n:'Punjab',ab:'PB',c:3,r:2,v:13000},{n:'Himachal Pradesh',ab:'HP',c:4,r:2,v:4500},{n:'Uttarakhand',ab:'UK',c:5,r:2,v:6000},
+ {n:'Rajasthan',ab:'RJ',c:2,r:3,v:27000},{n:'Haryana',ab:'HR',c:4,r:3,v:14000},{n:'Delhi',ab:'DL',c:5,r:3,v:16000},{n:'Sikkim',ab:'SK',c:7,r:3,v:900},{n:'Arunachal Pradesh',ab:'AR',c:8,r:3,v:1200},
+ {n:'Gujarat',ab:'GJ',c:1,r:4,v:33000},{n:'Madhya Pradesh',ab:'MP',c:3,r:4,v:29000},{n:'Uttar Pradesh',ab:'UP',c:5,r:4,v:62000},{n:'Bihar',ab:'BR',c:6,r:4,v:24000},{n:'Assam',ab:'AS',c:7,r:4,v:11000},{n:'Nagaland',ab:'NL',c:8,r:4,v:1400},
+ {n:'Maharashtra',ab:'MH',c:2,r:5,v:78000},{n:'Chhattisgarh',ab:'CG',c:4,r:5,v:10500},{n:'Jharkhand',ab:'JH',c:6,r:5,v:12000},{n:'West Bengal',ab:'WB',c:7,r:5,v:38000},{n:'Meghalaya',ab:'ML',c:8,r:5,v:1300},
+ {n:'Goa',ab:'GA',c:1,r:6,v:2200},{n:'Telangana',ab:'TS',c:3,r:6,v:22000},{n:'Odisha',ab:'OD',c:5,r:6,v:18000},
+ {n:'Karnataka',ab:'KA',c:2,r:7,v:41000},{n:'Andhra Pradesh',ab:'AP',c:3,r:7,v:31000},
+ {n:'Kerala',ab:'KL',c:2,r:8,v:21000},{n:'Tamil Nadu',ab:'TN',c:3,r:8,v:45000},
+];
+const IN=n=>n.toLocaleString('en-IN');
+const ALL={n:'All India',meta:'Aggregate across 36 States & UTs',v:586863,active:586778,trust:292669,society:241316,sec8:52793,rank:null};
+function stateObj(s){
+  return {n:s.n,meta:`DARPAN registrations · ${s.ab}`,v:s.v,
+    active:Math.round(s.v*0.9998),trust:Math.round(s.v*.4988),
+    society:Math.round(s.v*.4113),sec8:Math.round(s.v*.09),
+    rank:[...STATES].sort((a,b)=>b.v-a.v).findIndex(x=>x.n===s.n)+1};
+}
+function setPanel(o){
+  document.getElementById('pState').textContent=o.n;
+  document.getElementById('pMeta').textContent=o.meta;
+  document.getElementById('pTotal').textContent=IN(o.v);
+  document.getElementById('pActive').textContent=IN(o.active);
+  document.getElementById('pTrust').textContent=IN(o.trust);
+  document.getElementById('pSociety').textContent=IN(o.society);
+  document.getElementById('pSec8').textContent=IN(o.sec8);
+  document.getElementById('pRank').innerHTML=o.rank
+    ?`Ranked <b>#${o.rank}</b> of ${STATES.length} shown by number of registered NPOs.`
+    :'Select a state to view a single state, or keep the national view.';
+}
+
+/* populate the state selector */
+const sel=document.getElementById('stateSelect');
+const optAll=document.createElement('option');optAll.value='__all';optAll.textContent='All India';sel.appendChild(optAll);
+[...STATES].sort((a,b)=>a.n.localeCompare(b.n)).forEach(s=>{
+  const o=document.createElement('option');o.value=s.n;o.textContent=s.n;sel.appendChild(o);
+});
+sel.onchange=()=>{
+  if(sel.value==='__all'){setPanel(ALL);return;}
+  const s=STATES.find(x=>x.n===sel.value);if(s)setPanel(stateObj(s));
+};
+setPanel(ALL);
+
+/* inject the real India map so states can be styled/hovered inline */
+fetch('/assets/india_map.svg').then(r=>r.text()).then(svg=>{
+  const c=document.getElementById('indiaMap');if(c)c.innerHTML=svg;
+}).catch(()=>{});
+</script>
+</body>
+</html>
