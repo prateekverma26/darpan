@@ -156,6 +156,15 @@
   .hero-trust .ht b{font-family:var(--mono);font-size:1.15rem;color:#fff;}
   .hero-trust .ht span{font-size:.76rem;color:#8FA1C4;letter-spacing:.02em;}
 
+  /* ---------- Disclaimer marquee (below hero) ---------- */
+  .marquee{background:var(--navy-ink);color:#EAF0FC;border-top:1px solid var(--navy-2);border-bottom:1px solid var(--navy-2);overflow:hidden;white-space:nowrap;}
+  .marquee-track{display:inline-flex;align-items:center;gap:64px;padding:12px 0;will-change:transform;animation:marquee 34s linear infinite;}
+  .marquee-track span{display:inline-flex;align-items:center;gap:14px;font-size:.92rem;font-weight:600;letter-spacing:.01em;}
+  .marquee-track span::before{content:"";width:7px;height:7px;flex:0 0 auto;border-radius:50%;background:var(--saffron-2);}
+  .marquee:hover .marquee-track{animation-play-state:paused;}
+  @keyframes marquee{from{transform:translateX(0);}to{transform:translateX(-50%);}}
+  @media (prefers-reduced-motion:reduce){.marquee-track{animation:none;white-space:normal;justify-content:center;}}
+
   /* chakra + ID card */
   .hero-visual{position:relative;display:flex;justify-content:center;align-items:center;min-height:360px;}
   .chakra{position:absolute;width:430px;height:430px;opacity:.5;animation:spin 90s linear infinite;}
@@ -208,11 +217,14 @@
   .india-map svg path{stroke:#0B1733;stroke-width:.6;transition:fill .16s ease;}
   .india-map svg path[data-state]{cursor:pointer;}
   .india-map svg path[data-state]:hover{fill:#fff;}
+  .india-map svg path[data-state].sel{fill:var(--saffron);}
   html.contrast .india-map svg path{stroke:#000;stroke-width:.9;}
-  .map-tip{position:absolute;z-index:5;pointer-events:none;transform:translate(-50%,-132%);
+  .map-tip{position:absolute;z-index:5;pointer-events:none;transform:translate(-50%,-132%);text-align:center;line-height:1.25;
     background:var(--navy-ink);color:#fff;border:1px solid var(--saffron);
-    font-size:.78rem;font-weight:600;padding:6px 11px;border-radius:9px;white-space:nowrap;
+    font-size:.78rem;font-weight:600;padding:7px 12px;border-radius:9px;white-space:nowrap;
     box-shadow:0 12px 26px -10px rgba(0,0,0,.7);opacity:0;transition:opacity .12s ease;}
+  .map-tip b{display:block;font-weight:700;font-size:.8rem;}
+  .map-tip .c{display:block;font-weight:700;font-size:.72rem;color:#FFD36B;margin-top:2px;}
   .map-tip.show{opacity:1;}
   .map-tip::after{content:"";position:absolute;left:50%;top:100%;transform:translateX(-50%);
     border:5px solid transparent;border-top-color:var(--saffron);}
@@ -238,6 +250,39 @@
     html.anim .hero-visual{transform:translateY(0) scale(.955);}
     html.anim .in{opacity:1 !important;transform:none !important;}
   }
+
+  /* ---------- Important Advisory modal ---------- */
+  .advisory-overlay{position:fixed;inset:0;z-index:200;display:grid;place-items:safe center;padding:20px;overflow:auto;
+    background:rgba(11,23,51,.58);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);
+    opacity:0;visibility:hidden;transition:opacity .28s ease,visibility .28s ease;}
+  .advisory-overlay.open{opacity:1;visibility:visible;}
+  .advisory-card{width:min(640px,100%);overflow:hidden;
+    background:var(--surface);border:1px solid var(--line);border-radius:18px;
+    box-shadow:0 30px 80px -20px rgba(11,23,51,.6);
+    transform:translateY(16px) scale(.98);opacity:.5;transition:transform .32s cubic-bezier(.2,.7,.2,1),opacity .32s ease;}
+  .advisory-overlay.open .advisory-card{transform:none;opacity:1;}
+  .advisory-head{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:18px 22px;
+    background:linear-gradient(100deg,var(--navy) 0%, var(--navy-2) 34%, var(--saffron-2) 82%, var(--saffron) 100%);}
+  .advisory-head .adv-title{display:flex;align-items:center;gap:13px;min-width:0;}
+  .advisory-ic{width:40px;height:40px;flex:0 0 auto;border-radius:11px;background:#fff;color:var(--saffron);
+    display:grid;place-items:center;box-shadow:0 6px 14px -6px rgba(11,23,51,.5);}
+  .advisory-ic svg{width:23px;height:23px;}
+  .advisory-head h2{font-family:var(--display);font-weight:800;font-size:1.3rem;color:#fff;margin:0;letter-spacing:-.01em;}
+  .advisory-close{flex:0 0 auto;width:36px;height:36px;border-radius:50%;border:0;cursor:pointer;
+    background:rgba(255,255,255,.94);color:var(--navy);display:grid;place-items:center;transition:background .15s ease,transform .18s ease;}
+  .advisory-close:hover{background:#fff;transform:rotate(90deg);}
+  .advisory-close svg{width:18px;height:18px;}
+  .advisory-body{position:relative;padding:24px 26px 26px;border-top:3px solid var(--navy);
+    background-color:var(--surface);background-image:var(--dots);background-size:var(--dots-size);}
+  .advisory-body p{margin:0 0 13px;color:var(--muted);font-size:.94rem;line-height:1.6;position:relative;z-index:1;}
+  .advisory-body p:last-child{margin-bottom:0;}
+  .advisory-body strong{color:var(--navy);font-weight:700;}
+  .advisory-wm{position:absolute;right:-8px;bottom:-16px;width:180px;height:180px;color:var(--navy);opacity:.06;pointer-events:none;z-index:0;}
+  @media (max-width:560px){ .advisory-head h2{font-size:1.12rem;} .advisory-body{padding:20px;} }
+  @media (prefers-reduced-motion:reduce){
+    .advisory-overlay,.advisory-card{transition:opacity .2s ease;}
+    .advisory-card{transform:none;opacity:1;}
+  }
   .np-controls{display:flex;align-items:center;gap:14px;margin-top:20px;flex-wrap:wrap;}
   .np-controls .lbl-txt{font-size:.78rem;color:#B9C6E4;font-weight:600;letter-spacing:.02em;}
   .state-select{font:inherit;font-weight:600;color:#fff;background:var(--navy-2);border:1px solid #3A4E7A;
@@ -258,6 +303,29 @@
   .np-mini span{font-size:.72rem;color:#9FB1D4;}
   .np-panel .prank{margin-top:20px;font-size:.82rem;color:#B9C6E4;border-top:1px solid rgba(255,255,255,.12);padding-top:16px;}
   .np-panel .prank b{color:var(--saffron-2);}
+
+  /* ---------- Map / Table view toggle ---------- */
+  [hidden]{display:none!important;}
+  .view-toggle-row{display:flex;justify-content:flex-start;margin:-8px 0 22px;}
+  .view-toggle{display:inline-flex;background:#fff;border:1px solid var(--line);border-radius:100px;padding:4px;gap:2px;flex:0 0 auto;}
+  .view-toggle button{font:inherit;font-weight:600;font-size:.88rem;color:var(--navy-2);background:transparent;border:0;border-radius:100px;padding:8px 20px;cursor:pointer;display:inline-flex;align-items:center;gap:7px;transition:background .15s ease,color .15s ease;}
+  .view-toggle button .ic{width:16px;height:16px;flex:0 0 auto;}
+  .view-toggle button:hover{color:var(--navy);}
+  .view-toggle button[aria-selected="true"]{background:var(--navy);color:#fff;}
+  html.contrast .view-toggle button[aria-selected="true"]{background:var(--navy-ink);}
+
+  /* ---------- State table view ---------- */
+  .state-table-wrap{border:1px solid var(--line);border-radius:var(--r);overflow:hidden;max-height:560px;overflow-y:auto;}
+  table.state-table{width:100%;border-collapse:collapse;font-size:.95rem;}
+  table.state-table thead th{position:sticky;top:0;z-index:1;background:var(--surface,#F5F7FB);text-align:left;font-family:var(--display);font-weight:700;color:var(--navy);padding:18px 26px;border-bottom:1px solid var(--line);}
+  table.state-table tbody td{padding:16px 26px;border-bottom:1px solid var(--line);color:var(--navy-2);}
+  table.state-table tbody tr:last-child td{border-bottom:0;}
+  table.state-table tbody tr{cursor:pointer;transition:background .12s ease;}
+  table.state-table tbody tr:hover{background:var(--saffron-soft);}
+  table.state-table tbody tr.sel{background:var(--saffron-soft);}
+  table.state-table .st-name{font-weight:600;color:var(--navy);}
+  table.state-table .st-val{font-family:var(--mono);font-variant-numeric:tabular-nums;color:var(--navy);}
+  table.state-table thead th:last-child,table.state-table tbody td:last-child{text-align:right;}
 
   /* ---------- How to register ---------- */
   .register{position:relative;overflow:hidden;background-color:var(--surface);background-image:var(--dots);background-size:var(--dots-size);border-top:1px solid var(--line);border-bottom:1px solid var(--line);}
@@ -312,13 +380,42 @@
   .why p{margin:0;font-size:.9rem;color:var(--muted);}
 
   /* ---------- CTA band ---------- */
-  .ctaband{background:linear-gradient(120deg,var(--saffron) 0%,var(--saffron-2) 100%);color:#fff;border-radius:20px;padding:44px 48px;display:flex;align-items:center;justify-content:space-between;gap:30px;flex-wrap:wrap;}
-  .ctaband h2{font-family:var(--display);font-weight:800;font-size:clamp(1.6rem,2.6vw,2.1rem);margin:0;letter-spacing:-.01em;max-width:20ch;}
-  .ctaband .btn-primary{background:#fff;color:var(--saffron);}
+  .ctaband{position:relative;isolation:isolate;overflow:hidden;background:linear-gradient(120deg,var(--saffron) 0%,var(--saffron-2) 100%);color:#fff;border-radius:20px;padding:44px 48px;display:flex;align-items:center;justify-content:space-between;gap:30px;flex-wrap:wrap;}
+  /* NGO-India photo overlay, blended into the saffron */
+  .cta-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center right;z-index:0;opacity:.22;mix-blend-mode:soft-light;pointer-events:none;
+    -webkit-mask-image:linear-gradient(90deg,transparent 0%,#000 55%);mask-image:linear-gradient(90deg,transparent 0%,#000 55%);}
+  /* gradient light glow */
+  .ctaband::before{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;
+    background:radial-gradient(130% 150% at 100% 0%,rgba(255,255,255,.28),transparent 55%),
+              radial-gradient(90% 130% at 0% 100%,rgba(0,0,0,.14),transparent 55%);}
+  /* halftone dot pattern + a faint chakra ring, top-right */
+  .ctaband::after{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;opacity:.9;
+    background-image:radial-gradient(rgba(255,255,255,.30) 1.4px,transparent 1.5px),
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220' viewBox='0 0 100 100'%3E%3Cg fill='none' stroke='%23ffffff' stroke-width='1.1' opacity='0.5'%3E%3Ccircle cx='50' cy='50' r='46'/%3E%3Ccircle cx='50' cy='50' r='8'/%3E%3Cg stroke-width='0.8'%3E%3Cline x1='50' y1='4' x2='50' y2='96'/%3E%3Cline x1='4' y1='50' x2='96' y2='50'/%3E%3Cline x1='17.5' y1='17.5' x2='82.5' y2='82.5'/%3E%3Cline x1='82.5' y1='17.5' x2='17.5' y2='82.5'/%3E%3Cline x1='29' y1='9' x2='71' y2='91'/%3E%3Cline x1='71' y1='9' x2='29' y2='91'/%3E%3Cline x1='9' y1='29' x2='91' y2='71'/%3E%3Cline x1='91' y1='29' x2='9' y2='71'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    background-size:22px 22px,240px 240px;
+    background-position:0 0,right -70px top -70px;
+    background-repeat:repeat,no-repeat;
+    -webkit-mask-image:linear-gradient(100deg,#000,transparent 78%);mask-image:linear-gradient(100deg,#000,transparent 78%);}
+  .ctaband h2{position:relative;z-index:1;font-family:var(--display);font-weight:800;font-size:clamp(1.6rem,2.6vw,2.1rem);margin:0;letter-spacing:-.01em;max-width:20ch;}
+  .ctaband .btn{position:relative;z-index:1;}
+  .ctaband .btn-primary{background:#fff;color:var(--saffron);box-shadow:0 14px 30px -12px rgba(0,0,0,.4);}
   .ctaband .btn-primary:hover{background:#fff;filter:brightness(.96);}
 
   /* ---------- Footer ---------- */
-  footer{background:var(--navy-ink);color:#9FB1D4;padding:56px 0 0;}
+  footer{position:relative;isolation:isolate;overflow:hidden;color:#9FB1D4;padding:56px 0 0;
+    background:
+      radial-gradient(120% 90% at 12% 0%,rgba(232,89,12,.16),transparent 46%),
+      radial-gradient(90% 80% at 88% 6%,rgba(28,58,110,.55),transparent 52%),
+      linear-gradient(180deg,#0E1D40 0%,var(--navy-ink) 60%);}
+  /* lighter dot pattern overlay */
+  footer::before{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;opacity:.6;
+    background-image:radial-gradient(rgba(255,255,255,.06) 1px,transparent 1.4px);
+    background-size:24px 24px;
+    -webkit-mask-image:linear-gradient(180deg,#000,transparent 70%);mask-image:linear-gradient(180deg,#000,transparent 70%);}
+  /* soft top light line */
+  footer::after{content:"";position:absolute;top:0;left:0;right:0;height:1px;z-index:0;pointer-events:none;
+    background:linear-gradient(90deg,transparent,rgba(232,89,12,.6),rgba(255,255,255,.25),transparent);}
+  footer .wrap{position:relative;z-index:1;}
   .foot-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:36px;}
   .foot-brand b{font-family:var(--display);font-weight:800;font-size:1.3rem;color:#fff;}
   .foot-brand b span{color:var(--saffron-2);}
@@ -359,6 +456,27 @@
 </style>
 </head>
 <body>
+
+<!-- ============ IMPORTANT ADVISORY MODAL ============ -->
+<div class="advisory-overlay" id="advisoryModal" role="dialog" aria-modal="true" aria-labelledby="advTitle">
+  <div class="advisory-card">
+    <div class="advisory-head">
+      <div class="adv-title">
+        <span class="advisory-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 2 20h20L12 3Z"/><path d="M12 10v4M12 17.4v.01"/></svg></span>
+        <h2 id="advTitle" data-en="Important Advisory" data-hi="महत्वपूर्ण सूचना">Important Advisory</h2>
+      </div>
+      <button class="advisory-close" id="advisoryClose" aria-label="Close advisory"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+    </div>
+    <div class="advisory-body">
+      <svg class="advisory-wm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round" aria-hidden="true"><path d="M3 10v4h3l9 5V5L6 10H3Z"/><path d="M18 9a4 4 0 0 1 0 6"/><path d="M6 14v4a2 2 0 0 0 4 0v-2"/></svg>
+      <p data-en="It is hereby brought to the notice of all NPOs that <strong>use of the NITI Aayog name/logo or the National Emblem, in any manner, is strictly prohibited.</strong>" data-hi="सभी एनपीओ के ध्यान में यह लाया जाता है कि <strong>नीति आयोग के नाम/लोगो या राष्ट्रीय प्रतीक का किसी भी रूप में उपयोग सख्त वर्जित है।</strong>">It is hereby brought to the notice of all NPOs that <strong>use of the NITI Aayog name/logo or the National Emblem, in any manner, is strictly prohibited.</strong></p>
+      <p data-en="The Darpan ID generated upon registration on the Darpan Portal does not confer any right, endorsement, affiliation, or recognition by NITI Aayog or to use the NITI Aayog name/logo or the National Emblem, in any form or manner." data-hi="दर्पण पोर्टल पर पंजीकरण से प्राप्त दर्पण आईडी किसी भी प्रकार का अधिकार, समर्थन, संबद्धता या नीति आयोग द्वारा मान्यता प्रदान नहीं करती, और न ही नीति आयोग के नाम/लोगो या राष्ट्रीय प्रतीक के उपयोग की अनुमति देती है।">The Darpan ID generated upon registration on the Darpan Portal does not confer any right, endorsement, affiliation, or recognition by NITI Aayog or to use the NITI Aayog name/logo or the National Emblem, in any form or manner.</p>
+      <p data-en="All concerned NPOs are requested to take note of the above and ensure due compliance. In case of any inadvertent or existing use, the same may be discontinued immediately." data-hi="सभी संबंधित एनपीओ से अनुरोध है कि उपरोक्त का संज्ञान लें और अनुपालन सुनिश्चित करें। किसी भी अनजाने या मौजूदा उपयोग की स्थिति में इसे तुरंत बंद कर दें।">All concerned NPOs are requested to take note of the above and ensure due compliance. In case of any inadvertent or existing use, the same may be discontinued immediately.</p>
+      <p data-en="Any unauthorised use shall attract suitable administrative and legal action, including blacklisting of Darpan ID, as per applicable laws." data-hi="किसी भी अनधिकृत उपयोग पर लागू कानूनों के अनुसार उपयुक्त प्रशासनिक और कानूनी कार्रवाई की जाएगी, जिसमें दर्पण आईडी को काली सूची में डालना शामिल है।">Any unauthorised use shall attract suitable administrative and legal action, including blacklisting of Darpan ID, as per applicable laws.</p>
+      <p data-en="All concerned are advised to immediately <strong>refrain from use of NITI Aayog logo, endorsement, affiliation, or recognition by NITI Aayog,</strong> failing which Darpan ID shall be cancelled." data-hi="सभी संबंधितों को सलाह दी जाती है कि वे तुरंत <strong>नीति आयोग के लोगो के उपयोग, समर्थन, संबद्धता या नीति आयोग द्वारा मान्यता से बचें,</strong> ऐसा न करने पर दर्पण आईडी रद्द कर दी जाएगी।">All concerned are advised to immediately <strong>refrain from use of NITI Aayog logo, endorsement, affiliation, or recognition by NITI Aayog,</strong> failing which Darpan ID shall be cancelled.</p>
+    </div>
+  </div>
+</div>
 
 <!-- ============ TOP TRICOLOUR ============ -->
 <div class="tricolour"><i></i><i></i><i></i></div>
@@ -456,6 +574,18 @@
   </div>
 </section>
 
+<!-- ============ DISCLAIMER MARQUEE ============ -->
+<div class="marquee" role="marquee" aria-label="Important disclaimer">
+  <div class="marquee-track">
+    <span data-en="Niti Aayog does not issue any Physical Darpan certificate, it only provides Darpan registration ID to NPOs on the basis of self-declared affidavit." data-hi="नीति आयोग कोई भौतिक दर्पण प्रमाणपत्र जारी नहीं करता, यह केवल स्व-घोषित शपथ-पत्र के आधार पर एनपीओ को दर्पण पंजीकरण आईडी प्रदान करता है।">Niti Aayog does not issue any Physical Darpan certificate, it only provides Darpan registration ID to NPOs on the basis of self-declared affidavit.</span>
+    <span data-en="Niti Aayog does not issue any Physical Darpan certificate, it only provides Darpan registration ID to NPOs on the basis of self-declared affidavit." data-hi="नीति आयोग कोई भौतिक दर्पण प्रमाणपत्र जारी नहीं करता, यह केवल स्व-घोषित शपथ-पत्र के आधार पर एनपीओ को दर्पण पंजीकरण आईडी प्रदान करता है।">Niti Aayog does not issue any Physical Darpan certificate, it only provides Darpan registration ID to NPOs on the basis of self-declared affidavit.</span>
+    <span data-en="Niti Aayog does not issue any Physical Darpan certificate, it only provides Darpan registration ID to NPOs on the basis of self-declared affidavit." data-hi="नीति आयोग कोई भौतिक दर्पण प्रमाणपत्र जारी नहीं करता, यह केवल स्व-घोषित शपथ-पत्र के आधार पर एनपीओ को दर्पण पंजीकरण आईडी प्रदान करता है।">Niti Aayog does not issue any Physical Darpan certificate, it only provides Darpan registration ID to NPOs on the basis of self-declared affidavit.</span>
+    <span aria-hidden="true" data-en="Niti Aayog does not issue any Physical Darpan certificate, it only provides Darpan registration ID to NPOs on the basis of self-declared affidavit." data-hi="नीति आयोग कोई भौतिक दर्पण प्रमाणपत्र जारी नहीं करता, यह केवल स्व-घोषित शपथ-पत्र के आधार पर एनपीओ को दर्पण पंजीकरण आईडी प्रदान करता है।">Niti Aayog does not issue any Physical Darpan certificate, it only provides Darpan registration ID to NPOs on the basis of self-declared affidavit.</span>
+    <span aria-hidden="true" data-en="Niti Aayog does not issue any Physical Darpan certificate, it only provides Darpan registration ID to NPOs on the basis of self-declared affidavit." data-hi="नीति आयोग कोई भौतिक दर्पण प्रमाणपत्र जारी नहीं करता, यह केवल स्व-घोषित शपथ-पत्र के आधार पर एनपीओ को दर्पण पंजीकरण आईडी प्रदान करता है।">Niti Aayog does not issue any Physical Darpan certificate, it only provides Darpan registration ID to NPOs on the basis of self-declared affidavit.</span>
+    <span aria-hidden="true" data-en="Niti Aayog does not issue any Physical Darpan certificate, it only provides Darpan registration ID to NPOs on the basis of self-declared affidavit." data-hi="नीति आयोग कोई भौतिक दर्पण प्रमाणपत्र जारी नहीं करता, यह केवल स्व-घोषित शपथ-पत्र के आधार पर एनपीओ को दर्पण पंजीकरण आईडी प्रदान करता है।">Niti Aayog does not issue any Physical Darpan certificate, it only provides Darpan registration ID to NPOs on the basis of self-declared affidavit.</span>
+  </div>
+</div>
+
 <!-- ============ REGISTRY STATS ============ -->
 <section class="registry" id="registry">
   <div class="wrap">
@@ -514,24 +644,53 @@
         <div class="sec-eyebrow"><svg class="spoke" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="1.5"/></svg><span data-en="Across the country" data-hi="देश भर में">Across the country</span></div>
         <h2 class="sec-h" data-en="Registrations, state by state" data-hi="राज्यवार पंजीकरण">Registrations, state by state</h2>
       </div>
-      <p class="sec-lead" data-en="An interactive map of India — choose any state to see its registration numbers alongside." data-hi="भारत का इंटरैक्टिव मानचित्र — किसी भी राज्य को चुनें और उसके पंजीकरण आँकड़े देखें।">An interactive map of India — choose any state to see its registration numbers alongside.</p>
+      <p class="sec-lead" data-en="An interactive map of India — hover a state for its active DARPAN ID count, or click to pin it in the panel alongside." data-hi="भारत का इंटरैक्टिव मानचित्र — किसी राज्य पर होवर करें और उसकी सक्रिय दर्पण आईडी संख्या देखें, या क्लिक करके उसे पैनल में देखें।">An interactive map of India — hover a state for its active DARPAN ID count, or click to pin it in the panel alongside.</p>
+    </div>
+
+    <div class="view-toggle-row">
+      <div class="view-toggle" role="tablist" aria-label="Choose map or table view">
+        <button id="btnMap" role="tab" aria-selected="true" aria-controls="mapView">
+          <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="1 6 8 3 16 6 23 3 23 18 16 21 8 18 1 21 1 6"/><line x1="8" y1="3" x2="8" y2="18"/><line x1="16" y1="6" x2="16" y2="21"/></svg>
+          <span data-en="Show Map" data-hi="मानचित्र देखें">Show Map</span>
+        </button>
+        <button id="btnTable" role="tab" aria-selected="false" aria-controls="tableView">
+          <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="3" y1="15" x2="21" y2="15"/><line x1="12" y1="3" x2="12" y2="21"/></svg>
+          <span data-en="Show Table" data-hi="तालिका देखें">Show Table</span>
+        </button>
+      </div>
     </div>
 
     <div class="np-layout">
-      <div class="np-mapwrap">
-        <div class="india-map" id="indiaMap" role="img" aria-label="Map of India showing states with registered NPOs"></div>
-        <div class="np-controls">
-          <span class="lbl-txt" data-en="Select a state" data-hi="राज्य चुनें">Select a state</span>
-          <select class="state-select" id="stateSelect" aria-label="Select a state to view its registrations"></select>
-          <span class="illus" data-en="Illustrative data" data-hi="उदाहरण डेटा">Illustrative data</span>
+      <div class="np-left">
+        <div class="np-mapwrap" id="mapView">
+          <div class="india-map" id="indiaMap" role="img" aria-label="Map of India showing states with registered NPOs"></div>
+          <div class="np-controls">
+            <span class="lbl-txt" data-en="Select a state" data-hi="राज्य चुनें">Select a state</span>
+            <select class="state-select" id="stateSelect" aria-label="Select a state to view its registrations"></select>
+            <span class="illus" data-en="Counts are actual · type split illustrative" data-hi="संख्याएँ वास्तविक · प्रकार विभाजन उदाहरणात्मक">Counts are actual · type split illustrative</span>
+          </div>
+        </div>
+
+        <div id="tableView" hidden>
+          <div class="state-table-wrap">
+            <table class="state-table">
+              <thead>
+                <tr>
+                  <th data-en="State / UT Name" data-hi="राज्य / केंद्र शासित प्रदेश">State / UT Name</th>
+                  <th data-en="Active DARPAN IDs" data-hi="सक्रिय दर्पण आईडी">Active DARPAN IDs</th>
+                </tr>
+              </thead>
+              <tbody id="stateTableBody"></tbody>
+            </table>
+          </div>
         </div>
       </div>
 
       <aside class="np-panel" aria-live="polite">
         <div class="pstate" id="pState">All India</div>
         <div class="pmeta" id="pMeta">Aggregate across 36 States & UTs</div>
-        <div class="np-big-l" data-en="Registered NPOs" data-hi="पंजीकृत एनपीओ">Registered NPOs</div>
-        <div class="np-big mono" id="pTotal">5,86,863</div>
+        <div class="np-big-l" data-en="Active DARPAN IDs" data-hi="सक्रिय दर्पण आईडी">Active DARPAN IDs</div>
+        <div class="np-big mono" id="pTotal">5,86,912</div>
         <div class="np-mini">
           <div><b class="mono" id="pActive">5,86,778</b><span data-en="Active" data-hi="सक्रिय">Active</span></div>
           <div><b class="mono" id="pTrust">2,92,669</b><span data-en="Trusts" data-hi="ट्रस्ट">Trusts</span></div>
@@ -687,6 +846,7 @@
     </div>
 
     <div class="ctaband" style="margin-top:56px">
+      <img class="cta-img" src="/assets/signin_img.png" alt="" aria-hidden="true" loading="lazy">
       <h2 data-en="Your organisation deserves to be recognised. Start today." data-hi="आपका संगठन मान्यता का हकदार है। आज ही शुरू करें।">Your organisation deserves to be recognised. Start today.</h2>
       <button class="btn btn-primary btn-lg" data-en="Register your NPO →" data-hi="एनपीओ पंजीकरण →">Register your NPO →</button>
     </div>
@@ -825,6 +985,18 @@ document.querySelectorAll('.registry').forEach(s=>io.observe(s));
   els.forEach(e=>ro.observe(e));
 })();
 
+/* ---------- Important Advisory modal (shows on every load) ---------- */
+(function(){
+  const ov=document.getElementById('advisoryModal');if(!ov)return;
+  const closeBtn=document.getElementById('advisoryClose');
+  const open=()=>{ov.classList.add('open');document.body.style.overflow='hidden';if(closeBtn)closeBtn.focus();};
+  const close=()=>{ov.classList.remove('open');document.body.style.overflow='';};
+  if(closeBtn)closeBtn.addEventListener('click',close);
+  ov.addEventListener('click',e=>{if(e.target===ov)close();});
+  document.addEventListener('keydown',e=>{if(e.key==='Escape'&&ov.classList.contains('open'))close();});
+  open();
+})();
+
 /* ---------- Live ID ticker in hero ---------- */
 (function(){
   const el=document.getElementById('liveId');const states=['DL','MH','KA','TN','UP','WB','GJ','RJ'];
@@ -835,67 +1007,96 @@ document.querySelectorAll('.registry').forEach(s=>io.observe(s));
   },2600);
 })();
 
-/* ---------- State tile map ---------- */
-const STATES=[
- {n:'Jammu & Kashmir',ab:'JK',c:3,r:1,v:3800},
- {n:'Ladakh',ab:'LA',c:4,r:1,v:600},
- {n:'Punjab',ab:'PB',c:3,r:2,v:13000},
- {n:'Himachal Pradesh',ab:'HP',c:4,r:2,v:4500},
- {n:'Uttarakhand',ab:'UK',c:5,r:2,v:6000},
- {n:'Rajasthan',ab:'RJ',c:2,r:3,v:27000},
- {n:'Haryana',ab:'HR',c:4,r:3,v:14000},
- {n:'Delhi',ab:'DL',c:5,r:3,v:16000},
- {n:'Sikkim',ab:'SK',c:7,r:3,v:900},
- {n:'Arunachal Pradesh',ab:'AR',c:8,r:3,v:1200},
- {n:'Gujarat',ab:'GJ',c:1,r:4,v:33000},
- {n:'Madhya Pradesh',ab:'MP',c:3,r:4,v:29000},
- {n:'Uttar Pradesh',ab:'UP',c:5,r:4,v:62000},
- {n:'Bihar',ab:'BR',c:6,r:4,v:24000},
- {n:'Assam',ab:'AS',c:7,r:4,v:11000},
- {n:'Nagaland',ab:'NL',c:8,r:4,v:1400},
- {n:'Maharashtra',ab:'MH',c:2,r:5,v:78000},
- {n:'Chhattisgarh',ab:'CG',c:4,r:5,v:10500},
- {n:'Jharkhand',ab:'JH',c:6,r:5,v:12000},
- {n:'West Bengal',ab:'WB',c:7,r:5,v:38000},
- {n:'Meghalaya',ab:'ML',c:8,r:5,v:1300},
- {n:'Goa',ab:'GA',c:1,r:6,v:2200},
- {n:'Telangana',ab:'TS',c:3,r:6,v:22000},
- {n:'Odisha',ab:'OD',c:5,r:6,v:18000},
- {n:'Karnataka',ab:'KA',c:2,r:7,v:41000},
- {n:'Andhra Pradesh',ab:'AP',c:3,r:7,v:31000},
- {n:'Kerala',ab:'KL',c:2,r:8,v:21000},
- {n:'Tamil Nadu',ab:'TN',c:3,r:8,v:45000},
-];
+/* ---------- State map: active DARPAN ID counts (real, state-wise) ---------- */
+const COUNTS={
+ 'Andaman & Nicobar Islands':260,'Andhra Pradesh':21171,'Arunachal Pradesh':957,'Assam':7709,
+ 'Bihar':17199,'Chandigarh':1055,'Chhattisgarh':6350,'Delhi':35194,'Goa':1687,'Gujarat':39235,
+ 'Haryana':20576,'Himachal Pradesh':2882,'Jammu & Kashmir':4208,'Jharkhand':7733,'Karnataka':41318,
+ 'Kerala':16588,'Ladakh':276,'Lakshadweep':17,'Madhya Pradesh':24843,'Maharashtra':83507,
+ 'Manipur':4009,'Meghalaya':794,'Mizoram':492,'Nagaland':930,'Odisha':12228,'Puducherry':940,
+ 'Punjab':13401,'Rajasthan':32643,'Sikkim':273,'Tamil Nadu':44425,'Telangana':20976,
+ 'Dadra & Nagar Haveli and Daman & Diu':228,'Tripura':1074,'Uttar Pradesh':74154,'Uttarakhand':7460,
+ 'West Bengal':37428
+};
+const NA_COUNT=2692;
+const STATE_NAMES=Object.keys(COUNTS);
+const STATE_TOTAL=STATE_NAMES.reduce((a,n)=>a+COUNTS[n],0);
+const GRAND_TOTAL=STATE_TOTAL+NA_COUNT;
+const RANKED=[...STATE_NAMES].sort((a,b)=>COUNTS[b]-COUNTS[a]);
 const IN=n=>n.toLocaleString('en-IN');
-const ALL={n:'All India',meta:'Aggregate across 36 States & UTs',v:586863,active:586778,trust:292669,society:241316,sec8:52793,rank:null};
-function stateObj(s){
-  return {n:s.n,meta:`DARPAN registrations · ${s.ab}`,v:s.v,
-    active:Math.round(s.v*0.9998),trust:Math.round(s.v*.4988),
-    society:Math.round(s.v*.4113),sec8:Math.round(s.v*.09),
-    rank:[...STATES].sort((a,b)=>b.v-a.v).findIndex(x=>x.n===s.n)+1};
-}
+const pathByState={};   // name -> svg <path>, filled when the map is labelled
+let selectedState=null;
+
+const ALL={n:'All India',meta:'Aggregate across 36 States & UTs',v:GRAND_TOTAL,rank:null};
+// Org-type split is illustrative (national ratios) — the headline count is exact.
+const ratios=v=>({trust:Math.round(v*.4988),society:Math.round(v*.4113),sec8:Math.round(v*.09)});
+const stateObj=name=>({n:name,meta:'Active DARPAN IDs · state view',v:COUNTS[name],rank:RANKED.indexOf(name)+1});
 function setPanel(o){
   document.getElementById('pState').textContent=o.n;
   document.getElementById('pMeta').textContent=o.meta;
   document.getElementById('pTotal').textContent=IN(o.v);
-  document.getElementById('pActive').textContent=IN(o.active);
-  document.getElementById('pTrust').textContent=IN(o.trust);
-  document.getElementById('pSociety').textContent=IN(o.society);
-  document.getElementById('pSec8').textContent=IN(o.sec8);
+  document.getElementById('pActive').textContent=IN(o.v);
+  const r=ratios(o.v);
+  document.getElementById('pTrust').textContent=IN(r.trust);
+  document.getElementById('pSociety').textContent=IN(r.society);
+  document.getElementById('pSec8').textContent=IN(r.sec8);
   document.getElementById('pRank').innerHTML=o.rank
-    ?`Ranked <b>#${o.rank}</b> of ${STATES.length} shown by number of registered NPOs.`
-    :'Select a state to view a single state, or keep the national view.';
+    ?`Ranked <b>#${o.rank}</b> of ${STATE_NAMES.length} by active DARPAN IDs — <b>${(o.v/STATE_TOTAL*100).toFixed(2)}%</b> of the state total.`
+    :'Click any state on the map to see its exact active DARPAN ID count.';
 }
 const sel=document.getElementById('stateSelect');
 const optAll=document.createElement('option');optAll.value='__all';optAll.textContent='All India';sel.appendChild(optAll);
-[...STATES].sort((a,b)=>a.n.localeCompare(b.n)).forEach(s=>{
-  const o=document.createElement('option');o.value=s.n;o.textContent=s.n;sel.appendChild(o);
+[...STATE_NAMES].sort((a,b)=>a.localeCompare(b)).forEach(n=>{
+  const o=document.createElement('option');o.value=n;o.textContent=`${n} — ${IN(COUNTS[n])}`;sel.appendChild(o);
 });
-sel.onchange=()=>{
-  if(sel.value==='__all'){setPanel(ALL);return;}
-  const s=STATES.find(x=>x.n===sel.value);if(s)setPanel(stateObj(s));
-};
+function highlightMap(name){
+  Object.values(pathByState).forEach(p=>p.classList.remove('sel'));
+  if(name&&pathByState[name])pathByState[name].classList.add('sel');
+}
+function selectState(name){
+  selectedState=name||null;
+  if(name){setPanel(stateObj(name));sel.value=name;}
+  else{setPanel(ALL);sel.value='__all';}
+  highlightMap(selectedState);
+  if(window.__syncTableSelection)window.__syncTableSelection();
+}
+sel.onchange=()=>selectState(sel.value==='__all'?null:sel.value);
 setPanel(ALL);
+
+/* ---------- Map / Table view toggle ---------- */
+(function(){
+  const btnMap=document.getElementById('btnMap');
+  const btnTable=document.getElementById('btnTable');
+  const mapView=document.getElementById('mapView');
+  const tableView=document.getElementById('tableView');
+  const tbody=document.getElementById('stateTableBody');
+  if(!btnMap||!btnTable||!mapView||!tableView||!tbody)return;
+
+  // Build the table rows once, sorted by active DARPAN IDs (high → low).
+  RANKED.forEach(name=>{
+    const tr=document.createElement('tr');
+    tr.dataset.state=name;
+    tr.innerHTML=`<td class="st-name">${name}</td><td class="st-val">${IN(COUNTS[name])}</td>`;
+    tr.addEventListener('click',()=>selectState(name));
+    tbody.appendChild(tr);
+  });
+
+  function syncTableSelection(){
+    tbody.querySelectorAll('tr').forEach(tr=>tr.classList.toggle('sel',tr.dataset.state===selectedState));
+  }
+  window.__syncTableSelection=syncTableSelection;
+
+  function show(view){
+    const table=view==='table';
+    mapView.hidden=table;
+    tableView.hidden=!table;
+    btnMap.setAttribute('aria-selected',String(!table));
+    btnTable.setAttribute('aria-selected',String(table));
+    if(table)syncTableSelection();
+  }
+  btnMap.addEventListener('click',()=>show('map'));
+  btnTable.addEventListener('click',()=>show('table'));
+})();
 fetch('/assets/india_map.svg').then(r=>r.text()).then(svg=>{
   const c=document.getElementById('indiaMap');if(!c)return;
   c.innerHTML=svg;
@@ -947,22 +1148,27 @@ function labelMapStates(svg,container){
     usedP.add(pr.i);usedR.add(pr.j);
     const path=NP[pr.i].o.p,name=NR[pr.j].o.n;
     path.setAttribute('data-state',name);
+    pathByState[name]=path;
+    const cnt=COUNTS[name];
     let t=path.querySelector('title');
     if(!t){t=document.createElementNS('http://www.w3.org/2000/svg','title');path.appendChild(t);}
-    t.textContent=name;
+    t.textContent=cnt!=null?`${name} — ${IN(cnt)} active DARPAN IDs`:name;
   });
   const tip=document.createElement('div');tip.className='map-tip';container.appendChild(tip);
   paths.forEach(p=>{
     p.addEventListener('mousemove',e=>{
       const name=p.getAttribute('data-state');if(!name)return;
+      const cnt=COUNTS[name];
       const rect=container.getBoundingClientRect();
-      tip.textContent=name;
+      tip.innerHTML=`<b>${name}</b>`+(cnt!=null?`<span class="c">${IN(cnt)} active IDs</span>`:'');
       tip.style.left=(e.clientX-rect.left)+'px';
       tip.style.top=(e.clientY-rect.top)+'px';
       tip.classList.add('show');
     });
     p.addEventListener('mouseleave',()=>tip.classList.remove('show'));
+    p.addEventListener('click',()=>selectState(p.getAttribute('data-state')));
   });
+  if(selectedState)highlightMap(selectedState);
 }
 </script>
 </body>
