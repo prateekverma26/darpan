@@ -815,7 +815,8 @@ document.querySelectorAll('.registry').forEach(s=>io.observe(s));
 
   // Only on the home page.
   const path=location.pathname.replace(/\/+$/,'');
-  const isHome = path==='' || /\/(ngo-darpan|index)\.html$/i.test(path);
+  const p=path.toLowerCase();
+  const isHome = p==='' || p.endsWith('/ngo-darpan') || p.endsWith('/ngo-darpan.html') || p.endsWith('/index.html');
   if(!isHome) return;
 
   // How did we arrive here? navigate | reload | back_forward
