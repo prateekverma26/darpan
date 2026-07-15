@@ -455,7 +455,7 @@
   .foot-bottom b{color:#C7D2E8;}
 
   /* ---------- About page ---------- */
-  .page-hero{position:relative;overflow:hidden;color:#EAF0FC;
+  .page-hero{position:relative;overflow:hidden;padding:0;color:#EAF0FC;
     background:linear-gradient(120deg,var(--navy-ink) 0%,var(--navy) 56%,var(--navy-2) 128%);}
   /* diamond-grid + dot texture across the banner */
   .page-hero .ph-pattern{position:absolute;inset:0;pointer-events:none;opacity:.9;
@@ -493,8 +493,8 @@
   @media(max-width:1000px){.docs-grid{grid-template-columns:1fr 1fr;}}
   @media(max-width:640px){.docs-grid{grid-template-columns:1fr;}}
   /* ---------- FAQ accordion ---------- */
-  .faq-sec{position:relative;background:var(--surface);color:var(--ink);background-image:radial-gradient(130% 120% at 100% 0%,rgba(232,89,12,.05),transparent 46%),radial-gradient(120% 120% at 0% 100%,rgba(16,34,76,.05),transparent 48%),radial-gradient(rgba(16,34,76,.05) 1px,transparent 1.5px);background-size:100% 100%,100% 100%,24px 24px;}
-  .faq-sec .wrap{position:relative;z-index:1;max-width:980px;padding-top:56px;padding-bottom:80px;}
+  .faq-sec{position:relative;padding-top:0;background:var(--surface);color:var(--ink);background-image:radial-gradient(130% 120% at 100% 0%,rgba(232,89,12,.05),transparent 46%),radial-gradient(120% 120% at 0% 100%,rgba(16,34,76,.05),transparent 48%),radial-gradient(rgba(16,34,76,.05) 1px,transparent 1.5px);background-size:100% 100%,100% 100%,24px 24px;}
+  .faq-sec .wrap{position:relative;z-index:1;max-width:980px;padding-top:30px;padding-bottom:80px;}
   .faq{background:var(--saffron-soft);border-left:4px solid var(--saffron);border-radius:10px;margin-bottom:18px;}
   .faq summary{list-style:none;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:20px 22px;font-family:var(--display);font-weight:700;color:var(--navy);font-size:1.02rem;}
   .faq summary::-webkit-details-marker{display:none;}

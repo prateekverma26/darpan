@@ -455,7 +455,7 @@
   .foot-bottom b{color:#C7D2E8;}
 
   /* ---------- About page ---------- */
-  .page-hero{position:relative;overflow:hidden;color:#EAF0FC;
+  .page-hero{position:relative;overflow:hidden;padding:0;color:#EAF0FC;
     background:linear-gradient(120deg,var(--navy-ink) 0%,var(--navy) 56%,var(--navy-2) 128%);}
   /* diamond-grid + dot texture across the banner */
   .page-hero .ph-pattern{position:absolute;inset:0;pointer-events:none;opacity:.9;
@@ -479,14 +479,14 @@
   .crumb-cur{color:var(--saffron-2);}
 
   /* ---------- Contact Us ---------- */
-  .contact-sec{position:relative;background:var(--surface);color:var(--ink);
+  .contact-sec{position:relative;padding-top:0;background:var(--surface);color:var(--ink);
     background-image:
       radial-gradient(130% 120% at 100% 0%,rgba(232,89,12,.05),transparent 46%),
       radial-gradient(120% 120% at 0% 100%,rgba(16,34,76,.05),transparent 48%),
       radial-gradient(rgba(16,34,76,.05) 1px,transparent 1.5px);
     background-size:100% 100%,100% 100%,24px 24px;padding-bottom:80px;}
   .contact-sec .wrap{position:relative;z-index:1;}
-  .contact-grid{display:grid;grid-template-columns:1.55fr .85fr;gap:26px;align-items:stretch;padding-top:56px;}
+  .contact-grid{display:grid;grid-template-columns:1.55fr .85fr;gap:26px;align-items:stretch;padding-top:30px;}
   .contact-card{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:48px 36px;
     display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:26px;
     box-shadow:0 12px 28px -20px rgba(16,34,76,.5);}

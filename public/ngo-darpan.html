@@ -407,7 +407,7 @@
   .why p{margin:0;font-size:.9rem;color:var(--muted);}
 
   /* ---------- CTA band ---------- */
-  .ctaband{position:relative;isolation:isolate;overflow:hidden;background:linear-gradient(120deg,var(--saffron) 0%,var(--saffron-2) 100%);color:#fff;border-radius:20px;padding:44px 48px;display:flex;align-items:center;justify-content:space-between;gap:30px;flex-wrap:wrap;}
+  .ctaband{position:relative;isolation:isolate;overflow:hidden;background:linear-gradient(120deg,var(--saffron) 0%,var(--saffron-2) 100%);color:#fff;border-radius:20px;padding:36px 48px;display:flex;align-items:center;justify-content:space-between;gap:30px;flex-wrap:wrap;}
   /* NGO-India photo overlay, blended into the saffron */
   .cta-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center right;z-index:0;opacity:.22;mix-blend-mode:soft-light;pointer-events:none;
     -webkit-mask-image:linear-gradient(90deg,transparent 0%,#000 55%);mask-image:linear-gradient(90deg,transparent 0%,#000 55%);}
@@ -423,7 +423,7 @@
     background-position:0 0,right -70px top -70px;
     background-repeat:repeat,no-repeat;
     -webkit-mask-image:linear-gradient(100deg,#000,transparent 78%);mask-image:linear-gradient(100deg,#000,transparent 78%);}
-  .ctaband h2{position:relative;z-index:1;font-family:var(--display);font-weight:800;font-size:clamp(1.6rem,2.6vw,2.1rem);margin:0;letter-spacing:-.01em;max-width:20ch;}
+  .ctaband h2{position:relative;z-index:1;font-family:var(--display);font-weight:800;font-size:clamp(1.6rem,2.6vw,2.1rem);margin:0;letter-spacing:-.01em;line-height:1.3;}
   .ctaband .btn{position:relative;z-index:1;}
   .ctaband .btn-primary{background:#fff;color:var(--saffron);box-shadow:0 14px 30px -12px rgba(0,0,0,.4);}
   .ctaband .btn-primary:hover{background:#fff;filter:brightness(.96);}
@@ -579,15 +579,15 @@
     </div>
 
     <div class="hero-visual">
-      <!-- CHAKRA WHEEL + DARPAN ID CARD COMMENTED OUT
+      <!-- CHAKRA WHEEL COMMENTED OUT
       <svg class="chakra" viewBox="0 0 400 400" aria-hidden="true">
         <circle cx="200" cy="200" r="180" fill="none" stroke="#4C63A0" stroke-width="1.5"/>
         <circle cx="200" cy="200" r="150" fill="none" stroke="#3A4E7A" stroke-width="1"/>
         <circle cx="200" cy="200" r="18" fill="none" stroke="#7C8FC0" stroke-width="4"/>
         <g id="chakraSpokes" stroke="#7C8FC0" stroke-width="2"></g>
       </svg>
+      -->
       <div class="idcard">
-        <div class="idc-live" data-en="LIVE" data-hi="लाइव">● LIVE</div>
         <div class="idc-top">
           <div>
             <img class="idc-logo" src="/assets/darpan.png" alt="DARPAN" width="126" height="46">
@@ -595,13 +595,12 @@
           </div>
           <span class="idc-badge">✓ <span data-en="Verified" data-hi="सत्यापित">Verified</span></span>
         </div>
-        <div class="idc-id" id="liveId">DL/2026/0428613</div>
+        <div class="idc-id" id="liveId">DL/2026/042****</div>
         <div class="idc-row">
           <div><span data-en="Registered on" data-hi="पंजीकरण तिथि">Registered on</span><b>08 Jul 2026</b></div>
           <div style="text-align:right"><span data-en="Type" data-hi="प्रकार">Type</span><b data-en="Society" data-hi="सोसाइटी">Society</b></div>
         </div>
       </div>
-      -->
     </div>
   </div>
 </section>
@@ -891,13 +890,11 @@
     </div>
     -->
 
-    <!-- CTA BAND COMMENTED OUT
-    <div class="ctaband" style="margin-top:56px">
+    <div class="ctaband">
       <img class="cta-img" src="/assets/signin_img.png" alt="" aria-hidden="true" loading="lazy">
-      <h2 data-en="Your organisation deserves to be recognised. Start today." data-hi="आपका संगठन मान्यता का हकदार है। आज ही शुरू करें।">Your organisation deserves to be recognised. Start today.</h2>
+      <h2 data-en="Your organisation deserves to be recognised.<br>Start today." data-hi="आपका संगठन मान्यता का हकदार है।<br>आज ही शुरू करें।">Your organisation deserves to be recognised.<br>Start today.</h2>
       <button class="btn btn-primary btn-lg" data-en="Register your NPO →" data-hi="एनपीओ पंजीकरण →">Register your NPO →</button>
     </div>
-    -->
   </div>
 </section>
 
@@ -1080,13 +1077,14 @@ document.querySelectorAll('.registry').forEach(s=>io.observe(s));
   if(show) open();
 })();
 
-/* ---------- Live ID ticker in hero ---------- */
+/* ---------- Live ID ticker in hero (last 4 digits masked — confidential) ---------- */
 (function(){
-  const el=document.getElementById('liveId');const states=['DL','MH','KA','TN','UP','WB','GJ','RJ'];
+  const el=document.getElementById('liveId');if(!el)return;
+  const states=['DL','MH','KA','TN','UP','WB','GJ','RJ'];
   setInterval(()=>{
     const st=states[Math.floor(Math.random()*states.length)];
     const n=(400000+Math.floor(Math.random()*180000)).toString().padStart(7,'0');
-    el.textContent=`${st}/2026/${n}`;
+    el.textContent=`${st}/2026/${n.slice(0,3)}****`;
   },2600);
 })();
 
