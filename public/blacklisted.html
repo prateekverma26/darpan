@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>NGO DARPAN — Redesign Concept</title>
+<title>Blacklisted NPO — NGO DARPAN</title>
 <link rel="icon" type="image/png" href="/assets/fab_icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -454,6 +454,120 @@
   .foot-bottom{border-top:1px solid #223257;margin-top:44px;padding:18px 0;font-size:.8rem;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;}
   .foot-bottom b{color:#C7D2E8;}
 
+  /* ---------- About page ---------- */
+  .page-hero{position:relative;overflow:hidden;color:#EAF0FC;
+    background:linear-gradient(120deg,var(--navy-ink) 0%,var(--navy) 56%,var(--navy-2) 128%);}
+  /* diamond-grid + dot texture across the banner */
+  .page-hero .ph-pattern{position:absolute;inset:0;pointer-events:none;opacity:.9;
+    background-image:
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='64' height='64' viewBox='0 0 64 64'%3E%3Cg fill='none' stroke='%23ffffff' stroke-opacity='0.06' stroke-width='1'%3E%3Cpath d='M32 0 L64 32 L32 64 L0 32 Z'/%3E%3C/g%3E%3Ccircle cx='32' cy='32' r='2' fill='%23ffffff' fill-opacity='0.06'/%3E%3C/svg%3E"),
+      radial-gradient(rgba(255,255,255,.05) 1px,transparent 1.4px);
+    background-size:64px 64px,26px 26px;
+    -webkit-mask-image:linear-gradient(120deg,#000,transparent 82%);mask-image:linear-gradient(120deg,#000,transparent 82%);}
+  /* faint concentric chakra rings, top-right */
+  .page-hero::before{content:"";position:absolute;top:-120px;right:-90px;width:420px;height:420px;pointer-events:none;opacity:.55;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='420' height='420' viewBox='0 0 420 420'%3E%3Cg fill='none' stroke='%23F2751A' stroke-opacity='0.35' stroke-width='1.4'%3E%3Ccircle cx='210' cy='210' r='80'/%3E%3Ccircle cx='210' cy='210' r='130'/%3E%3Ccircle cx='210' cy='210' r='180'/%3E%3C/g%3E%3C/svg%3E");
+    background-repeat:no-repeat;background-size:contain;}
+  .page-hero::after{content:"";position:absolute;top:-46%;right:-6%;width:520px;height:520px;border-radius:50%;pointer-events:none;
+    background:radial-gradient(circle,rgba(232,89,12,.18),transparent 62%);}
+  .ph-inner{position:relative;z-index:1;padding:26px 24px 24px;}
+  .ph-title{font-family:var(--display);font-weight:800;font-size:clamp(2rem,4.4vw,3rem);letter-spacing:-.02em;margin:0;color:#fff;}
+  .crumb{display:flex;align-items:center;gap:10px;margin-top:16px;font-size:.9rem;font-weight:600;}
+  .crumb a{color:#B9C6E4;}
+  .crumb a:hover{color:var(--saffron-2);}
+  .crumb-sep{color:#5A6E9C;}
+  .crumb-cur{color:var(--saffron-2);}
+
+  .about-sec{position:relative;background:var(--surface);color:var(--ink);
+    background-image:
+      radial-gradient(130% 120% at 100% 0%,rgba(232,89,12,.05),transparent 46%),
+      radial-gradient(120% 120% at 0% 100%,rgba(16,34,76,.05),transparent 48%),
+      radial-gradient(rgba(16,34,76,.055) 1px,transparent 1.5px);
+    background-size:100% 100%,100% 100%,24px 24px;}
+  .about-sec .wrap{position:relative;z-index:1;padding-top:64px;padding-bottom:64px;}
+  .about-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:52px;align-items:center;}
+  .about-visual{position:relative;}
+  .about-visual img{width:100%;height:auto;display:block;border-radius:18px;border:1px solid var(--line);
+    box-shadow:0 26px 50px -28px rgba(16,34,76,.45);}
+  .about-chip{position:absolute;left:18px;bottom:18px;background:rgba(11,23,51,.86);backdrop-filter:blur(4px);
+    color:#fff;font-size:.74rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase;
+    padding:8px 13px;border-radius:100px;border:1px solid var(--saffron);}
+  .about-sec .sec-eyebrow{color:var(--saffron);}
+  .about-sec .sec-eyebrow .spoke{color:var(--navy);}
+  .about-sec h2.sec-h{color:var(--navy);}
+  .about-copy .about-lead{margin:16px 0 0;color:#42517A;font-size:1.05rem;line-height:1.78;}
+  html.contrast .about-copy .about-lead{color:var(--navy);}
+  @media(max-width:860px){ .about-grid{grid-template-columns:1fr;gap:34px;} .about-visual{order:-1;max-width:460px;} }
+
+  /* ---------- NPO Directory search ---------- */
+  .npo-search{position:relative;background:var(--surface);color:var(--ink);
+    background-image:
+      radial-gradient(130% 120% at 100% 0%,rgba(232,89,12,.05),transparent 46%),
+      radial-gradient(120% 120% at 0% 100%,rgba(16,34,76,.05),transparent 48%),
+      radial-gradient(rgba(16,34,76,.055) 1px,transparent 1.5px);
+    background-size:100% 100%,100% 100%,24px 24px;}
+  .npo-search .wrap{position:relative;z-index:1;padding-top:54px;padding-bottom:76px;}
+  .npo-form{display:flex;flex-direction:column;gap:20px;}
+  .npo-row{display:grid;gap:20px;}
+  .npo-row-4{grid-template-columns:repeat(4,1fr);}
+  .npo-row-search{grid-template-columns:1fr 1fr 1.5fr auto;align-items:end;}
+  .field{display:flex;flex-direction:column;gap:7px;min-width:0;}
+  .field-lbl{font-size:.78rem;font-weight:600;color:var(--muted);letter-spacing:.01em;}
+  .npo-form select,.npo-form input[type=text]{font:inherit;font-size:.95rem;color:var(--navy);
+    border:1px solid var(--line);border-radius:11px;padding:14px 16px;width:100%;background:var(--surface);
+    transition:border-color .15s ease,box-shadow .15s ease;}
+  .npo-form select{appearance:none;-webkit-appearance:none;background-color:#F6F8FC;cursor:pointer;padding-right:42px;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%2310224C' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+    background-repeat:no-repeat;background-position:right 16px center;}
+  .npo-form select:disabled{opacity:.55;cursor:not-allowed;}
+  .npo-form select:hover:not(:disabled),.npo-form input[type=text]:hover{border-color:#AEBBD6;}
+  .npo-form select:focus,.npo-form input[type=text]:focus{outline:none;border-color:var(--saffron);box-shadow:0 0 0 3px rgba(232,89,12,.14);}
+  .npo-form input::placeholder{color:#9AA6C0;}
+  .field-captcha{min-width:0;}
+  .captcha-wrap{display:flex;align-items:center;gap:10px;}
+  .captcha-img{flex:0 0 auto;width:106px;height:50px;display:flex;align-items:center;justify-content:center;
+    background:repeating-linear-gradient(135deg,#EEF1F7 0 7px,#E4E9F3 7px 14px);border:1px solid var(--line);border-radius:10px;
+    font-family:var(--mono);font-weight:700;font-size:1.14rem;letter-spacing:.16em;color:#5A667F;
+    user-select:none;font-style:italic;transform:skewX(-6deg);text-shadow:1px 1px 0 rgba(255,255,255,.7);}
+  .captcha-refresh{flex:0 0 auto;width:46px;height:46px;border-radius:10px;border:1px solid var(--saffron-soft);
+    background:var(--saffron-soft);color:var(--saffron);display:grid;place-items:center;cursor:pointer;transition:background .15s ease,color .15s ease,border-color .15s ease;}
+  .captcha-refresh:hover{background:var(--saffron);color:#fff;border-color:var(--saffron);}
+  .captcha-refresh svg{width:19px;height:19px;transition:transform .45s ease;}
+  .captcha-refresh:active svg{transform:rotate(-180deg);}
+  .captcha-input{flex:1 1 90px;min-width:70px;}
+  .field-submit .field-lbl{visibility:hidden;}
+  .npo-search-btn{width:100%;justify-content:center;height:50px;padding:14px 30px;font-weight:700;}
+  .npo-note{margin:2px 0 0;padding:13px 16px;border-radius:11px;background:var(--saffron-soft);
+    color:#8A3D08;font-weight:600;font-size:.92rem;border:1px solid #F6C9AB;}
+  html.contrast .npo-form select,html.contrast .npo-form input[type=text]{border-color:var(--navy);}
+  @media(max-width:1000px){ .npo-row-4{grid-template-columns:1fr 1fr;} .npo-row-search{grid-template-columns:1fr 1fr;} }
+  @media(max-width:560px){ .npo-row-4,.npo-row-search{grid-template-columns:1fr;} }
+  .npo-btns{display:flex;gap:10px;}
+  .npo-reset-btn{height:50px;padding:14px 26px;font-weight:700;background:transparent;color:var(--saffron);border:1.5px solid var(--saffron);}
+  .npo-reset-btn:hover{background:var(--saffron);color:#fff;}
+
+  /* ---------- Blacklisted NPO results table ---------- */
+  .bl-results{position:relative;z-index:1;margin-top:30px;}
+  .bl-total{color:var(--saffron);font-weight:800;font-size:1.02rem;text-align:right;margin:0 0 16px;}
+  .bl-table-wrap{border:1px solid var(--line);border-radius:14px;overflow:hidden;overflow-x:auto;box-shadow:0 14px 32px -24px rgba(16,34,76,.55);background:var(--surface);}
+  table.bl-table{width:100%;border-collapse:collapse;font-size:.92rem;min-width:840px;}
+  table.bl-table thead th{background:#FBF4DF;text-align:left;font-family:var(--display);font-weight:700;color:var(--navy);
+    padding:16px 18px;border-bottom:1px solid var(--line);white-space:nowrap;vertical-align:top;}
+  table.bl-table tbody td{padding:16px 18px;border-bottom:1px solid var(--line-2);color:var(--navy-2);vertical-align:top;}
+  table.bl-table tbody tr:last-child td{border-bottom:0;}
+  table.bl-table tbody tr:hover{background:#FAFBFE;}
+  .bl-name{color:#2563EB;font-weight:600;}
+  .bl-name:hover{color:var(--saffron);text-decoration:underline;}
+  .bl-empty{text-align:center;color:var(--muted);padding:36px 0;font-weight:600;}
+  .bl-pager{display:flex;justify-content:center;align-items:center;gap:6px;margin-top:26px;flex-wrap:wrap;}
+  .bl-page{min-width:38px;height:38px;padding:0 11px;border:1px solid var(--line);background:#fff;color:var(--navy-2);
+    border-radius:9px;font:inherit;font-weight:600;cursor:pointer;transition:border-color .15s ease,color .15s ease,background .15s ease;}
+  .bl-page:hover:not(:disabled):not(.active){border-color:var(--saffron);color:var(--saffron);}
+  .bl-page.active{background:var(--saffron);border-color:var(--saffron);color:#fff;cursor:default;}
+  .bl-page:disabled{opacity:.4;cursor:not-allowed;}
+  html.contrast .bl-table-wrap,html.contrast .bl-page{border-color:var(--navy);}
+  @media(max-width:560px){ .bl-total{text-align:left;} }
+
   /* ---------- responsive ---------- */
   @media(max-width:960px){
     nav.main,.head-cta .btn-ghost{display:none;}
@@ -542,11 +656,11 @@
 <header class="head">
   <div class="wrap">
     <nav class="main" aria-label="Primary">
-      <a href="/ngo-darpan.html" class="active" data-en="Home" data-hi="मुखपृष्ठ">Home</a>
+      <a href="/ngo-darpan.html" data-en="Home" data-hi="मुखपृष्ठ">Home</a>
       <a href="/about.html" data-en="About Us" data-hi="हमारे बारे में">About Us</a>
       <a href="/npo-directory.html" data-en="NPO Directory" data-hi="एनपीओ निर्देशिका">NPO Directory</a>
       <a href="/grants.html" data-en="Grant-in-aid Portals" data-hi="अनुदान सहायता पोर्टल">Grant-in-aid Portals</a>
-      <a href="/blacklisted.html" data-en="Blacklisted NPOs" data-hi="काली सूची वाले एनपीओ">Blacklisted NPOs</a>
+      <a href="/blacklisted.html" class="active" data-en="Blacklisted NPOs" data-hi="काली सूची वाले एनपीओ">Blacklisted NPOs</a>
       <div class="nav-dd"><a href="#" class="nav-dd-t" data-en="Resources" data-hi="संसाधन">Resources</a><div class="nav-dd-menu"><a href="/circulars.html" data-en="Circulars" data-hi="परिपत्र">Circulars</a><a href="/faqs.html" data-en="FAQ's" data-hi="सामान्य प्रश्न">FAQ's</a><a href="/guidelines.html" data-en="Guidelines" data-hi="दिशानिर्देश">Guidelines</a></div></div>
       <a href="/contact.html" data-en="Contact Us" data-hi="संपर्क करें">Contact Us</a>
     </nav>
@@ -561,343 +675,119 @@
   </div>
 </header>
 
-<!-- ============ HERO ============ -->
-<section class="hero" style="padding:0;">
-  <div class="wrap">
-    <div class="hero-copy">
-      <h1 class="hero-h" data-en='A Digital Platform<br>To Obtain DARPAN<br><em>Unique ID</em>' data-hi='दर्पण&nbsp;<em>विशिष्ट आईडी</em><br>प्राप्त करने के लिए<br>एक डिजिटल मंच'>A Digital Platform<br>To Obtain DARPAN<br><em>Unique ID</em></h1>
-      <p class="hero-sub" data-en="DARPAN is the mirror between NGOs and the government — a single, transparent record that unlocks a unique ID, grant eligibility and ministry recognition. Register once, be recognised everywhere." data-hi="दर्पण एनजीओ और सरकार के बीच का आईना है — एक पारदर्शी रिकॉर्ड जो विशिष्ट आईडी, अनुदान पात्रता और मंत्रालय मान्यता देता है।">DARPAN is the mirror between NGOs and the government — a single, transparent record that unlocks a unique ID, grant eligibility and ministry recognition. Register once, be recognised everywhere.</p>
-      <div class="hero-actions">
-        <button class="btn btn-primary btn-lg" data-en="Start registration →" data-hi="पंजीकरण शुरू करें →">Start registration →</button>
-        <button class="btn btn-ghost btn-lg" style="color:#EAF0FC;border-color:#3A4E7A" data-en="Search the directory" data-hi="निर्देशिका खोजें">Search the directory</button>
-      </div>
-      <div class="hero-trust">
-        <div class="ht"><b class="mono">5.86 L+</b><span data-en="NPOs registered" data-hi="एनपीओ पंजीकृत">NPOs registered</span></div>
-        <div class="ht"><b class="mono">36</b><span data-en="States & UTs" data-hi="राज्य और केंद्र शासित">States & UTs</span></div>
-        <div class="ht"><b class="mono">100%</b><span data-en="Self-declared, e-signed" data-hi="स्व-घोषित, ई-हस्ताक्षरित">Self-declared, e-signed</span></div>
-      </div>
-    </div>
-
-    <div class="hero-visual">
-      <!-- CHAKRA WHEEL + DARPAN ID CARD COMMENTED OUT
-      <svg class="chakra" viewBox="0 0 400 400" aria-hidden="true">
-        <circle cx="200" cy="200" r="180" fill="none" stroke="#4C63A0" stroke-width="1.5"/>
-        <circle cx="200" cy="200" r="150" fill="none" stroke="#3A4E7A" stroke-width="1"/>
-        <circle cx="200" cy="200" r="18" fill="none" stroke="#7C8FC0" stroke-width="4"/>
-        <g id="chakraSpokes" stroke="#7C8FC0" stroke-width="2"></g>
-      </svg>
-      <div class="idcard">
-        <div class="idc-live" data-en="LIVE" data-hi="लाइव">● LIVE</div>
-        <div class="idc-top">
-          <div>
-            <img class="idc-logo" src="/assets/darpan.png" alt="DARPAN" width="126" height="46">
-            <b style="margin-top:8px">Unique DARPAN ID</b>
-          </div>
-          <span class="idc-badge">✓ <span data-en="Verified" data-hi="सत्यापित">Verified</span></span>
-        </div>
-        <div class="idc-id" id="liveId">DL/2026/0428613</div>
-        <div class="idc-row">
-          <div><span data-en="Registered on" data-hi="पंजीकरण तिथि">Registered on</span><b>08 Jul 2026</b></div>
-          <div style="text-align:right"><span data-en="Type" data-hi="प्रकार">Type</span><b data-en="Society" data-hi="सोसाइटी">Society</b></div>
-        </div>
-      </div>
-      -->
-    </div>
+<!-- ============ BLACKLISTED NPO BANNER ============ -->
+<section class="page-hero">
+  <div class="ph-pattern" aria-hidden="true"></div>
+  <div class="wrap ph-inner">
+    <h1 class="ph-title" data-en="Blacklisted NPO" data-hi="काली सूची वाले एनपीओ">Blacklisted NPO</h1>
+    <nav class="crumb" aria-label="Breadcrumb">
+      <a href="/ngo-darpan.html" data-en="Home" data-hi="मुखपृष्ठ">Home</a>
+      <span class="crumb-sep" aria-hidden="true">/</span>
+      <span class="crumb-cur" data-en="BlackListed NPO" data-hi="काली सूची वाले एनपीओ">BlackListed NPO</span>
+    </nav>
   </div>
 </section>
 
-<!-- ============ DISCLAIMER MARQUEE ============ -->
-<div class="marquee" role="marquee" aria-label="Important disclaimer">
-  <div class="marquee-track">
-    <span data-en="Niti Aayog does not issue any Physical Darpan certificate, it only provides Darpan registration ID to NPOs on the basis of self-declared affidavit." data-hi="नीति आयोग कोई भौतिक दर्पण प्रमाणपत्र जारी नहीं करता, यह केवल स्व-घोषित शपथ-पत्र के आधार पर एनपीओ को दर्पण पंजीकरण आईडी प्रदान करता है।">Niti Aayog does not issue any Physical Darpan certificate, it only provides Darpan registration ID to NPOs on the basis of self-declared affidavit.</span>
-    <span data-en="Niti Aayog does not issue any Physical Darpan certificate, it only provides Darpan registration ID to NPOs on the basis of self-declared affidavit." data-hi="नीति आयोग कोई भौतिक दर्पण प्रमाणपत्र जारी नहीं करता, यह केवल स्व-घोषित शपथ-पत्र के आधार पर एनपीओ को दर्पण पंजीकरण आईडी प्रदान करता है।">Niti Aayog does not issue any Physical Darpan certificate, it only provides Darpan registration ID to NPOs on the basis of self-declared affidavit.</span>
-    <span data-en="Niti Aayog does not issue any Physical Darpan certificate, it only provides Darpan registration ID to NPOs on the basis of self-declared affidavit." data-hi="नीति आयोग कोई भौतिक दर्पण प्रमाणपत्र जारी नहीं करता, यह केवल स्व-घोषित शपथ-पत्र के आधार पर एनपीओ को दर्पण पंजीकरण आईडी प्रदान करता है।">Niti Aayog does not issue any Physical Darpan certificate, it only provides Darpan registration ID to NPOs on the basis of self-declared affidavit.</span>
-    <span aria-hidden="true" data-en="Niti Aayog does not issue any Physical Darpan certificate, it only provides Darpan registration ID to NPOs on the basis of self-declared affidavit." data-hi="नीति आयोग कोई भौतिक दर्पण प्रमाणपत्र जारी नहीं करता, यह केवल स्व-घोषित शपथ-पत्र के आधार पर एनपीओ को दर्पण पंजीकरण आईडी प्रदान करता है।">Niti Aayog does not issue any Physical Darpan certificate, it only provides Darpan registration ID to NPOs on the basis of self-declared affidavit.</span>
-    <span aria-hidden="true" data-en="Niti Aayog does not issue any Physical Darpan certificate, it only provides Darpan registration ID to NPOs on the basis of self-declared affidavit." data-hi="नीति आयोग कोई भौतिक दर्पण प्रमाणपत्र जारी नहीं करता, यह केवल स्व-घोषित शपथ-पत्र के आधार पर एनपीओ को दर्पण पंजीकरण आईडी प्रदान करता है।">Niti Aayog does not issue any Physical Darpan certificate, it only provides Darpan registration ID to NPOs on the basis of self-declared affidavit.</span>
-    <span aria-hidden="true" data-en="Niti Aayog does not issue any Physical Darpan certificate, it only provides Darpan registration ID to NPOs on the basis of self-declared affidavit." data-hi="नीति आयोग कोई भौतिक दर्पण प्रमाणपत्र जारी नहीं करता, यह केवल स्व-घोषित शपथ-पत्र के आधार पर एनपीओ को दर्पण पंजीकरण आईडी प्रदान करता है।">Niti Aayog does not issue any Physical Darpan certificate, it only provides Darpan registration ID to NPOs on the basis of self-declared affidavit.</span>
-  </div>
-</div>
-
-<!-- ============ REGISTRY STATS ============ -->
-<section class="registry" id="registry">
+<!-- ============ SEARCH NPO FORM ============ -->
+<section class="npo-search">
   <div class="wrap">
-    <div class="sec-head">
-      <div>
-        <div class="sec-eyebrow"><svg class="spoke" viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="9.3" stroke-width="1.7"/><circle cx="12" cy="12" r="2.3" stroke-width="1.3"/><g stroke-width="1.1" stroke-linecap="round"><line x1="15.3" y1="12" x2="19.8" y2="12"/><line x1="14.86" y1="13.65" x2="18.75" y2="15.9"/><line x1="13.65" y1="14.86" x2="15.9" y2="18.75"/><line x1="12" y1="15.3" x2="12" y2="19.8"/><line x1="10.35" y1="14.86" x2="8.1" y2="18.75"/><line x1="9.14" y1="13.65" x2="5.25" y2="15.9"/><line x1="8.7" y1="12" x2="4.2" y2="12"/><line x1="9.14" y1="10.35" x2="5.25" y2="8.1"/><line x1="10.35" y1="9.14" x2="8.1" y2="5.25"/><line x1="12" y1="8.7" x2="12" y2="4.2"/><line x1="13.65" y1="9.14" x2="15.9" y2="5.25"/><line x1="14.86" y1="10.35" x2="18.75" y2="8.1"/></g></svg><span data-en="Live registry" data-hi="लाइव रजिस्ट्री">Live registry</span></div>
-        <h2 class="sec-h" data-en="The state of NPOs, updated in real time" data-hi="एनपीओ की स्थिति, वास्तविक समय में">The state of NPOs, updated in real time</h2>
-      </div>
-      <p class="sec-lead" data-en="Every number below is drawn from the public DARPAN registry. Transparency is the point — anyone can look." data-hi="नीचे दिया गया हर आँकड़ा सार्वजनिक दर्पण रजिस्ट्री से है।">Every number below is drawn from the public DARPAN registry. Transparency is the point — anyone can look.</p>
-    </div>
+    <form class="npo-form" id="npoForm" autocomplete="off" novalidate>
 
-    <div class="stat-grid">
-      <div class="stat">
-        <div class="lbl" data-en="Total DARPAN IDs" data-hi="कुल दर्पण आईडी">Total DARPAN IDs</div>
-        <div class="num" data-count="586863">0</div>
-        <div class="delta">▲ 1,204 <span data-en="this week" data-hi="इस सप्ताह">this week</span></div>
-      </div>
-      <div class="stat active">
-        <div class="lbl" data-en="Active IDs" data-hi="सक्रिय आईडी">Active IDs</div>
-        <div class="num" data-count="586778">0</div>
-        <div class="delta">99.98% <span data-en="in good standing" data-hi="अच्छी स्थिति में">in good standing</span></div>
-      </div>
-      <div class="stat black">
-        <div class="lbl" data-en="Blacklisted IDs" data-hi="काली सूची आईडी">Blacklisted IDs</div>
-        <div class="num" data-count="85">0</div>
-        <div class="delta" data-en="Flagged for review" data-hi="समीक्षा हेतु चिह्नित">Flagged for review</div>
-      </div>
-    </div>
+      <div class="npo-row npo-row-4">
+        <label class="field">
+          <span class="field-lbl" data-en="NPO Registered State" data-hi="एनपीओ पंजीकृत राज्य">NPO Registered State</span>
+          <select id="fState">
+            <option value="" selected data-en="NPO Registered State" data-hi="एनपीओ पंजीकृत राज्य">NPO Registered State</option>
+          </select>
+        </label>
 
-    <div class="breakdown">
-      <h3 data-en="Registered organisations by type" data-hi="प्रकार अनुसार पंजीकृत संगठन">Registered organisations by type</h3>
-      <div class="btype">
-        <div class="bname" data-en="Trust" data-hi="ट्रस्ट">Trust<span data-en="Charitable / religious" data-hi="धर्मार्थ / धार्मिक">Charitable / religious</span></div>
-        <div class="btrack"><div class="bfill" data-w="49.88" style="background:var(--navy)"></div></div>
-        <div class="bval">2,92,669 <em>49.88%</em></div>
-      </div>
-      <div class="btype">
-        <div class="bname" data-en="Society" data-hi="सोसाइटी">Society<span data-en="Registered societies" data-hi="पंजीकृत सोसाइटी">Registered societies</span></div>
-        <div class="btrack"><div class="bfill" data-w="41.13" style="background:var(--green)"></div></div>
-        <div class="bval">2,41,316 <em>41.13%</em></div>
-      </div>
-      <div class="btype">
-        <div class="bname" data-en="Section 8 Company" data-hi="धारा 8 कंपनी">Section 8 Company<span data-en="Not-for-profit companies" data-hi="गैर-लाभकारी कंपनियाँ">Not-for-profit companies</span></div>
-        <div class="btrack"><div class="bfill" data-w="9.00" style="background:var(--saffron)"></div></div>
-        <div class="bval">52,793 <em>9.00%</em></div>
-      </div>
-    </div>
-  </div>
-</section>
+        <label class="field">
+          <span class="field-lbl" data-en="NPO Registered District" data-hi="एनपीओ पंजीकृत जिला">NPO Registered District</span>
+          <select id="fDistrict" disabled>
+            <option value="" selected data-en="NPO Registered District" data-hi="एनपीओ पंजीकृत जिला">NPO Registered District</option>
+          </select>
+        </label>
 
-<!-- ============ STATE TILEMAP ============ -->
-<section>
-  <div class="wrap">
-    <div class="sec-head">
-      <div>
-        <div class="sec-eyebrow"><svg class="spoke" viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="9.3" stroke-width="1.7"/><circle cx="12" cy="12" r="2.3" stroke-width="1.3"/><g stroke-width="1.1" stroke-linecap="round"><line x1="15.3" y1="12" x2="19.8" y2="12"/><line x1="14.86" y1="13.65" x2="18.75" y2="15.9"/><line x1="13.65" y1="14.86" x2="15.9" y2="18.75"/><line x1="12" y1="15.3" x2="12" y2="19.8"/><line x1="10.35" y1="14.86" x2="8.1" y2="18.75"/><line x1="9.14" y1="13.65" x2="5.25" y2="15.9"/><line x1="8.7" y1="12" x2="4.2" y2="12"/><line x1="9.14" y1="10.35" x2="5.25" y2="8.1"/><line x1="10.35" y1="9.14" x2="8.1" y2="5.25"/><line x1="12" y1="8.7" x2="12" y2="4.2"/><line x1="13.65" y1="9.14" x2="15.9" y2="5.25"/><line x1="14.86" y1="10.35" x2="18.75" y2="8.1"/></g></svg><span data-en="Across the country" data-hi="देश भर में">Across the country</span></div>
-        <h2 class="sec-h" data-en="Registrations, state by state" data-hi="राज्यवार पंजीकरण">Registrations, state by state</h2>
-      </div>
-      <p class="sec-lead" data-en="An interactive map of India — hover a state for its active DARPAN ID count, or click to pin it in the panel alongside." data-hi="भारत का इंटरैक्टिव मानचित्र — किसी राज्य पर होवर करें और उसकी सक्रिय दर्पण आईडी संख्या देखें, या क्लिक करके उसे पैनल में देखें।">An interactive map of India — hover a state for its active DARPAN ID count, or click to pin it in the panel alongside.</p>
-    </div>
+        <label class="field">
+          <span class="field-lbl" data-en="Sectors" data-hi="क्षेत्र">Sectors</span>
+          <select id="fSector">
+            <option value="" selected data-en="Sectors" data-hi="क्षेत्र">Sectors</option>
+            <option data-en="Education &amp; Literacy" data-hi="शिक्षा एवं साक्षरता">Education &amp; Literacy</option>
+            <option data-en="Health &amp; Family Welfare" data-hi="स्वास्थ्य एवं परिवार कल्याण">Health &amp; Family Welfare</option>
+            <option data-en="Women's Development &amp; Empowerment" data-hi="महिला विकास एवं सशक्तिकरण">Women's Development &amp; Empowerment</option>
+            <option data-en="Children" data-hi="बच्चे">Children</option>
+            <option data-en="Environment &amp; Forests" data-hi="पर्यावरण एवं वन">Environment &amp; Forests</option>
+            <option data-en="Rural Development &amp; Poverty Alleviation" data-hi="ग्रामीण विकास एवं गरीबी उन्मूलन">Rural Development &amp; Poverty Alleviation</option>
+            <option data-en="Disability &amp; Welfare" data-hi="दिव्यांगता एवं कल्याण">Disability &amp; Welfare</option>
+            <option data-en="Agriculture" data-hi="कृषि">Agriculture</option>
+            <option data-en="Art &amp; Culture" data-hi="कला एवं संस्कृति">Art &amp; Culture</option>
+          </select>
+        </label>
 
-    <div class="view-toggle-row">
-      <div class="view-toggle" role="tablist" aria-label="Choose map or table view">
-        <button id="btnMap" role="tab" aria-selected="true" aria-controls="mapView">
-          <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="1 6 8 3 16 6 23 3 23 18 16 21 8 18 1 21 1 6"/><line x1="8" y1="3" x2="8" y2="18"/><line x1="16" y1="6" x2="16" y2="21"/></svg>
-          <span data-en="Show Map" data-hi="मानचित्र देखें">Show Map</span>
-        </button>
-        <button id="btnTable" role="tab" aria-selected="false" aria-controls="tableView">
-          <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="3" y1="15" x2="21" y2="15"/><line x1="12" y1="3" x2="12" y2="21"/></svg>
-          <span data-en="Show Table" data-hi="तालिका देखें">Show Table</span>
-        </button>
+        <label class="field">
+          <span class="field-lbl" data-en="NPO Type" data-hi="एनपीओ प्रकार">NPO Type</span>
+          <select id="fType">
+            <option value="" selected data-en="NPO Type" data-hi="एनपीओ प्रकार">NPO Type</option>
+            <option data-en="Trust" data-hi="ट्रस्ट">Trust</option>
+            <option data-en="Society" data-hi="सोसाइटी">Society</option>
+            <option data-en="Section 8 Company" data-hi="धारा 8 कंपनी">Section 8 Company</option>
+          </select>
+        </label>
       </div>
-    </div>
 
-    <div class="np-layout">
-      <div class="np-left">
-        <div class="np-mapwrap" id="mapView">
-          <div class="india-map" id="indiaMap" role="img" aria-label="Map of India showing states with registered NPOs"></div>
-          <div class="np-controls">
-            <span class="lbl-txt" data-en="Select a state" data-hi="राज्य चुनें">Select a state</span>
-            <select class="state-select" id="stateSelect" aria-label="Select a state to view its registrations"></select>
-            <span class="illus" data-en="Counts are actual · type split illustrative" data-hi="संख्याएँ वास्तविक · प्रकार विभाजन उदाहरणात्मक">Counts are actual · type split illustrative</span>
+      <div class="npo-row npo-row-search">
+        <label class="field">
+          <span class="field-lbl" data-en="Search by NPO Name" data-hi="एनपीओ नाम से खोजें">Search by NPO Name</span>
+          <input type="text" id="fName" placeholder="Search by NPO Name" data-ph-en="Search by NPO Name" data-ph-hi="एनपीओ नाम से खोजें">
+        </label>
+
+        <label class="field">
+          <span class="field-lbl" data-en="Search by DARPAN ID" data-hi="दर्पण आईडी से खोजें">Search by DARPAN ID</span>
+          <input type="text" id="fDarpan" placeholder="Search by DARPAN ID" data-ph-en="Search by DARPAN ID" data-ph-hi="दर्पण आईडी से खोजें">
+        </label>
+
+        <div class="field field-captcha">
+          <span class="field-lbl" data-en="Captcha" data-hi="कैप्चा">Captcha</span>
+          <div class="captcha-wrap">
+            <span class="captcha-img" id="captchaText" aria-label="Captcha code">gxvUyp</span>
+            <button type="button" class="captcha-refresh" id="captchaRefresh" aria-label="Refresh captcha">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-2.64-6.36"/><path d="M21 3v5h-5"/></svg>
+            </button>
+            <input type="text" id="fCaptcha" class="captcha-input" placeholder="Captcha" data-ph-en="Captcha" data-ph-hi="कैप्चा" aria-label="Enter captcha">
           </div>
         </div>
 
-        <div id="tableView" hidden>
-          <div class="state-table-wrap">
-            <table class="state-table">
-              <thead>
-                <tr>
-                  <th data-en="State / UT Name" data-hi="राज्य / केंद्र शासित प्रदेश">State / UT Name</th>
-                  <th data-en="Active DARPAN IDs" data-hi="सक्रिय दर्पण आईडी">Active DARPAN IDs</th>
-                </tr>
-              </thead>
-              <tbody id="stateTableBody"></tbody>
-            </table>
+        <div class="field field-submit">
+          <span class="field-lbl" aria-hidden="true">&nbsp;</span>
+          <div class="npo-btns">
+            <button type="submit" class="btn btn-primary npo-search-btn" data-en="Search" data-hi="खोजें">Search</button>
+            <button type="button" class="btn npo-reset-btn" id="npoReset" data-en="Reset" data-hi="रीसेट">Reset</button>
           </div>
         </div>
       </div>
 
-      <aside class="np-panel" aria-live="polite">
-        <div class="pstate" id="pState">All India</div>
-        <div class="pmeta" id="pMeta">Aggregate across 36 States & UTs</div>
-        <div class="np-big-l" data-en="Active DARPAN IDs" data-hi="सक्रिय दर्पण आईडी">Active DARPAN IDs</div>
-        <div class="np-big mono" id="pTotal">5,86,912</div>
-        <div class="np-mini">
-          <div><b class="mono" id="pActive">5,86,778</b><span data-en="Active" data-hi="सक्रिय">Active</span></div>
-          <div><b class="mono" id="pTrust">2,92,669</b><span data-en="Trusts" data-hi="ट्रस्ट">Trusts</span></div>
-          <div><b class="mono" id="pSociety">2,41,316</b><span data-en="Societies" data-hi="सोसाइटी">Societies</span></div>
-          <div><b class="mono" id="pSec8">52,793</b><span data-en="Section 8" data-hi="धारा 8">Section 8</span></div>
-        </div>
-        <div class="prank" id="pRank" data-en="Select a tile to view a single state, or keep the national view." data-hi="किसी राज्य के लिए टाइल चुनें।">Select a tile to view a single state, or keep the national view.</div>
-      </aside>
-    </div>
-  </div>
-</section>
+      <p class="npo-note" id="npoNote" role="status" aria-live="polite" hidden></p>
+    </form>
 
-<!-- ============ HOW TO REGISTER ============ -->
-<section class="register" id="register">
-  <div class="wrap register-grid">
-
-    <div class="register-visual">
-      <img src="/assets/signin_img.png" class="rv-img" alt="Registering for a DARPAN Unique ID" width="900" height="720">
-    </div>
-
-    <div class="register-copy">
-      <div class="sec-eyebrow"><svg class="spoke" viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="9.3" stroke-width="1.7"/><circle cx="12" cy="12" r="2.3" stroke-width="1.3"/><g stroke-width="1.1" stroke-linecap="round"><line x1="15.3" y1="12" x2="19.8" y2="12"/><line x1="14.86" y1="13.65" x2="18.75" y2="15.9"/><line x1="13.65" y1="14.86" x2="15.9" y2="18.75"/><line x1="12" y1="15.3" x2="12" y2="19.8"/><line x1="10.35" y1="14.86" x2="8.1" y2="18.75"/><line x1="9.14" y1="13.65" x2="5.25" y2="15.9"/><line x1="8.7" y1="12" x2="4.2" y2="12"/><line x1="9.14" y1="10.35" x2="5.25" y2="8.1"/><line x1="10.35" y1="9.14" x2="8.1" y2="5.25"/><line x1="12" y1="8.7" x2="12" y2="4.2"/><line x1="13.65" y1="9.14" x2="15.9" y2="5.25"/><line x1="14.86" y1="10.35" x2="18.75" y2="8.1"/></g></svg><span data-en="Four steps" data-hi="चार चरण">Four steps</span></div>
-      <h2 class="sec-h" data-en="How to register for your DARPAN Unique ID" data-hi="अपनी दर्पण विशिष्ट आईडी के लिए पंजीकरण कैसे करें">How to register for your DARPAN Unique ID</h2>
-      <p class="sec-lead" data-en="The whole process is online and typically completed in one sitting, ending with an e-signed affidavit." data-hi="पूरी प्रक्रिया ऑनलाइन है और आमतौर पर एक बार में पूरी हो जाती है, जो ई-हस्ताक्षरित शपथ-पत्र के साथ समाप्त होती है।">The whole process is online and typically completed in one sitting, ending with an e-signed affidavit.</p>
-
-      <div class="reg-steps">
-        <div class="rstep">
-          <div class="rstep-chip">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.2"/><path d="M3.5 20a5.5 5.5 0 0 1 11 0"/><path d="M19 8v6M16 11h6"/></svg>
-          </div>
-          <div class="rstep-body">
-            <span class="rstep-n" data-en="Step 01" data-hi="चरण 01">Step 01</span>
-            <h3 data-en="Create an account" data-hi="खाता बनाएँ">Create an account</h3>
-            <p data-en="Register with your PAN, verify email and mobile by OTP, then set a password and mPIN." data-hi="पैन से पंजीकरण करें, ओटीपी सत्यापन करें, फिर पासवर्ड और एमपिन सेट करें।">Register with your PAN, verify email and mobile by OTP, then set a password and mPIN.</p>
-          </div>
-        </div>
-        <div class="rstep">
-          <div class="rstep-chip">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h8l4 4v14H6z"/><path d="M12 16v-5M9.5 12.5 12 10l2.5 2.5"/></svg>
-          </div>
-          <div class="rstep-body">
-            <span class="rstep-n" data-en="Step 02" data-hi="चरण 02">Step 02</span>
-            <h3 data-en="Add details &amp; documents" data-hi="विवरण व दस्तावेज़">Add details &amp; documents</h3>
-            <p data-en="Fill NPO details, members, working areas and projects, then upload the required proofs." data-hi="एनपीओ विवरण, सदस्य, कार्यक्षेत्र और परियोजनाएँ भरें, फिर आवश्यक दस्तावेज़ अपलोड करें।">Fill NPO details, members, working areas and projects, then upload the required proofs.</p>
-          </div>
-        </div>
-        <div class="rstep">
-          <div class="rstep-chip">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 4h6v3H9z"/><path d="M15 5h3v15H6V5h3"/><path d="m9 13 2 2 4-4"/></svg>
-          </div>
-          <div class="rstep-body">
-            <span class="rstep-n" data-en="Step 03" data-hi="चरण 03">Step 03</span>
-            <h3 data-en="Review &amp; e-sign" data-hi="समीक्षा व ई-हस्ताक्षर">Review &amp; e-sign</h3>
-            <p data-en="Check every section, add witness details, then e-sign the affidavit with an OTP." data-hi="हर अनुभाग जाँचें, गवाह विवरण जोड़ें, फिर ओटीपी से शपथ-पत्र ई-हस्ताक्षरित करें।">Check every section, add witness details, then e-sign the affidavit with an OTP.</p>
-          </div>
-        </div>
-        <div class="rstep">
-          <div class="rstep-chip">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="8.5" cy="11" r="2"/><path d="M6 16c.6-1.4 4-1.4 5 0M14 9.5h4M14 13h4"/></svg>
-          </div>
-          <div class="rstep-body">
-            <span class="rstep-n" data-en="Step 04" data-hi="चरण 04">Step 04</span>
-            <h3 data-en="Receive your DARPAN ID" data-hi="अपनी दर्पण आईडी पाएँ">Receive your DARPAN ID</h3>
-            <p data-en="Your unique ID is generated instantly — start applying for grants and exemptions." data-hi="आपकी विशिष्ट आईडी तुरंत बनती है — अनुदान व छूट हेतु आवेदन शुरू करें।">Your unique ID is generated instantly — start applying for grants and exemptions.</p>
-          </div>
-        </div>
+    <div class="bl-results">
+      <div class="bl-total" id="blTotal">Total Blacklisted NPOs: 85</div>
+      <div class="bl-table-wrap">
+        <table class="bl-table">
+          <thead>
+            <tr>
+              <th data-en="Sr. No." data-hi="क्र. सं.">Sr. No.</th>
+              <th data-en="Name of NPO" data-hi="एनपीओ का नाम">Name of NPO</th>
+              <th data-en="DARPAN ID" data-hi="दर्पण आईडी">DARPAN ID</th>
+              <th data-en="Blacklisted By" data-hi="काली सूची में डाला गया">Blacklisted By</th>
+              <th data-en="WEF" data-hi="प्रभावी तिथि">WEF</th>
+              <th data-en="Last Updated On" data-hi="अंतिम अद्यतन">Last Updated On</th>
+            </tr>
+          </thead>
+          <tbody id="blTbody"></tbody>
+        </table>
       </div>
+      <div class="bl-pager" id="blPager" role="navigation" aria-label="Table pagination"></div>
     </div>
-
-  </div>
-</section>
-
-<!-- ============ GRANT PORTALS ============ -->
-<section class="grants" id="grants">
-  <div class="wrap">
-    <div class="sec-head">
-      <div>
-        <div class="sec-eyebrow"><svg class="spoke" viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="9.3" stroke-width="1.7"/><circle cx="12" cy="12" r="2.3" stroke-width="1.3"/><g stroke-width="1.1" stroke-linecap="round"><line x1="15.3" y1="12" x2="19.8" y2="12"/><line x1="14.86" y1="13.65" x2="18.75" y2="15.9"/><line x1="13.65" y1="14.86" x2="15.9" y2="18.75"/><line x1="12" y1="15.3" x2="12" y2="19.8"/><line x1="10.35" y1="14.86" x2="8.1" y2="18.75"/><line x1="9.14" y1="13.65" x2="5.25" y2="15.9"/><line x1="8.7" y1="12" x2="4.2" y2="12"/><line x1="9.14" y1="10.35" x2="5.25" y2="8.1"/><line x1="10.35" y1="9.14" x2="8.1" y2="5.25"/><line x1="12" y1="8.7" x2="12" y2="4.2"/><line x1="13.65" y1="9.14" x2="15.9" y2="5.25"/><line x1="14.86" y1="10.35" x2="18.75" y2="8.1"/></g></svg><span data-en="Grant-in-aid" data-hi="अनुदान सहायता">Grant-in-aid</span></div>
-        <h2 class="sec-h" data-en="Online Grant Application Links for Ministries and Departments" data-hi="मंत्रालयों और विभागों के लिए ऑनलाइन अनुदान आवेदन लिंक">Online Grant Application Links for Ministries and Departments</h2>
-      </div>
-      <p class="sec-lead" data-en="Access official portals for submitting online grant applications to various government Ministries and Departments" data-hi="विभिन्न सरकारी मंत्रालयों और विभागों को ऑनलाइन अनुदान आवेदन जमा करने के लिए आधिकारिक पोर्टल तक पहुँचें">Access official portals for submitting online grant applications to various government Ministries and Departments</p>
-    </div>
-
-    <div class="grant-slider" id="grantSlider">
-      <div class="grant-viewport">
-        <div class="grant-track" id="grantTrack">
-
-          <div class="grant-slide">
-            <a class="grant-card" href="#">रसायन एवं पेट्रो-रसायन विभाग</a>
-            <a class="grant-card" href="#">उच्चतर शिक्षा विभाग</a>
-            <a class="grant-card" href="#">पूर्वोत्तर क्षेत्र विकास मंत्रालय</a>
-            <a class="grant-card" href="#">सामाजिक न्याय एवं अधिकारिता मंत्रालय</a>
-            <a class="grant-card" href="#">जनजातीय कार्य मंत्रालय</a>
-          </div>
-
-          <div class="grant-slide">
-            <a class="grant-card" href="#">जैव प्रौद्योगिकी विभाग</a>
-            <a class="grant-card" href="#">विकास आयुक्त हस्तशिल्प (वस्त्र मंत्रालय)</a>
-            <a class="grant-card" href="#">नई रोशनी (अल्पसंख्यक कार्य मंत्रालय)</a>
-            <a class="grant-card" href="#">स्फूर्ति एमएसएमई</a>
-            <a class="grant-card" href="#">कानूनी साक्षरता अधिकार न्याय विभाग</a>
-          </div>
-
-          <div class="grant-slide">
-            <a class="grant-card" href="#">राष्ट्रीय प्राधिकरण रासायनिक हथियार, कन्वेंशन कैबिनेट सचिवालय</a>
-            <a class="grant-card" href="#">अटल नवाचार मिशन - नीति आयोग</a>
-            <a class="grant-card" href="#">पीएम सूर्यघर योजना (नवीन एवं नवीकरणीय ऊर्जा मंत्रालय)</a>
-            <a class="grant-card" href="#">सूचना एवं प्रसारण मंत्रालय</a>
-            <a class="grant-card" href="#">आर्थिक कार्य विभाग</a>
-          </div>
-
-          <div class="grant-slide">
-            <a class="grant-card" href="#">जन शिक्षण संस्थान – कौशल विकास मंत्रालय</a>
-            <a class="grant-card" href="#">नगरपालिका कर्मचारियों के लिए प्रशिक्षण केन्द्र – आवासन एवं शहरी कार्य मंत्रालय</a>
-            <a class="grant-card" href="#">खान मंत्रालय</a>
-            <a class="grant-card" href="#">औषध विभाग</a>
-            <a class="grant-card" href="#">दिव्यांगजन सशक्तिकरण विभाग</a>
-          </div>
-
-          <div class="grant-slide">
-            <a class="grant-card" href="#">एनपीसीबीवीआई – स्वास्थ्य एवं परिवार कल्याण मंत्रालय</a>
-            <a class="grant-card" href="#">राष्ट्रीय जल मिशन – जल शक्ति मंत्रालय</a>
-            <a class="grant-card" href="#">एमपीलैड्स – सांख्यिकी और कार्यक्रम कार्यान्वयन मंत्रालय</a>
-            <a class="grant-card" href="#">आयुर्वेद, योग और प्राकृतिक चिकित्सा, यूनानी, सिद्ध और होम्योपैथी मंत्रालय (आयुष)</a>
-            <a class="grant-card" href="#">एचएसआरटी – पर्यटन मंत्रालय</a>
-          </div>
-
-        </div>
-      </div>
-      <div class="grant-dots" id="grantDots" role="tablist" aria-label="Slide navigation"></div>
-    </div>
-  </div>
-</section>
-
-<!-- ============ WHY DARPAN ============ -->
-<section>
-  <div class="wrap">
-    <!-- WHY-REGISTER SECTION COMMENTED OUT
-    <div class="sec-head">
-      <div>
-        <div class="sec-eyebrow"><svg class="spoke" viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="9.3" stroke-width="1.7"/><circle cx="12" cy="12" r="2.3" stroke-width="1.3"/><g stroke-width="1.1" stroke-linecap="round"><line x1="15.3" y1="12" x2="19.8" y2="12"/><line x1="14.86" y1="13.65" x2="18.75" y2="15.9"/><line x1="13.65" y1="14.86" x2="15.9" y2="18.75"/><line x1="12" y1="15.3" x2="12" y2="19.8"/><line x1="10.35" y1="14.86" x2="8.1" y2="18.75"/><line x1="9.14" y1="13.65" x2="5.25" y2="15.9"/><line x1="8.7" y1="12" x2="4.2" y2="12"/><line x1="9.14" y1="10.35" x2="5.25" y2="8.1"/><line x1="10.35" y1="9.14" x2="8.1" y2="5.25"/><line x1="12" y1="8.7" x2="12" y2="4.2"/><line x1="13.65" y1="9.14" x2="15.9" y2="5.25"/><line x1="14.86" y1="10.35" x2="18.75" y2="8.1"/></g></svg><span data-en="Why register" data-hi="पंजीकरण क्यों">Why register</span></div>
-        <h2 class="sec-h" data-en="Recognition that travels with you" data-hi="मान्यता जो हर जगह काम आए">Recognition that travels with you</h2>
-      </div>
-    </div>
-    <div class="why-grid">
-      <div class="why">
-        <div class="wicon">🆔</div>
-        <h3 data-en="One unique ID" data-hi="एक विशिष्ट आईडी">One unique ID</h3>
-        <p data-en="A single identity ministries and departments recognise — no repeating your credentials everywhere." data-hi="एक ही पहचान जिसे सभी मंत्रालय मानते हैं।">A single identity ministries and departments recognise — no repeating your credentials everywhere.</p>
-      </div>
-      <div class="why">
-        <div class="wicon">📂</div>
-        <h3 data-en="Faster grant access" data-hi="तेज़ अनुदान पहुँच">Faster grant access</h3>
-        <p data-en="Your verified profile pre-fills applications across dozens of grant-in-aid portals." data-hi="आपका सत्यापित प्रोफ़ाइल आवेदनों को पहले से भर देता है।">Your verified profile pre-fills applications across dozens of grant-in-aid portals.</p>
-      </div>
-      <div class="why">
-        <div class="wicon">🔍</div>
-        <h3 data-en="Public transparency" data-hi="सार्वजनिक पारदर्शिता">Public transparency</h3>
-        <p data-en="Listed in an open, searchable directory that donors and citizens can verify at any time." data-hi="एक खुली, खोजने योग्य निर्देशिका में सूचीबद्ध।">Listed in an open, searchable directory that donors and citizens can verify at any time.</p>
-      </div>
-      <div class="why">
-        <div class="wicon">🛡️</div>
-        <h3 data-en="Trusted record" data-hi="विश्वसनीय रिकॉर्ड">Trusted record</h3>
-        <p data-en="An e-signed, self-declared affidavit gives your organisation a credible government-held record." data-hi="ई-हस्ताक्षरित शपथ-पत्र आपके संगठन को विश्वसनीय रिकॉर्ड देता है।">An e-signed, self-declared affidavit gives your organisation a credible government-held record.</p>
-      </div>
-    </div>
-    -->
-
-    <!-- CTA BAND COMMENTED OUT
-    <div class="ctaband" style="margin-top:56px">
-      <img class="cta-img" src="/assets/signin_img.png" alt="" aria-hidden="true" loading="lazy">
-      <h2 data-en="Your organisation deserves to be recognised. Start today." data-hi="आपका संगठन मान्यता का हकदार है। आज ही शुरू करें।">Your organisation deserves to be recognised. Start today.</h2>
-      <button class="btn btn-primary btn-lg" data-en="Register your NPO →" data-hi="एनपीओ पंजीकरण →">Register your NPO →</button>
-    </div>
-    -->
   </div>
 </section>
 
@@ -1078,6 +968,142 @@ document.querySelectorAll('.registry').forEach(s=>io.observe(s));
   else show=!internalRef;
 
   if(show) open();
+})();
+
+/* ---------- NPO Directory: states, cascading districts, captcha, search ---------- */
+(function(){
+  const form=document.getElementById('npoForm'); if(!form) return;
+  const stateSel=document.getElementById('fState');
+  const distSel=document.getElementById('fDistrict');
+  const captchaText=document.getElementById('captchaText');
+  const captchaRefresh=document.getElementById('captchaRefresh');
+  const captchaInput=document.getElementById('fCaptcha');
+  const note=document.getElementById('npoNote');
+
+  const STATES=['Andaman & Nicobar Islands','Andhra Pradesh','Arunachal Pradesh','Assam','Bihar','Chandigarh','Chhattisgarh','Dadra & Nagar Haveli and Daman & Diu','Delhi','Goa','Gujarat','Haryana','Himachal Pradesh','Jammu & Kashmir','Jharkhand','Karnataka','Kerala','Ladakh','Lakshadweep','Madhya Pradesh','Maharashtra','Manipur','Meghalaya','Mizoram','Nagaland','Odisha','Puducherry','Punjab','Rajasthan','Sikkim','Tamil Nadu','Telangana','Tripura','Uttar Pradesh','Uttarakhand','West Bengal'];
+  const DISTRICTS={
+    'Rajasthan':['Ajmer','Alwar','Anoopgarh','Balotra','Banswara','Baran','Barmer','Bharatpur','Jaipur','Jodhpur','Kota','Udaipur'],
+    'Maharashtra':['Mumbai City','Mumbai Suburban','Pune','Nagpur','Nashik','Thane','Aurangabad'],
+    'Uttar Pradesh':['Lucknow','Kanpur Nagar','Varanasi','Agra','Prayagraj','Ghaziabad','Gorakhpur'],
+    'Karnataka':['Bengaluru Urban','Mysuru','Mangaluru','Belagavi','Hubballi-Dharwad','Kalaburagi'],
+    'Tamil Nadu':['Chennai','Coimbatore','Madurai','Tiruchirappalli','Salem','Erode'],
+    'Delhi':['New Delhi','North Delhi','South Delhi','East Delhi','West Delhi','Central Delhi'],
+    'Gujarat':['Ahmedabad','Surat','Vadodara','Rajkot','Bhavnagar','Gandhinagar'],
+    'West Bengal':['Kolkata','Howrah','North 24 Parganas','Hooghly','Darjeeling','Bardhaman']
+  };
+
+  STATES.forEach(s=>{const o=document.createElement('option');o.value=s;o.textContent=s;stateSel.appendChild(o);});
+
+  stateSel.addEventListener('change',()=>{
+    distSel.innerHTML='';
+    const ph=document.createElement('option');ph.value='';ph.textContent=(document.getElementById('langSelect')&&document.getElementById('langSelect').value==='hi')?'एनपीओ पंजीकृत जिला':'NPO Registered District';distSel.appendChild(ph);
+    const st=stateSel.value;
+    if(!st){distSel.disabled=true;return;}
+    distSel.disabled=false;
+    const list=DISTRICTS[st]||['All Districts'];
+    list.forEach(d=>{const o=document.createElement('option');o.value=d;o.textContent=d;distSel.appendChild(o);});
+  });
+
+  // Captcha (client-side, demo)
+  const CHARS='ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnpqrstuvwxyz23456789';
+  function genCaptcha(){let s='';for(let i=0;i<6;i++)s+=CHARS[Math.floor(Math.random()*CHARS.length)];captchaText.textContent=s;captchaText.dataset.code=s;}
+  captchaRefresh.addEventListener('click',()=>{genCaptcha();captchaInput.value='';captchaInput.focus();});
+  genCaptcha();
+
+  function showNote(msg,err){note.hidden=false;note.textContent=msg;
+    note.style.background=err?'#FDE7E7':'var(--saffron-soft)';
+    note.style.borderColor=err?'#F3B4B4':'#F6C9AB';
+    note.style.color=err?'#9B2C2C':'#8A3D08';}
+
+  // ---- Results table refs ----
+  const resetBtn=document.getElementById('npoReset');
+  const tbody=document.getElementById('blTbody');
+  const totalEl=document.getElementById('blTotal');
+  const pager=document.getElementById('blPager');
+
+  // ---- Blacklisted NPO dataset (page 1 exact, remainder generated deterministically) ----
+  const SEED=[
+    ['Akhil Sanskritik Sansthan','UP/2009/0003343','UTTAR PRADESH','31-12-2019','31-12-2019'],
+    ['Angarberia Aloke Sangha','WB/2019/0229248','NATIONAL DIVYANGJAN FINANCE AND DEVELOPMENT CORPORATION','28-03-2024','28-03-2024'],
+    ['Asha Ram National Academy','UP/2016/0097783','UTTAR PRADESH','10-02-2020','10-02-2020'],
+    ['AVATHAAR CHARITABTE TRUST','TN/2017/0173262','NATIONAL DIVYANGJAN FINANCE AND DEVELOPMENT CORPORATION','28-03-2024','28-03-2024'],
+    ['AVTEG Private Limited','HR/2016/0112761','SOCIAL JUSTICE AND EMPOWERMENT','02-01-2020','02-01-2020'],
+    ['AWAM EDUCATIONAL AND DEVELOPMENT SOCIETY','HR/2017/0154233','UTTAR PRADESH','30-01-2020','30-01-2020'],
+    ['Baba Paramhans Charitable Trust','UP/2014/0077542','UTTAR PRADESH','30-01-2020','30-01-2020'],
+    ['Balaji Sewa Samiti','UP/2016/0097527','UTTAR PRADESH','10-02-2020','10-02-2020'],
+    ['BHAGYAJYOTHI RURAL DEVELOPMENT SOCIETY','KA/2012/0048501','NATIONAL DIVYANGJAN FINANCE AND DEVELOPMENT CORPORATION','28-03-2024','28-03-2024'],
+    ['BHARTIYA VIDHYALAY SAMITI','UP/2017/0115530','UTTAR PRADESH','30-01-2020','30-01-2020']
+  ].map(r=>({name:r[0],darpan:r[1],by:r[2],wef:r[3],upd:r[4]}));
+  const NP=['Shri','Maa','Gramin','Adarsh','Nav','Jan','Bharat','Rural','Lok','Sarva','Navjyoti','Pragati'];
+  const CO=['Vikas','Shiksha','Seva','Kalyan','Jyoti','Chetna','Uday','Unnati','Sanskar','Jagriti'];
+  const SF=['Samiti','Sansthan','Society','Trust','Foundation','Sangathan','Welfare Society','Charitable Trust','Sangh','Mission'];
+  const ST=['UP','MH','RJ','WB','KA','TN','HR','BR','MP','GJ','DL','OD'];
+  const BY=['UTTAR PRADESH','NATIONAL DIVYANGJAN FINANCE AND DEVELOPMENT CORPORATION','SOCIAL JUSTICE AND EMPOWERMENT','MADHYA PRADESH','RAJASTHAN','MINISTRY OF TRIBAL AFFAIRS'];
+  const DT=['30-01-2020','10-02-2020','02-01-2020','28-03-2024','31-12-2019','15-06-2021','09-11-2022','21-08-2023'];
+  const SCODE={UP:'Uttar Pradesh',MH:'Maharashtra',RJ:'Rajasthan',WB:'West Bengal',KA:'Karnataka',TN:'Tamil Nadu',HR:'Haryana',BR:'Bihar',MP:'Madhya Pradesh',GJ:'Gujarat',DL:'Delhi',OD:'Odisha'};
+  const DATA=SEED.slice();
+  for(let i=DATA.length;i<85;i++){
+    const st=ST[i%ST.length], yr=2009+(i%15), num=('0000000'+((i*137+53)%9999999)).slice(-7), d=DT[(i*11)%DT.length];
+    DATA.push({name:NP[i%NP.length]+' '+CO[(i*3)%CO.length]+' '+SF[(i*7)%SF.length],darpan:st+'/'+yr+'/'+num,by:BY[(i*5)%BY.length],wef:d,upd:d});
+  }
+  const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+  const stateOf=r=>SCODE[r.darpan.split('/')[0]]||'';
+
+  // ---- pagination + render ----
+  const PER=10; let page=1; let rows=DATA.slice();
+  function render(){
+    const pages=Math.max(1,Math.ceil(rows.length/PER));
+    if(page>pages)page=pages;
+    totalEl.textContent='Total Blacklisted NPOs: '+rows.length;
+    const start=(page-1)*PER, slice=rows.slice(start,start+PER);
+    tbody.innerHTML=slice.length?slice.map((r,i)=>'<tr><td>'+(start+i+1)+'</td><td><a class="bl-name" href="#">'+esc(r.name)+'</a></td><td class="mono">'+esc(r.darpan)+'</td><td>'+esc(r.by)+'</td><td class="mono">'+esc(r.wef)+'</td><td class="mono">'+esc(r.upd)+'</td></tr>').join(''):'<tr><td colspan="6" class="bl-empty">No blacklisted NPOs match your search.</td></tr>';
+    renderPager(pages);
+  }
+  function renderPager(pages){
+    if(pages<=1){pager.innerHTML='';return;}
+    const b=(lbl,p,dis,cur)=>'<button type="button" class="bl-page'+(cur?' active':'')+'"'+(dis?' disabled':'')+' data-p="'+p+'">'+lbl+'</button>';
+    let h=b('«',1,page===1)+b('‹',page-1,page===1);
+    let s=Math.max(1,page-2),e=Math.min(pages,s+4);s=Math.max(1,e-4);
+    for(let p=s;p<=e;p++)h+=b(p,p,false,p===page);
+    h+=b('›',page+1,page===pages)+b('»',pages,page===pages);
+    pager.innerHTML=h;
+  }
+  pager.addEventListener('click',ev=>{const btn=ev.target.closest('.bl-page');if(!btn||btn.disabled)return;const p=+btn.dataset.p;if(p&&p!==page){page=p;render();const w=document.querySelector('.bl-table-wrap');if(w)w.scrollIntoView({behavior:'smooth',block:'start'});}});
+
+  function applyFilters(){
+    const st=stateSel.value,name=document.getElementById('fName').value.trim().toLowerCase(),darpan=document.getElementById('fDarpan').value.trim().toLowerCase();
+    rows=DATA.filter(r=>{
+      if(st&&stateOf(r)!==st)return false;
+      if(name&&r.name.toLowerCase().indexOf(name)<0)return false;
+      if(darpan&&r.darpan.toLowerCase().indexOf(darpan)<0)return false;
+      return true;
+    });
+    page=1;render();
+  }
+
+  form.addEventListener('submit',ev=>{
+    ev.preventDefault();
+    if((captchaInput.value||'')!==(captchaText.dataset.code||'')){
+      showNote('Captcha does not match. Please try again.',true);
+      genCaptcha();captchaInput.value='';captchaInput.focus();return;
+    }
+    note.hidden=true;
+    applyFilters();
+  });
+
+  if(resetBtn)resetBtn.addEventListener('click',()=>{
+    form.reset();
+    distSel.innerHTML='';
+    const ph=document.createElement('option');ph.value='';ph.textContent='NPO Registered District';distSel.appendChild(ph);distSel.disabled=true;
+    genCaptcha();note.hidden=true;rows=DATA.slice();page=1;render();
+  });
+
+  render(); // initial full list
+
+  // Keep placeholders in sync with the language toggle.
+  function applyPlaceholders(lang){document.querySelectorAll('[data-ph-en]').forEach(el=>{el.placeholder=lang==='hi'?el.dataset.phHi:el.dataset.phEn;});}
+  const langSel=document.getElementById('langSelect');
+  if(langSel){applyPlaceholders(langSel.value);langSel.addEventListener('change',()=>applyPlaceholders(langSel.value));}
 })();
 
 /* ---------- Live ID ticker in hero ---------- */
