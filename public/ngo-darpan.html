@@ -202,7 +202,15 @@
   /* ---------- Registry stats ---------- */
   .registry{background-color:var(--surface);background-image:var(--dots);background-size:var(--dots-size);border-top:1px solid var(--line);border-bottom:1px solid var(--line);}
   .stat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;}
-  .stat{background:var(--paper);border:1px solid var(--line);border-radius:var(--r);padding:24px;position:relative;overflow:hidden;}
+  .stat{border:1px solid var(--line);border-radius:var(--r);padding:24px;position:relative;overflow:hidden;
+    background-color:var(--paper);
+    background-image:
+      radial-gradient(90% 120% at 100% 0%,rgba(232,89,12,.06),transparent 55%),
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140' viewBox='0 0 100 100'%3E%3Cg fill='none' stroke='%2310224C' stroke-width='1' opacity='0.07'%3E%3Ccircle cx='50' cy='50' r='46'/%3E%3Ccircle cx='50' cy='50' r='7'/%3E%3Cg stroke-width='0.7'%3E%3Cline x1='50' y1='4' x2='50' y2='96'/%3E%3Cline x1='4' y1='50' x2='96' y2='50'/%3E%3Cline x1='17.5' y1='17.5' x2='82.5' y2='82.5'/%3E%3Cline x1='82.5' y1='17.5' x2='17.5' y2='82.5'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E"),
+      radial-gradient(rgba(16,34,76,.06) 1px,transparent 1.4px);
+    background-size:100% 100%,150px 150px,18px 18px;
+    background-position:0 0,right -46px top -46px,0 0;
+    background-repeat:no-repeat,no-repeat,repeat;}
   .stat::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--navy);}
   .stat.active::before{background:var(--green);}
   .stat.black::before{background:var(--saffron);}
@@ -362,12 +370,12 @@
   .rv-img{position:relative;z-index:1;width:min(510px,100%);height:auto;filter:drop-shadow(0 26px 48px rgba(16,34,76,.18));}
 
   .register-copy h2.sec-h{margin-bottom:6px;}
-  .reg-steps{position:relative;display:flex;flex-direction:column;gap:4px;margin-top:32px;}
-  .rstep:not(:last-child)::before{content:"";position:absolute;left:42px;top:42px;height:calc(100% + 4px);width:2px;border-radius:2px;
-    background:linear-gradient(180deg,var(--saffron),var(--gold));opacity:.5;}
-  .rstep{position:relative;display:flex;gap:18px;align-items:flex-start;padding:15px 16px;border-radius:var(--r);
-    transition:background .18s ease;}
-  .rstep:hover{background:rgba(16,34,76,.04);}
+  .reg-steps{position:relative;display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:32px;}
+  .rstep{position:relative;display:flex;gap:16px;align-items:flex-start;padding:18px;border-radius:var(--r);
+    background:var(--surface);border:1px solid var(--line);box-shadow:0 10px 24px -20px rgba(16,34,76,.5);
+    transition:border-color .18s ease,transform .12s ease,box-shadow .2s ease;}
+  .rstep:hover{border-color:var(--saffron);transform:translateY(-3px);box-shadow:0 16px 30px -18px rgba(232,89,12,.4);}
+  @media(max-width:700px){ .reg-steps{grid-template-columns:1fr;} }
   .rstep-chip{position:relative;z-index:1;width:54px;height:54px;flex:0 0 auto;border-radius:16px;background:var(--saffron-soft);color:var(--saffron);
     display:grid;place-items:center;box-shadow:0 8px 18px -10px rgba(232,89,12,.55);transition:transform .16s ease, box-shadow .16s ease;}
   .rstep-chip svg{width:26px;height:26px;}
@@ -508,7 +516,6 @@
 </div>
 
 <!-- ============ TOP TRICOLOUR ============ -->
-<div class="tricolour"><i></i><i></i><i></i></div>
 
 <!-- ============ TOP STRIP: logos + utilities ============ -->
 <div class="topbar" id="top">
@@ -942,7 +949,6 @@
       </span>
     </div>
   </div>
-  <div class="tricolour" style="margin-top:8px"><i></i><i></i><i></i></div>
 </footer>
 
 <script>
