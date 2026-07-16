@@ -500,6 +500,8 @@
   .ai-chips button{font:inherit;font-size:.84rem;font-weight:500;color:var(--navy-2);background:var(--surface);
     border:1px solid var(--line);border-radius:100px;padding:8px 16px;cursor:pointer;transition:border-color .14s ease,color .14s ease,background .14s ease;}
   .ai-chips button:hover{border-color:var(--saffron);color:var(--saffron);background:#FFF8F3;}
+  .ai-chips button.active{background:var(--saffron-soft);border-color:var(--saffron);color:var(--saffron);font-weight:700;}
+  .ai-chips button.active:hover{background:#F9D9C2;color:var(--saffron);}
 
   /* suggestions dropdown */
   .ai-suggest{position:absolute;top:calc(100% + 6px);left:0;right:0;z-index:60;background:var(--surface);
@@ -1264,10 +1266,22 @@ document.querySelectorAll('.registry').forEach(s=>io.observe(s));
       items[idx].classList.add('sel');items[idx].scrollIntoView({block:'nearest'});
     }
   });
-  document.getElementById('aiChips').addEventListener('click',function(ev){
+  var chipsWrap=document.getElementById('aiChips');
+  function clearChipSel(){[].slice.call(chipsWrap.querySelectorAll('button.active')).forEach(function(b){b.classList.remove('active');});}
+  chipsWrap.addEventListener('click',function(ev){
     var btn=ev.target.closest('button');if(!btn)return;
+    if(btn.classList.contains('active')){
+      clearChipSel();input.value='';closeSg();
+      underEl.hidden=true;resWrap.hidden=true;
+      input.focus();return;
+    }
+    clearChipSel();btn.classList.add('active');
     input.value=btn.textContent;doSearch();
     input.focus();
+  });
+  input.addEventListener('input',function(){
+    var act=chipsWrap.querySelector('button.active');
+    if(act&&act.textContent!==input.value)clearChipSel();
   });
 
   /* ===== live suggestions (places + NPO records) ===== */
