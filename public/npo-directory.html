@@ -482,15 +482,20 @@
   .ai-card{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:24px 26px;
     box-shadow:0 14px 32px -24px rgba(16,34,76,.55);}
   .ai-head{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:14px;}
-  .ai-badge{display:inline-flex;align-items:center;gap:7px;background:var(--navy);color:#fff;font-size:.76rem;font-weight:800;letter-spacing:.02em;
-    padding:6px 13px;border-radius:100px;}
-  .ai-badge-ic{width:16px;height:16px;object-fit:contain;display:block;}
+  .ai-badge{display:inline-flex;align-items:center;gap:7px;color:#fff;font-size:.76rem;font-weight:800;letter-spacing:.02em;
+    padding:6px 13px;border-radius:100px;position:relative;overflow:hidden;
+    background:linear-gradient(110deg,#0B1733 0%,#10224C 18%,#2A3F8F 38%,#6D4AFF 52%,#E8590C 70%,#10224C 88%,#0B1733 100%);
+    background-size:280% 100%;animation:aiGradient 6s ease-in-out infinite;
+    box-shadow:0 4px 14px -4px rgba(16,34,76,.5);}
+  .ai-badge-ic{width:16px;height:16px;object-fit:contain;display:block;position:relative;z-index:1;}
+  @keyframes aiGradient{0%{background-position:0% 50%;}50%{background-position:100% 50%;}100%{background-position:0% 50%;}}
+  @media(prefers-reduced-motion:reduce){ .ai-badge{animation:none;background-position:0% 50%;} }
   .ai-hint{color:var(--muted);font-size:.92rem;}
   .ai-row{display:flex;gap:12px;align-items:stretch;}
   .ai-inputwrap{position:relative;flex:1;}
   .ai-inputwrap input{width:100%;height:100%;font:inherit;font-size:1rem;color:var(--navy);
-    border:1px solid #F6C9AB;border-radius:11px;padding:14px 17px;background:#fffdfb;transition:border-color .15s ease,box-shadow .15s ease,background .15s ease;}
-  .ai-inputwrap input::placeholder{color:#B98A6A;}
+    border:1.5px solid #F6C9AB;border-radius:11px;padding:14px 17px;background:#ffffff;transition:border-color .15s ease,box-shadow .15s ease,background .15s ease;}
+  .ai-inputwrap input::placeholder{color:#9AA6C0;}
   .ai-inputwrap input:hover{border-color:#F2A97A;}
   .ai-inputwrap input:focus{outline:none;border-color:var(--saffron);background:#fff;box-shadow:0 0 0 3px rgba(232,89,12,.12);}
   .ai-search-btn{flex:0 0 auto;font:inherit;font-weight:700;font-size:1rem;color:#fff;background:var(--saffron);
