@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Login — NGO DARPAN</title>
+<link rel="icon" type="image/png" href="/assets/fab_icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600&family=Noto+Sans+Devanagari:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#10224C; --navy-2:#1C3A6E; --navy-ink:#0B1733;
+    --saffron:#E8590C; --saffron-2:#F2751A; --saffron-soft:#FCE8D8;
+    --paper:#F5F7FC; --surface:#FFFFFF; --line:#DDE4F0; --muted:#5B6B8C; --ink:#10224C;
+    --display:'Noto Sans',system-ui,sans-serif; --sans:'Noto Sans',system-ui,sans-serif;
+    --r:14px;
+  }
+  *{box-sizing:border-box;}
+  html{font-size:16px;}
+  body{margin:0;font-family:var(--sans);color:var(--ink);line-height:1.55;-webkit-font-smoothing:antialiased;
+    min-height:100vh;display:flex;flex-direction:column;
+    background-color:#FCF9F1;
+    background-image:
+      radial-gradient(110% 90% at 100% 0%,rgba(232,89,12,.05),transparent 50%),
+      radial-gradient(rgba(201,162,39,.10) 1px,transparent 1.4px);
+    background-size:100% 100%,26px 26px;}
+  a{color:inherit;text-decoration:none;}
+  .wrap{max-width:1200px;margin:0 auto;padding:0 24px;width:100%;}
+
+  /* ---------- top strip ---------- */
+  .topbar{background:#fff;border-bottom:1px solid var(--line);}
+  .topbar-inner{display:flex;align-items:center;gap:12px;min-height:64px;padding-top:8px;padding-bottom:8px;}
+  .topbar-inner img{display:block;width:auto;}
+  .lg-niti{height:38px;} .lg-ngo{height:38px;} .lg-darpan{height:40px;}
+  .lg-div{width:1px;height:34px;background:var(--line);}
+
+  /* ---------- important notice ---------- */
+  .notice{display:flex;align-items:stretch;background:#FBDCCB;color:#5A2408;font-size:.88rem;}
+  .notice .tag{flex:0 0 auto;display:flex;align-items:center;background:#D93511;color:#fff;font-weight:800;font-size:.8rem;padding:8px 14px;}
+  .notice .txt{padding:8px 16px;align-self:center;}
+  .notice b{color:#3F1704;}
+
+  /* ---------- card ---------- */
+  main{flex:1;display:grid;place-items:center;padding:44px 20px;position:relative;}
+  .deco-dots{position:absolute;top:52px;left:56px;width:130px;height:96px;pointer-events:none;
+    background-image:radial-gradient(var(--saffron) 1.6px,transparent 1.9px);background-size:16px 16px;opacity:.22;}
+  .card{width:min(500px,100%);background:var(--surface);border:1px solid var(--line);border-radius:16px;overflow:hidden;
+    box-shadow:0 24px 60px -28px rgba(16,34,76,.35);}
+  .card-body{padding:30px 34px 26px;}
+  .eyebrow{font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);font-weight:700;}
+  .card-head{display:flex;align-items:center;gap:14px;margin:4px 0 18px;}
+  .card-head h1{font-family:var(--display);font-weight:800;font-size:1.45rem;letter-spacing:-.01em;color:var(--navy);margin:0;white-space:nowrap;}
+  .card-head .rule{flex:1;height:1px;background:var(--line);}
+  .home-link{flex:0 0 auto;color:var(--saffron);display:grid;place-items:center;width:34px;height:34px;border-radius:9px;transition:background .15s ease;}
+  .home-link:hover{background:var(--saffron-soft);}
+  .home-link svg{width:20px;height:20px;}
+
+  .infobox{background:linear-gradient(115deg,var(--saffron) 0%,var(--saffron-2) 100%);color:#fff;border-radius:10px;
+    padding:13px 16px;font-size:.84rem;line-height:1.6;margin-bottom:20px;}
+  .infobox b{color:#fff;}
+
+  /* ---------- mode radios ---------- */
+  .modes{display:flex;gap:26px;margin-bottom:18px;}
+  .modes label{display:flex;align-items:center;gap:8px;font-size:.9rem;font-weight:600;color:var(--navy-2);cursor:pointer;}
+  .modes input{accent-color:var(--saffron);width:17px;height:17px;cursor:pointer;}
+
+  /* ---------- fields ---------- */
+  .field{position:relative;margin-bottom:16px;}
+  .field input{width:100%;font:inherit;font-size:.94rem;color:var(--navy);background:var(--surface);
+    border:1px solid var(--line);border-radius:10px;padding:13px 44px 13px 15px;transition:border-color .15s ease,box-shadow .15s ease;}
+  .field input::placeholder{color:#9AA6C0;}
+  .field input:hover{border-color:#AEBBD6;}
+  .field input:focus{outline:none;border-color:var(--saffron);box-shadow:0 0 0 3px rgba(232,89,12,.14);}
+  .field .adorn{position:absolute;right:12px;top:50%;transform:translateY(-50%);border:0;background:none;padding:4px;cursor:pointer;color:#8FA1C4;display:grid;place-items:center;}
+  .field .adorn svg{width:18px;height:18px;}
+  .field .adorn.info{color:#2E9E6B;cursor:help;}
+  .field .adorn.eye:hover{color:var(--navy);}
+
+  .otp-note{display:none;background:var(--saffron-soft);border:1px solid #F6C9AB;color:#8A3D08;
+    border-radius:10px;padding:12px 15px;font-size:.86rem;margin-bottom:16px;}
+  body.otp .otp-note{display:block;}
+  body.otp .pw-field{display:none;}
+
+  /* ---------- captcha ---------- */
+  .captcha-row{display:flex;align-items:center;gap:10px;margin-bottom:8px;}
+  .captcha-img{flex:0 0 auto;width:104px;height:46px;display:flex;align-items:center;justify-content:center;
+    background:repeating-linear-gradient(135deg,#EEF1F7 0 7px,#E4E9F3 7px 14px);border:1px solid var(--line);border-radius:9px;
+    font-weight:700;font-size:1.08rem;letter-spacing:.14em;color:#5A667F;user-select:none;font-style:italic;transform:skewX(-6deg);
+    text-shadow:1px 1px 0 rgba(255,255,255,.7);}
+  .captcha-refresh{flex:0 0 auto;width:42px;height:42px;border-radius:9px;border:1px solid var(--saffron-soft);
+    background:var(--saffron-soft);color:var(--saffron);display:grid;place-items:center;cursor:pointer;transition:.15s;}
+  .captcha-refresh:hover{background:var(--saffron);color:#fff;}
+  .captcha-refresh svg{width:17px;height:17px;transition:transform .4s ease;}
+  .captcha-refresh:active svg{transform:rotate(-180deg);}
+  .captcha-row input{flex:1;min-width:80px;font:inherit;font-size:.94rem;color:var(--navy);border:1px solid var(--line);border-radius:10px;padding:12px 14px;}
+  .captcha-row input:focus{outline:none;border-color:var(--saffron);box-shadow:0 0 0 3px rgba(232,89,12,.14);}
+
+  .forgot{display:block;text-align:right;font-size:.82rem;font-weight:700;color:#2563EB;margin:2px 0 18px;}
+  .forgot:hover{color:var(--saffron);}
+
+  .btn-login{width:100%;font:inherit;font-weight:700;font-size:1rem;color:#fff;background:var(--saffron);
+    border:0;border-radius:10px;padding:14px;cursor:pointer;transition:background .15s ease,transform .08s ease;}
+  .btn-login:hover{background:var(--saffron-2);}
+  .btn-login:active{transform:translateY(1px);}
+
+  .reg-line{text-align:center;font-size:.88rem;color:var(--muted);margin:18px 0 2px;}
+  .reg-line a{color:var(--navy);font-weight:800;text-decoration:underline;text-underline-offset:3px;}
+  .reg-line a:hover{color:var(--saffron);}
+
+  .note-msg{display:none;margin-top:14px;padding:11px 14px;border-radius:10px;font-size:.86rem;font-weight:600;}
+
+  .card-foot{background:#F6F8FB;border-top:1px solid var(--line);padding:13px;text-align:center;}
+  .card-foot a{display:inline-flex;align-items:center;gap:8px;font-size:.85rem;font-weight:600;color:#2563EB;}
+  .card-foot a:hover{color:var(--saffron);}
+  .card-foot svg{width:17px;height:17px;color:var(--saffron);}
+
+  footer{background:var(--navy-ink);color:#9FB1D4;text-align:center;font-size:.82rem;padding:14px 20px;}
+
+  @media(max-width:520px){ .card-body{padding:24px 20px;} .deco-dots{display:none;} }
+</style>
+</head>
+<body>
+
+<!-- ============ TOP STRIP ============ -->
+<div class="topbar">
+  <div class="wrap topbar-inner">
+    <a href="/ngo-darpan.html" style="display:flex;align-items:center;gap:12px" aria-label="NGO DARPAN home">
+      <img src="/assets/niti.png" class="lg-niti" alt="NITI Aayog, Government of India">
+      <span class="lg-div" aria-hidden="true"></span>
+      <img src="/assets/ngo-globe.gif" class="lg-ngo" alt="NGO">
+      <img src="/assets/darpan.png" class="lg-darpan" alt="DARPAN">
+    </a>
+  </div>
+</div>
+
+<!-- ============ IMPORTANT NOTICE ============ -->
+<div class="notice">
+  <span class="tag">Important Notice:</span>
+  <span class="txt">If registration is not completed within <b>30 days</b> from initiation, the profile will be <b>permanently removed</b> from the portal, and the user will need to <b>reapply</b></span>
+</div>
+
+<!-- ============ LOGIN CARD ============ -->
+<main>
+  <div class="deco-dots" aria-hidden="true"></div>
+  <div class="card">
+    <div class="card-body">
+      <div class="eyebrow">Let's get you started</div>
+      <div class="card-head">
+        <h1>Login an Account</h1>
+        <span class="rule" aria-hidden="true"></span>
+        <a class="home-link" href="/ngo-darpan.html" aria-label="Back to home">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.5 12 3l9 7.5"/><path d="M5 9.5V21h14V9.5"/><path d="M10 21v-6h4v6"/></svg>
+        </a>
+      </div>
+
+      <div class="infobox">
+        All NPOs/NGOs registered before <b>07-Mar-2025</b> should use their <b>NPO/NGO PAN</b> as their <b>Login ID</b>. To log in, select the <b>"Login with OTP"</b> option, then reset your password and m-PIN.
+      </div>
+
+      <form id="loginForm" autocomplete="off" novalidate>
+        <div class="modes" role="radiogroup" aria-label="Login method">
+          <label><input type="radio" name="mode" value="password" checked> Login with Password</label>
+          <label><input type="radio" name="mode" value="otp"> Login with OTP</label>
+        </div>
+
+        <div class="field">
+          <input type="text" id="loginId" placeholder="NPO PAN/DARPAN ID/EMAIL ID" aria-label="NPO PAN, DARPAN ID or Email ID">
+          <span class="adorn info" title="Enter your NPO PAN, DARPAN ID or registered Email ID">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="9.2"/><path d="M12 11v5M12 7.6v.01"/></svg>
+          </span>
+        </div>
+
+        <div class="field pw-field">
+          <input type="password" id="password" placeholder="Password" aria-label="Password">
+          <button type="button" class="adorn eye" id="eyeBtn" aria-label="Show or hide password">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3.5-6.5 10-6.5S22 12 22 12s-3.5 6.5-10 6.5S2 12 2 12Z"/><circle cx="12" cy="12" r="2.6"/></svg>
+          </button>
+        </div>
+
+        <div class="otp-note">An OTP will be sent to your registered email ID and mobile number after verification.</div>
+
+        <div class="captcha-row">
+          <span class="captcha-img" id="captchaText">r1cwgt</span>
+          <button type="button" class="captcha-refresh" id="captchaRefresh" aria-label="Refresh captcha">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-2.64-6.36"/><path d="M21 3v5h-5"/></svg>
+          </button>
+          <input type="text" id="captchaInput" placeholder="Captcha" aria-label="Enter captcha">
+        </div>
+
+        <a class="forgot" href="#">Forgot Password ?</a>
+
+        <button type="submit" class="btn-login" id="loginBtn">Log in</button>
+
+        <p class="reg-line">Don't have an Account? <a href="/register.html">Register</a></p>
+        <p class="note-msg" id="noteMsg" role="status" aria-live="polite"></p>
+      </form>
+    </div>
+
+    <div class="card-foot">
+      <a href="#">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 5h7a3 3 0 0 1 3 3v11a3 3 0 0 0-3-3H2V5Z"/><path d="M22 5h-7a3 3 0 0 0-3 3v11a3 3 0 0 1 3-3h7V5Z"/></svg>
+        View Instructions
+      </a>
+    </div>
+  </div>
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer>Copyright © 2026 ngodarpan.gov.in</footer>
+
+<script>
+(function(){
+  /* mode toggle */
+  const form=document.getElementById('loginForm');
+  const btn=document.getElementById('loginBtn');
+  document.querySelectorAll('input[name=mode]').forEach(r=>r.addEventListener('change',()=>{
+    const otp=r.value==='otp'&&r.checked;
+    document.body.classList.toggle('otp',otp);
+    btn.textContent=otp?'Send OTP':'Log in';
+  }));
+
+  /* password eye */
+  const pw=document.getElementById('password');
+  document.getElementById('eyeBtn').addEventListener('click',()=>{pw.type=pw.type==='password'?'text':'password';pw.focus();});
+
+  /* captcha */
+  const ct=document.getElementById('captchaText'),ci=document.getElementById('captchaInput');
+  const CHARS='ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnpqrstuvwxyz23456789';
+  function gen(){let s='';for(let i=0;i<6;i++)s+=CHARS[Math.floor(Math.random()*CHARS.length)];ct.textContent=s;ct.dataset.code=s;}
+  document.getElementById('captchaRefresh').addEventListener('click',()=>{gen();ci.value='';ci.focus();});
+  gen();
+
+  /* submit (demo) */
+  const note=document.getElementById('noteMsg');
+  function show(msg,err){note.style.display='block';note.textContent=msg;
+    note.style.background=err?'#FDE7E7':'#DDF0E8';
+    note.style.border=err?'1px solid #F3B4B4':'1px solid #A9D9C4';
+    note.style.color=err?'#9B2C2C':'#0E7C5A';}
+  form.addEventListener('submit',e=>{
+    e.preventDefault();
+    const id=document.getElementById('loginId').value.trim();
+    const otp=document.body.classList.contains('otp');
+    if(!id){show('Please enter your NPO PAN, DARPAN ID or Email ID.',true);return;}
+    if(!otp && !pw.value){show('Please enter your password.',true);return;}
+    if((ci.value||'')!==(ct.dataset.code||'')){show('Captcha does not match. Please try again.',true);gen();ci.value='';ci.focus();return;}
+    show(otp?'OTP sent to your registered email and mobile number. (demo)':'Signing you in… (demo: authentication service not connected)',false);
+  });
+})();
+</script>
+</body>
+</html>
