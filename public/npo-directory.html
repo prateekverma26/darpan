@@ -478,6 +478,93 @@
   .crumb-sep{color:#5A6E9C;}
   .crumb-cur{color:var(--saffron-2);}
 
+  /* ---------- AI intent search ---------- */
+  .ai-card{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:24px 26px;
+    box-shadow:0 14px 32px -24px rgba(16,34,76,.55);}
+  .ai-head{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:14px;}
+  .ai-badge{display:inline-flex;align-items:center;gap:7px;background:var(--navy);color:#fff;font-size:.76rem;font-weight:800;letter-spacing:.02em;
+    padding:6px 13px;border-radius:100px;}
+  .ai-badge-ic{width:16px;height:16px;object-fit:contain;display:block;}
+  .ai-hint{color:var(--muted);font-size:.92rem;}
+  .ai-row{display:flex;gap:12px;align-items:stretch;}
+  .ai-inputwrap{position:relative;flex:1;}
+  .ai-inputwrap input{width:100%;height:100%;font:inherit;font-size:1rem;color:var(--navy);
+    border:1px solid var(--line);border-radius:11px;padding:15px 18px;transition:border-color .15s ease,box-shadow .15s ease;}
+  .ai-inputwrap input::placeholder{color:#9AA6C0;}
+  .ai-inputwrap input:focus{outline:none;border-color:var(--navy-2);box-shadow:0 0 0 3px rgba(28,58,110,.15);}
+  .ai-search-btn{flex:0 0 auto;font:inherit;font-weight:700;font-size:1rem;color:#fff;background:var(--saffron);
+    border:0;border-radius:11px;padding:15px 34px;cursor:pointer;transition:background .15s ease,transform .08s ease;}
+  .ai-search-btn:hover{background:var(--saffron-2);}
+  .ai-search-btn:active{transform:translateY(1px);}
+  .ai-chips{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px;}
+  .ai-chips button{font:inherit;font-size:.84rem;font-weight:500;color:var(--navy-2);background:var(--surface);
+    border:1px solid var(--line);border-radius:100px;padding:8px 16px;cursor:pointer;transition:border-color .14s ease,color .14s ease,background .14s ease;}
+  .ai-chips button:hover{border-color:var(--saffron);color:var(--saffron);background:#FFF8F3;}
+
+  /* suggestions dropdown */
+  .ai-suggest{position:absolute;top:calc(100% + 6px);left:0;right:0;z-index:60;background:var(--surface);
+    border:1px solid var(--line);border-radius:12px;box-shadow:0 24px 50px -20px rgba(16,34,76,.4);
+    max-height:380px;overflow-y:auto;}
+  .sg-head{position:sticky;top:0;background:#F6F8FB;border-bottom:1px solid var(--line-2);
+    font-size:.78rem;color:var(--muted);padding:9px 16px;font-weight:600;}
+  .sg-head i{font-style:italic;color:var(--navy-2);}
+  .sg-item{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:11px 16px;cursor:pointer;
+    border-bottom:1px solid var(--line-2);}
+  .sg-item:last-child{border-bottom:0;}
+  .sg-item:hover,.sg-item.sel{background:#F4F7FE;}
+  .sg-id{display:block;font-family:var(--mono);font-size:.78rem;font-weight:700;color:#2563EB;letter-spacing:.03em;}
+  .sg-name{display:block;font-weight:600;color:var(--navy);font-size:.93rem;margin-top:1px;}
+  .sg-sub{display:block;font-size:.8rem;color:var(--muted);margin-top:1px;}
+  .sg-place{font-size:.92rem;color:var(--navy);}
+  .sg-place b{font-weight:700;}
+  .sg-place span{color:var(--muted);font-size:.84rem;}
+
+  /* understood strip */
+  .ai-understood{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-top:16px;
+    background:var(--surface);border:1px solid var(--line);border-radius:13px;padding:13px 18px;
+    box-shadow:0 10px 24px -20px rgba(16,34,76,.5);}
+  .u-lbl{font-weight:600;color:var(--muted);font-size:.92rem;}
+  .u-chips{display:flex;align-items:center;gap:8px;flex-wrap:wrap;flex:1;}
+  .u-chip{display:inline-flex;align-items:center;gap:6px;font-size:.85rem;font-weight:600;color:var(--navy);
+    background:#EAF1FE;border-radius:100px;padding:6px 13px;}
+  .u-chip.x{background:#FDE7E7;color:#9B2C2C;}
+  .u-chip.idc{background:#F3E8FD;color:#6B21A8;}
+  .u-chip.sec{background:#DDF0E8;color:#0E7C5A;}
+  .u-mode{background:var(--navy);color:#fff;font-family:var(--mono);font-size:.74rem;font-weight:700;
+    padding:6px 13px;border-radius:100px;}
+
+  /* results */
+  .ai-results{margin-top:18px;}
+  .res-meta{display:flex;align-items:baseline;justify-content:space-between;gap:14px;flex-wrap:wrap;margin:6px 2px 12px;}
+  .res-count{font-size:1.02rem;color:var(--navy);}
+  .res-count b{font-size:1.15rem;color:#1D4ED8;}
+  .res-page{color:var(--muted);font-size:.9rem;margin-left:6px;}
+  .res-showing{color:var(--muted);font-size:.9rem;}
+  .res-table-wrap{border:1px solid var(--line);border-radius:14px;overflow:hidden;overflow-x:auto;background:var(--surface);
+    box-shadow:0 14px 32px -24px rgba(16,34,76,.55);}
+  table.res-table{width:100%;border-collapse:collapse;font-size:.92rem;min-width:820px;}
+  table.res-table thead th{background:#FBF4DF;text-align:left;font-family:var(--display);font-weight:700;color:var(--navy);
+    padding:15px 18px;border-bottom:1px solid var(--line);white-space:nowrap;}
+  table.res-table tbody td{padding:14px 18px;border-bottom:1px solid var(--line-2);color:var(--navy-2);vertical-align:top;}
+  table.res-table tbody tr:last-child td{border-bottom:0;}
+  table.res-table tbody tr:nth-child(even){background:#FAFBFE;}
+  .res-name{color:#1D4ED8;font-weight:700;text-decoration:underline;text-underline-offset:3px;}
+  .res-name:hover{color:var(--saffron);}
+  .mono-id{font-family:var(--mono);font-size:.82rem;color:var(--navy);letter-spacing:.04em;}
+  .id-sub{color:var(--muted);font-size:.88rem;}
+  .pill{display:inline-block;background:#DDF0E8;color:#0E7C5A;font-size:.78rem;font-weight:700;
+    padding:5px 13px;border-radius:100px;white-space:nowrap;}
+  .res-empty{text-align:center;color:var(--muted);padding:34px 0;font-weight:600;}
+  .res-pager{display:flex;justify-content:center;align-items:center;gap:6px;margin-top:22px;flex-wrap:wrap;}
+  .res-pg{min-width:40px;height:40px;padding:0 13px;border:1px solid var(--line);background:#fff;color:var(--navy-2);
+    border-radius:9px;font:inherit;font-weight:600;cursor:pointer;transition:.15s;}
+  .res-pg:hover:not(:disabled):not(.active){border-color:var(--saffron);color:var(--saffron);}
+  .res-pg.active{background:var(--navy);border-color:var(--navy);color:#fff;cursor:default;}
+  .res-pg:disabled{opacity:.45;cursor:not-allowed;}
+  .res-dots{color:var(--muted);padding:0 4px;}
+  html.contrast .ai-card,html.contrast .res-table-wrap,html.contrast .ai-understood{border-color:var(--navy);}
+  @media(max-width:640px){ .ai-row{flex-direction:column;} .ai-search-btn{padding:14px;} }
+
   .about-sec{position:relative;background:var(--surface);color:var(--ink);
     background-image:
       radial-gradient(130% 120% at 100% 0%,rgba(232,89,12,.05),transparent 46%),
@@ -662,83 +749,59 @@
   </div>
 </section>
 
-<!-- ============ SEARCH NPO FORM ============ -->
+<!-- ============ AI INTENT SEARCH ============ -->
 <section class="npo-search">
   <div class="wrap">
-    <form class="npo-form" id="npoForm" autocomplete="off" novalidate>
 
-      <div class="npo-row npo-row-4">
-        <label class="field">
-          <span class="field-lbl" data-en="NPO Registered State" data-hi="एनपीओ पंजीकृत राज्य">NPO Registered State</span>
-          <select id="fState">
-            <option value="" selected data-en="NPO Registered State" data-hi="एनपीओ पंजीकृत राज्य">NPO Registered State</option>
-          </select>
-        </label>
-
-        <label class="field">
-          <span class="field-lbl" data-en="NPO Registered District" data-hi="एनपीओ पंजीकृत जिला">NPO Registered District</span>
-          <select id="fDistrict" disabled>
-            <option value="" selected data-en="NPO Registered District" data-hi="एनपीओ पंजीकृत जिला">NPO Registered District</option>
-          </select>
-        </label>
-
-        <label class="field">
-          <span class="field-lbl" data-en="Sectors" data-hi="क्षेत्र">Sectors</span>
-          <select id="fSector">
-            <option value="" selected data-en="Sectors" data-hi="क्षेत्र">Sectors</option>
-            <option data-en="Education &amp; Literacy" data-hi="शिक्षा एवं साक्षरता">Education &amp; Literacy</option>
-            <option data-en="Health &amp; Family Welfare" data-hi="स्वास्थ्य एवं परिवार कल्याण">Health &amp; Family Welfare</option>
-            <option data-en="Women's Development &amp; Empowerment" data-hi="महिला विकास एवं सशक्तिकरण">Women's Development &amp; Empowerment</option>
-            <option data-en="Children" data-hi="बच्चे">Children</option>
-            <option data-en="Environment &amp; Forests" data-hi="पर्यावरण एवं वन">Environment &amp; Forests</option>
-            <option data-en="Rural Development &amp; Poverty Alleviation" data-hi="ग्रामीण विकास एवं गरीबी उन्मूलन">Rural Development &amp; Poverty Alleviation</option>
-            <option data-en="Disability &amp; Welfare" data-hi="दिव्यांगता एवं कल्याण">Disability &amp; Welfare</option>
-            <option data-en="Agriculture" data-hi="कृषि">Agriculture</option>
-            <option data-en="Art &amp; Culture" data-hi="कला एवं संस्कृति">Art &amp; Culture</option>
-          </select>
-        </label>
-
-        <label class="field">
-          <span class="field-lbl" data-en="NPO Type" data-hi="एनपीओ प्रकार">NPO Type</span>
-          <select id="fType">
-            <option value="" selected data-en="NPO Type" data-hi="एनपीओ प्रकार">NPO Type</option>
-            <option data-en="Trust" data-hi="ट्रस्ट">Trust</option>
-            <option data-en="Society" data-hi="सोसाइटी">Society</option>
-            <option data-en="Section 8 Company" data-hi="धारा 8 कंपनी">Section 8 Company</option>
-          </select>
-        </label>
+    <div class="ai-card">
+      <div class="ai-head">
+        <span class="ai-badge"><img src="/assets/ai_icon.png" alt="" class="ai-badge-ic">AI Intent Search</span>
+        <span class="ai-hint">Ask anything — states, districts, sectors, DARPAN IDs, Hindi words, spelling mistakes all work</span>
       </div>
-
-      <div class="npo-row npo-row-search">
-        <label class="field">
-          <span class="field-lbl" data-en="Search by NPO Name" data-hi="एनपीओ नाम से खोजें">Search by NPO Name</span>
-          <input type="text" id="fName" placeholder="Search by NPO Name" data-ph-en="Search by NPO Name" data-ph-hi="एनपीओ नाम से खोजें">
-        </label>
-
-        <label class="field">
-          <span class="field-lbl" data-en="Search by DARPAN ID" data-hi="दर्पण आईडी से खोजें">Search by DARPAN ID</span>
-          <input type="text" id="fDarpan" placeholder="Search by DARPAN ID" data-ph-en="Search by DARPAN ID" data-ph-hi="दर्पण आईडी से खोजें">
-        </label>
-
-        <div class="field field-captcha">
-          <span class="field-lbl" data-en="Captcha" data-hi="कैप्चा">Captcha</span>
-          <div class="captcha-wrap">
-            <span class="captcha-img" id="captchaText" aria-label="Captcha code">gxvUyp</span>
-            <button type="button" class="captcha-refresh" id="captchaRefresh" aria-label="Refresh captcha">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-2.64-6.36"/><path d="M21 3v5h-5"/></svg>
-            </button>
-            <input type="text" id="fCaptcha" class="captcha-input" placeholder="Captcha" data-ph-en="Captcha" data-ph-hi="कैप्चा" aria-label="Enter captcha">
-          </div>
+      <div class="ai-row">
+        <div class="ai-inputwrap">
+          <input type="text" id="aiQuery" placeholder='"NGOs in TN and Kerala" or type "TN" for DARPAN suggestions' autocomplete="off" aria-label="Search NPOs">
+          <div class="ai-suggest" id="aiSuggest" hidden></div>
         </div>
-
-        <div class="field field-submit">
-          <span class="field-lbl" aria-hidden="true">&nbsp;</span>
-          <button type="submit" class="btn btn-primary npo-search-btn" data-en="Search" data-hi="खोजें">Search</button>
-        </div>
+        <button type="button" class="ai-search-btn" id="aiSearchBtn">Search</button>
       </div>
+      <div class="ai-chips" id="aiChips">
+        <button type="button">Agriculture NGOs in Tamil Nadu and Kerala</button>
+        <button type="button">Health NGOs in Chennai in Tamil Nadu and all NGOs in UP</button>
+        <button type="button">All NGOs in TN, KL and KA</button>
+        <button type="button">TN-2022-0045231, MH-2021-0033333</button>
+        <button type="button">Health and Education NGOs in Delhi</button>
+        <button type="button">Give me only 10 NGOs in Tamil Nadu</button>
+        <button type="button">Tamil Nadu NGOs start with TN-2022</button>
+        <button type="button">mahila empowerment society in Maharashtra Mumbai</button>
+        <button type="button">flood relief organizations in Odisha</button>
+        <button type="button">Anbesha Group of Society IN ASSAM</button>
+        <button type="button">i wnat helth turst in tmail naadu chenai</button>
+      </div>
+    </div>
 
-      <p class="npo-note" id="npoNote" role="status" aria-live="polite" hidden></p>
-    </form>
+    <div class="ai-understood" id="aiUnderstood" hidden>
+      <span class="u-lbl">Understood:</span>
+      <span class="u-chips" id="uChips"></span>
+      <span class="u-mode">structured_filter</span>
+    </div>
+
+    <div class="ai-results" id="aiResults" hidden>
+      <div class="res-meta">
+        <div class="res-count"><b id="resCount">0</b> NPOs found <span class="res-page" id="resPage"></span></div>
+        <div class="res-showing" id="resShowing"></div>
+      </div>
+      <div class="res-table-wrap">
+        <table class="res-table">
+          <thead>
+            <tr><th>Sr. No.</th><th>Name of NPO</th><th>DARPAN ID, District (State)</th><th>Sector</th><th>Type</th></tr>
+          </thead>
+          <tbody id="resTbody"></tbody>
+        </table>
+      </div>
+      <div class="res-pager" id="resPager" role="navigation" aria-label="Result pages"></div>
+    </div>
+
   </div>
 </section>
 
@@ -921,71 +984,344 @@ document.querySelectorAll('.registry').forEach(s=>io.observe(s));
   if(show) open();
 })();
 
-/* ---------- NPO Directory: states, cascading districts, captcha, search ---------- */
+/* ---------- NPO Directory: AI intent search over dummy registry ---------- */
 (function(){
-  const form=document.getElementById('npoForm'); if(!form) return;
-  const stateSel=document.getElementById('fState');
-  const distSel=document.getElementById('fDistrict');
-  const captchaText=document.getElementById('captchaText');
-  const captchaRefresh=document.getElementById('captchaRefresh');
-  const captchaInput=document.getElementById('fCaptcha');
-  const note=document.getElementById('npoNote');
+  var input=document.getElementById('aiQuery'); if(!input) return;
+  var sgBox=document.getElementById('aiSuggest');
+  var underEl=document.getElementById('aiUnderstood'),uChips=document.getElementById('uChips');
+  var resWrap=document.getElementById('aiResults'),tbody=document.getElementById('resTbody');
+  var countEl=document.getElementById('resCount'),pageEl=document.getElementById('resPage');
+  var showEl=document.getElementById('resShowing'),pager=document.getElementById('resPager');
 
-  const STATES=['Andaman & Nicobar Islands','Andhra Pradesh','Arunachal Pradesh','Assam','Bihar','Chandigarh','Chhattisgarh','Dadra & Nagar Haveli and Daman & Diu','Delhi','Goa','Gujarat','Haryana','Himachal Pradesh','Jammu & Kashmir','Jharkhand','Karnataka','Kerala','Ladakh','Lakshadweep','Madhya Pradesh','Maharashtra','Manipur','Meghalaya','Mizoram','Nagaland','Odisha','Puducherry','Punjab','Rajasthan','Sikkim','Tamil Nadu','Telangana','Tripura','Uttar Pradesh','Uttarakhand','West Bengal'];
-  const DISTRICTS={
-    'Rajasthan':['Ajmer','Alwar','Anoopgarh','Balotra','Banswara','Baran','Barmer','Bharatpur','Jaipur','Jodhpur','Kota','Udaipur'],
-    'Maharashtra':['Mumbai City','Mumbai Suburban','Pune','Nagpur','Nashik','Thane','Aurangabad'],
-    'Uttar Pradesh':['Lucknow','Kanpur Nagar','Varanasi','Agra','Prayagraj','Ghaziabad','Gorakhpur'],
-    'Karnataka':['Bengaluru Urban','Mysuru','Mangaluru','Belagavi','Hubballi-Dharwad','Kalaburagi'],
-    'Tamil Nadu':['Chennai','Coimbatore','Madurai','Tiruchirappalli','Salem','Erode'],
-    'Delhi':['New Delhi','North Delhi','South Delhi','East Delhi','West Delhi','Central Delhi'],
-    'Gujarat':['Ahmedabad','Surat','Vadodara','Rajkot','Bhavnagar','Gandhinagar'],
-    'West Bengal':['Kolkata','Howrah','North 24 Parganas','Hooghly','Darjeeling','Bardhaman']
-  };
+  /* ===== dummy registry (deterministic) ===== */
+  var STATES=[
+    {n:'Tamil Nadu',c:'TN',d:['Chennai','Coimbatore','Madurai','Salem','Erode','Tiruchirappalli']},
+    {n:'Kerala',c:'KL',d:['Kochi','Thiruvananthapuram','Kozhikode','Thrissur']},
+    {n:'Karnataka',c:'KA',d:['Bengaluru Urban','Mysuru','Belagavi','Mangaluru']},
+    {n:'Maharashtra',c:'MH',d:['Mumbai','Pune','Nagpur','Nashik','Thane']},
+    {n:'Uttar Pradesh',c:'UP',d:['Lucknow','Varanasi','Agra','Kanpur Nagar','Prayagraj']},
+    {n:'West Bengal',c:'WB',d:['Kolkata','Howrah','Haldia','Darjeeling','Siliguri']},
+    {n:'Delhi',c:'DL',d:['New Delhi','South Delhi','North Delhi','East Delhi']},
+    {n:'Assam',c:'AS',d:['Guwahati','Dibrugarh','Tinsukia','Nagaon','Silchar']},
+    {n:'Odisha',c:'OD',d:['Bhubaneswar','Cuttack','Puri','Rourkela']},
+    {n:'Rajasthan',c:'RJ',d:['Jaipur','Jodhpur','Udaipur','Kota']},
+    {n:'Gujarat',c:'GJ',d:['Ahmedabad','Surat','Vadodara','Rajkot']},
+    {n:'Madhya Pradesh',c:'MP',d:['Bhopal','Indore','Gwalior','Jabalpur']},
+    {n:'Bihar',c:'BR',d:['Patna','Gaya','Muzaffarpur']},
+    {n:'Haryana',c:'HR',d:['Gurugram','Faridabad','Panipat']},
+    {n:'Punjab',c:'PB',d:['Ludhiana','Amritsar','Jalandhar']},
+    {n:'Telangana',c:'TG',d:['Hyderabad','Warangal']},
+    {n:'Andhra Pradesh',c:'AP',d:['Visakhapatnam','Vijayawada','Guntur']},
+    {n:'Jharkhand',c:'JH',d:['Ranchi','Jamshedpur']},
+    {n:'Chhattisgarh',c:'CG',d:['Raipur','Bilaspur']},
+    {n:'Uttarakhand',c:'UK',d:['Dehradun','Haridwar']}
+  ];
+  var SECTORS=['Health','Education & Literacy','Agriculture',"Women's Empowerment",'Environment','Rural Development','Disaster Management','Minority Issues','Children','Serving Aged / Elderly','Nutrition','Drinking Water','Skill Development','Civic Issues','Dalit Upliftment','Land and Labour','Right to Information and Advocacy',"Prisoner's Issues"];
+  var TYPES=['Society','Trust','Section 8 Company'];
+  var A=['Shri','Maa','Jan','Nav','Gramin','Adarsh','Bharat','Sarva','Lok','National','Rural','Nava','Akhil','Vishwa','Udaan','Asha','Seva','Ujjwal'];
+  var B=['Seva','Vikas','Kalyan','Jyoti','Shiksha','Swasthya','Unnati','Pragati','Chetna','Sahara','Utthan','Care','Support','Welfare','Upliftment','Manav','Kisan','Mahila','Jal','Bal'];
+  var C=['Samiti','Sansthan','Society','Trust','Foundation','Sangathan','Mission','Forum','Academy','Club','Sabha','Nyas','Group','Center','Committee','Institute','Organisation','Collective','Initiative'];
+  function h(n){n=(n^61)^(n>>>16);n=n+(n<<3);n=n^(n>>>4);n=(n*2654435761)>>>0;n=n^(n>>>15);return n>>>0;}
 
-  STATES.forEach(s=>{const o=document.createElement('option');o.value=s;o.textContent=s;stateSel.appendChild(o);});
-
-  stateSel.addEventListener('change',()=>{
-    distSel.innerHTML='';
-    const ph=document.createElement('option');ph.value='';ph.textContent=(document.getElementById('langSelect')&&document.getElementById('langSelect').value==='hi')?'एनपीओ पंजीकृत जिला':'NPO Registered District';distSel.appendChild(ph);
-    const st=stateSel.value;
-    if(!st){distSel.disabled=true;return;}
-    distSel.disabled=false;
-    const list=DISTRICTS[st]||['All Districts'];
-    list.forEach(d=>{const o=document.createElement('option');o.value=d;o.textContent=d;distSel.appendChild(o);});
+  var DATA=[]; var gi=1;
+  STATES.forEach(function(st,si){
+    st.d.forEach(function(dist,di){
+      var count=48+h(si*97+di*13)%92;
+      for(var k=0;k<count;k++){
+        var r=h(gi*7919);
+        var year=2009+r%17;
+        var num=String(1000000+(h(gi*31+7)%999999)).slice(0,7);
+        var first=(r%3===0)?dist.split(' ')[0]:A[r%A.length];
+        var name=first+' '+B[h(gi*17)%B.length]+' '+C[h(gi*53)%C.length];
+        var t=r%10; var type=t<4?'Society':(t<7?'Trust':'Section 8 Company');
+        DATA.push({id:st.c+'-'+year+'-'+num,name:name,state:st.n,district:dist,sector:SECTORS[h(gi*11)%SECTORS.length],type:type});
+        gi++;
+      }
+    });
   });
+  var FEATURED=[
+    {id:'TN-2022-0045231',name:'Green Harvest Foundation',state:'Tamil Nadu',district:'Chennai',sector:'Agriculture',type:'Trust'},
+    {id:'TN-2022-0020202',name:'Chennai Women Rights NGO',state:'Tamil Nadu',district:'Chennai',sector:"Women's Empowerment",type:'Society'},
+    {id:'TN-2020-0078901',name:'Chennai Health Initiative',state:'Tamil Nadu',district:'Chennai',sector:'Health',type:'Trust'},
+    {id:'TN-2022-0067890',name:'Chennai Rural Development Trust',state:'Tamil Nadu',district:'Chennai',sector:'Rural Development',type:'Trust'},
+    {id:'MH-2021-0033333',name:"Mumbai Women's Collective",state:'Maharashtra',district:'Mumbai',sector:"Women's Empowerment",type:'Section 8 Company'},
+    {id:'WB-2015-1003156',name:'Haldia Sarva Sabha',state:'West Bengal',district:'Haldia',sector:'Minority Issues',type:'Section 8 Company'},
+    {id:'AS-2016-1002331',name:'Anbesha Group of Society',state:'Assam',district:'Guwahati',sector:'Children',type:'Society'},
+    {id:'KL-2023-0022334',name:'Kochi Health Society',state:'Kerala',district:'Kochi',sector:'Health',type:'Society'},
+    {id:'OD-2019-1004455',name:'Odisha Flood Relief Organisation',state:'Odisha',district:'Bhubaneswar',sector:'Disaster Management',type:'Society'}
+  ];
+  DATA=FEATURED.concat(DATA);
 
-  // Captcha (client-side, demo)
-  const CHARS='ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnpqrstuvwxyz23456789';
-  function genCaptcha(){let s='';for(let i=0;i<6;i++)s+=CHARS[Math.floor(Math.random()*CHARS.length)];captchaText.textContent=s;captchaText.dataset.code=s;}
-  captchaRefresh.addEventListener('click',()=>{genCaptcha();captchaInput.value='';captchaInput.focus();});
-  genCaptcha();
+  /* ===== dictionaries + fuzzy ===== */
+  function lev(a,b){ if(a===b)return 0; var m=a.length,n=b.length; if(!m)return n; if(!n)return m;
+    var prev=[],i,j; for(j=0;j<=n;j++)prev[j]=j;
+    for(i=1;i<=m;i++){var cur=[i];for(j=1;j<=n;j++){cur[j]=Math.min(prev[j]+1,cur[j-1]+1,prev[j-1]+(a.charAt(i-1)===b.charAt(j-1)?0:1));}prev=cur;}
+    return prev[n];}
+  function fuzzyEq(a,b){a=a.toLowerCase();b=b.toLowerCase(); if(a===b)return true;
+    var L=Math.max(a.length,b.length); if(L<4)return false;
+    return lev(a,b)<=(L<=5?1:2);}
 
-  function showNote(msg,err){note.hidden=false;note.textContent=msg;
-    note.style.background=err?'#FDE7E7':'var(--saffron-soft)';
-    note.style.borderColor=err?'#F3B4B4':'#F6C9AB';
-    note.style.color=err?'#9B2C2C':'#8A3D08';}
+  var distIndex=[]; STATES.forEach(function(s){s.d.forEach(function(d){distIndex.push({name:d,state:s.n});});});
+  var ALIAS={tn:'Tamil Nadu',kl:'Kerala',ka:'Karnataka',mh:'Maharashtra',up:'Uttar Pradesh',wb:'West Bengal',dl:'Delhi',as:'Assam',od:'Odisha',rj:'Rajasthan',gj:'Gujarat',mp:'Madhya Pradesh',br:'Bihar',hr:'Haryana',pb:'Punjab',tg:'Telangana',ap:'Andhra Pradesh',jh:'Jharkhand',cg:'Chhattisgarh',uk:'Uttarakhand'};
+  var AMBIG={up:1,as:1,'in':1,or:1,me:1,to:1,at:1,on:1,go:1,it:1,us:1,uk:1};
+  var HINDI={'तमिलनाडु':'Tamil Nadu','केरल':'Kerala','कर्नाटक':'Karnataka','महाराष्ट्र':'Maharashtra','दिल्ली':'Delhi','असम':'Assam','ओडिशा':'Odisha','चेन्नई':'Chennai','मुंबई':'Mumbai','कोलकाता':'Kolkata','महिला':'mahila','स्वास्थ्य':'health','शिक्षा':'education','कृषि':'agriculture','ट्रस्ट':'trust','सोसाइटी':'society','बाल':'children','ग्रामीण':'rural'};
+  var SEC_SYN={
+    'Health':['health','helth','swasthya','medical','arogya','hospital'],
+    'Education & Literacy':['education','shiksha','literacy','school','vidya'],
+    'Agriculture':['agriculture','agri','krishi','farming','farmers','kisan'],
+    "Women's Empowerment":['women','womens','woman','mahila','nari','empowerment'],
+    'Environment':['environment','paryavaran','climate'],
+    'Rural Development':['rural','gramin','village'],
+    'Disaster Management':['disaster','flood','relief','apda'],
+    'Minority Issues':['minority','alpsankhyak'],
+    'Children':['children','child','bal','bachche'],
+    'Serving Aged / Elderly':['elderly','aged','senior','vridh'],
+    'Nutrition':['nutrition','poshan'],
+    'Drinking Water':['water','jal'],
+    'Skill Development':['skill','kaushal'],
+    'Civic Issues':['civic'],
+    'Dalit Upliftment':['dalit'],
+    'Land and Labour':['labour','labor'],
+    'Right to Information and Advocacy':['rti','advocacy'],
+    "Prisoner's Issues":['prisoner','prisoners']};
+  var TYPE_SYN={'Trust':['trust','trusts','turst','nyas'],'Society':['society','societies','soceity'],'Section 8 Company':['section 8','sec 8','section8','section-8','company','companies']};
+  var STOP={};'give me the details detail of and also provide in only all ngos ngo npos npo organizations organisations organisation organization orgs i want wnat a an for with show list please get need find search from that which id ids darpan do details based state states district districts sector sectors'.split(' ').forEach(function(w){STOP[w]=1;});
+  var STATE_WORDS=[]; STATES.forEach(function(s){s.n.toLowerCase().split(' ').forEach(function(w){STATE_WORDS.push({w:w,state:s.n});});distIndex.forEach(function(){});});
+  distIndex.forEach(function(d){d.name.toLowerCase().split(' ').forEach(function(w){STATE_WORDS.push({w:w,state:d.state});});});
 
-  form.addEventListener('submit',e=>{
-    e.preventDefault();
-    if((captchaInput.value||'')!==(captchaText.dataset.code||'')){
-      showNote('Captcha does not match. Please try again.',true);
-      genCaptcha();captchaInput.value='';captchaInput.focus();return;
+  function parse(raw){
+    var P={places:[],xplaces:[],sectors:[],xsectors:[],types:[],xtypes:[],ids:[],prefix:null,limit:null,nameTerms:[]};
+    var q=(raw||'').trim(); if(!q)return P;
+    Object.keys(HINDI).forEach(function(k){q=q.split(k).join(' '+HINDI[k]+' ');});
+    q=q.replace(/\b([a-z]{2})[\s-]?(\d{4})[\s-]?(\d{6,7})\b/gi,function(m,s2,y,n){P.ids.push((s2+'-'+y+'-'+n).toUpperCase());return ' ';});
+    q=q.replace(/\b(?:starts?\s+with\s+)?([a-z]{2})-(\d{2,4})\b/gi,function(m,s2,y){P.prefix=(s2+'-'+y).toUpperCase();return ' ';});
+    q=q.replace(/\b(?:only|top|first|sirf)\s+(\d{1,3})\b/gi,function(m,n){P.limit=parseInt(n,10);return ' ';});
+    var rawTokens=q.split(/[^A-Za-z0-9ऀ-ॿ'&-]+/).filter(Boolean);
+    var toks=rawTokens.map(function(t){return {raw:t,low:t.toLowerCase(),used:false,excl:false};});
+    var EXCL={except:1,excluding:1,without:1,exclude:1,excepting:1};
+    var ex=false;
+    toks.forEach(function(t){ if(EXCL[t.low]){ex=true;t.used=true;return;} if(ex&&(t.low==='and'||t.low==='plus')){ex=false;} t.excl=ex; });
+
+    function tryEntity(phrase){
+      var i;
+      for(i=0;i<distIndex.length;i++){ if(fuzzyEq(phrase,distIndex[i].name))return {kind:'district',val:distIndex[i]}; }
+      for(i=0;i<STATES.length;i++){ if(fuzzyEq(phrase,STATES[i].n))return {kind:'state',val:STATES[i].n}; }
+      var sec,sy;
+      for(sec in SEC_SYN){ for(i=0;i<SEC_SYN[sec].length;i++){ if(fuzzyEq(phrase,SEC_SYN[sec][i]))return {kind:'sector',val:sec}; } }
+      for(sy in TYPE_SYN){ for(i=0;i<TYPE_SYN[sy].length;i++){ if(fuzzyEq(phrase,TYPE_SYN[sy][i]))return {kind:'type',val:sy}; } }
+      return null;
     }
-    const parts=[];
-    if(stateSel.value)parts.push(stateSel.value);
-    if(distSel.value&&distSel.value!=='All Districts')parts.push(distSel.value);
-    const type=document.getElementById('fType').value,sector=document.getElementById('fSector').value;
-    const name=document.getElementById('fName').value.trim(),darpan=document.getElementById('fDarpan').value.trim();
-    if(type)parts.push(type);if(sector)parts.push(sector);
-    if(name)parts.push('Name: '+name);if(darpan)parts.push('DARPAN ID: '+darpan);
-    showNote('Searching the NPO directory'+(parts.length?' — '+parts.join(', '):'')+' … (demo: results service not connected).',false);
+    for(var n=3;n>=1;n--){
+      for(var i=0;i+n<=toks.length;i++){
+        var win=toks.slice(i,i+n);
+        var skip=false; win.forEach(function(t){if(t.used)skip=true;});
+        if(skip)continue;
+        var phrase=win.map(function(t){return t.low;}).join(' ');
+        var ent=null;
+        if(n===1){
+          var t0=win[0];
+          if(STOP[t0.low]){t0.used=true;continue;}
+          var al=ALIAS[t0.low];
+          if(al && (!AMBIG[t0.low] || /^[A-Z]{2}$/.test(t0.raw))) ent={kind:'state',val:al};
+          if(!ent)ent=tryEntity(phrase);
+        } else ent=tryEntity(phrase);
+        if(ent){
+          win.forEach(function(t){t.used=true;});
+          var excl=win[0].excl;
+          if(ent.kind==='district'){(excl?P.xplaces:P.places).push({state:ent.val.state,district:ent.val.name});}
+          else if(ent.kind==='state'){(excl?P.xplaces:P.places).push({state:ent.val});}
+          else if(ent.kind==='sector'){(excl?P.xsectors:P.sectors).push(ent.val);}
+          else {(excl?P.xtypes:P.types).push(ent.val);}
+        }
+      }
+    }
+    /* leftovers: absorb near-miss place words, rest become name terms */
+    toks.forEach(function(t){
+      if(t.used||STOP[t.low]||t.low.length<3||/^\d+$/.test(t.low))return;
+      for(var i=0;i<STATE_WORDS.length;i++){
+        if(lev(t.low,STATE_WORDS[i].w)<=2 && Math.max(t.low.length,STATE_WORDS[i].w.length)>=4){t.used=true;return;}
+      }
+      P.nameTerms.push(t.low);
+    });
+    /* dedupe + drop bare state if one of its districts present */
+    function key(p){return p.state+'|'+(p.district||'');}
+    var seen={},plc=[];
+    P.places.forEach(function(p){var k2=key(p);if(!seen[k2]){seen[k2]=1;plc.push(p);}});
+    var withDist={};plc.forEach(function(p){if(p.district)withDist[p.state]=1;});
+    P.places=plc.filter(function(p){return p.district||!withDist[p.state];});
+    P.sectors=P.sectors.filter(function(v,i,a){return a.indexOf(v)===i;});
+    P.xsectors=P.xsectors.filter(function(v,i,a){return a.indexOf(v)===i;});
+    P.types=P.types.filter(function(v,i,a){return a.indexOf(v)===i;});
+    P.xtypes=P.xtypes.filter(function(v,i,a){return a.indexOf(v)===i;});
+    P.ids=P.ids.filter(function(v,i,a){return a.indexOf(v)===i;});
+    return P;
+  }
+
+  /* ===== filter ===== */
+  function runFilter(P){
+    var structured=P.places.length||P.xplaces.length||P.sectors.length||P.xsectors.length||P.types.length||P.xtypes.length||P.prefix||P.nameTerms.length;
+    function inPlace(r){return P.places.some(function(p){return p.district?(r.state===p.state&&r.district===p.district):r.state===p.state;});}
+    function outPlace(r){return P.xplaces.some(function(p){return p.district?(r.state===p.state&&r.district===p.district):r.state===p.state;});}
+    function nameHit(r){var nm=r.name.toLowerCase();
+      return P.nameTerms.every(function(t){ if(nm.indexOf(t)>=0)return true;
+        return nm.split(/\s+/).some(function(w){return fuzzyEq(w,t);});});}
+    var s2=[];
+    if(structured){
+      s2=DATA.filter(function(r){
+        if(P.places.length&&!inPlace(r))return false;
+        if(P.xplaces.length&&outPlace(r))return false;
+        if(P.sectors.length&&P.sectors.indexOf(r.sector)<0)return false;
+        if(P.xsectors.length&&P.xsectors.indexOf(r.sector)>=0)return false;
+        if(P.types.length&&P.types.indexOf(r.type)<0)return false;
+        if(P.xtypes.length&&P.xtypes.indexOf(r.type)>=0)return false;
+        if(P.prefix&&r.id.indexOf(P.prefix)!==0)return false;
+        if(P.nameTerms.length&&!nameHit(r))return false;
+        return true;
+      });
+      s2.sort(function(a,b){return a.state.localeCompare(b.state)||a.district.localeCompare(b.district)||a.name.localeCompare(b.name);});
+    }
+    var out;
+    if(P.ids.length){
+      var idm=DATA.filter(function(r){return P.ids.indexOf(r.id)>=0;});
+      out=structured?idm.concat(s2.filter(function(r){return P.ids.indexOf(r.id)<0;})):idm;
+    } else out=s2;
+    if(P.limit)out=out.slice(0,P.limit);
+    return out;
+  }
+
+  /* ===== render ===== */
+  var PER=20,page=1,rows=[],lastP=null;
+  function esc(x){return String(x).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
+  function chipHTML(P){
+    var out=[];
+    P.places.forEach(function(p){out.push('<span class="u-chip">📍 '+esc(p.district?p.state+' › '+p.district:p.state)+'</span>');});
+    P.xplaces.forEach(function(p){out.push('<span class="u-chip x">🚫 '+esc(p.district?p.state+' › '+p.district:p.state)+'</span>');});
+    P.sectors.forEach(function(v){out.push('<span class="u-chip sec">'+esc(v)+'</span>');});
+    P.xsectors.forEach(function(v){out.push('<span class="u-chip x">🚫 '+esc(v)+'</span>');});
+    P.types.forEach(function(v){out.push('<span class="u-chip">'+esc(v)+'</span>');});
+    P.xtypes.forEach(function(v){out.push('<span class="u-chip x">🚫 '+esc(v)+'</span>');});
+    P.ids.forEach(function(v){out.push('<span class="u-chip idc">🪪 '+esc(v)+'</span>');});
+    if(P.prefix)out.push('<span class="u-chip idc">starts with '+esc(P.prefix)+'</span>');
+    if(P.limit)out.push('<span class="u-chip">limit '+P.limit+'</span>');
+    if(P.nameTerms.length)out.push('<span class="u-chip">&ldquo;'+esc(P.nameTerms.join(' '))+'&rdquo;</span>');
+    return out.join('');
+  }
+  function render(){
+    var pages=Math.max(1,Math.ceil(rows.length/PER));
+    if(page>pages)page=pages;
+    countEl.textContent=rows.length.toLocaleString('en-IN');
+    pageEl.textContent=rows.length?('— Page '+page+' of '+pages):'';
+    var st=(page-1)*PER,slice=rows.slice(st,st+PER);
+    showEl.textContent=rows.length?('Showing '+(st+1)+'–'+(st+slice.length)):'';
+    tbody.innerHTML=slice.length?slice.map(function(r,i){
+      return '<tr><td>'+(st+i+1)+'</td>'+
+        '<td><a class="res-name" href="#">'+esc(r.name)+'</a></td>'+
+        '<td><span class="mono-id">'+esc(r.id)+'</span><br><span class="id-sub">'+esc(r.district)+' ('+esc(r.state)+')</span></td>'+
+        '<td>'+esc(r.sector)+'</td>'+
+        '<td><span class="pill">'+esc(r.type)+'</span></td></tr>';
+    }).join(''):'<tr><td colspan="5" class="res-empty">No NPOs matched — try a different state, district, sector or DARPAN ID.</td></tr>';
+    renderPager(pages);
+  }
+  function renderPager(pages){
+    if(pages<=1){pager.innerHTML='';return;}
+    function b(lbl,p,dis,cur){return '<button type="button" class="res-pg'+(cur?' active':'')+'"'+(dis?' disabled':'')+' data-p="'+p+'">'+lbl+'</button>';}
+    var nums=[1]; var i;
+    for(i=page-1;i<=page+1;i++)if(i>1&&i<pages)nums.push(i);
+    if(pages>1)nums.push(pages);
+    nums=nums.filter(function(v,ix,a){return a.indexOf(v)===ix;}).sort(function(a2,b2){return a2-b2;});
+    var html=b('← Prev',page-1,page===1);
+    var last=0;
+    nums.forEach(function(nn){ if(nn-last>1)html+='<span class="res-dots">…</span>'; html+=b(nn,nn,false,nn===page); last=nn; });
+    html+=b('Next →',page+1,page===pages);
+    pager.innerHTML=html;
+  }
+  pager.addEventListener('click',function(ev){var btn=ev.target.closest('.res-pg');if(!btn||btn.disabled)return;
+    var p=parseInt(btn.getAttribute('data-p'),10);
+    if(p&&p!==page){page=p;render();resWrap.scrollIntoView({behavior:'smooth',block:'start'});}});
+  tbody.addEventListener('click',function(ev){if(ev.target.closest('.res-name'))ev.preventDefault();});
+
+  function doSearch(){
+    closeSg();
+    var q=input.value;
+    lastP=parse(q);
+    rows=runFilter(lastP);
+    page=1;
+    var any=chipHTML(lastP);
+    uChips.innerHTML=any||'<span class="u-chip">free text</span>';
+    underEl.hidden=false;
+    resWrap.hidden=false;
+    render();
+  }
+  document.getElementById('aiSearchBtn').addEventListener('click',doSearch);
+  input.addEventListener('keydown',function(ev){
+    if(ev.key==='Enter'){ var sel=sgBox.querySelector('.sg-item.sel'); if(!sgBox.hidden&&sel){sel.click();} else doSearch(); }
+    else if(ev.key==='Escape'){closeSg();}
+    else if(ev.key==='ArrowDown'||ev.key==='ArrowUp'){ if(sgBox.hidden)return; ev.preventDefault();
+      var items=[].slice.call(sgBox.querySelectorAll('.sg-item')); if(!items.length)return;
+      var idx=items.findIndex(function(el){return el.classList.contains('sel');});
+      idx=ev.key==='ArrowDown'?Math.min(idx+1,items.length-1):Math.max(idx-1,0);
+      items.forEach(function(el){el.classList.remove('sel');});
+      items[idx].classList.add('sel');items[idx].scrollIntoView({block:'nearest'});
+    }
+  });
+  document.getElementById('aiChips').addEventListener('click',function(ev){
+    var btn=ev.target.closest('button');if(!btn)return;
+    input.value=btn.textContent;doSearch();
+    input.focus();
   });
 
-  // Keep placeholders in sync with the language toggle.
-  function applyPlaceholders(lang){document.querySelectorAll('[data-ph-en]').forEach(el=>{el.placeholder=lang==='hi'?el.dataset.phHi:el.dataset.phEn;});}
-  const langSel=document.getElementById('langSelect');
-  if(langSel){applyPlaceholders(langSel.value);langSel.addEventListener('change',()=>applyPlaceholders(langSel.value));}
+  /* ===== live suggestions (places + NPO records) ===== */
+  var sgTimer=null;
+  function closeSg(){sgBox.hidden=true;sgBox.innerHTML='';}
+  function suggestTerm(v){
+    var m=v.match(/([A-Za-z]{2}-[\d-]*\d)\s*$/); if(m)return m[1].toLowerCase();
+    var toks=v.trim().split(/\s+/);
+    var lastTok=toks[toks.length-1]||'';
+    if(v.trim().length>=3 && toks.length<=4)return v.trim().toLowerCase();
+    return lastTok.toLowerCase();
+  }
+  function buildSg(){
+    var v=input.value;
+    if(v.trim().length<2){closeSg();return;}
+    var term=suggestTerm(v);
+    if(!term||term.length<2){closeSg();return;}
+    /* place suggestions */
+    var places=[];
+    STATES.forEach(function(st){ if(st.n.toLowerCase().indexOf(term)===0||fuzzyEq(st.n,term))places.push({label:st.n,sub:'state',fill:st.n}); });
+    distIndex.forEach(function(d){ if(d.name.toLowerCase().indexOf(term)===0||fuzzyEq(d.name,term))places.push({label:d.name,sub:'district, '+d.state,fill:d.name}); });
+    places=places.slice(0,6);
+    /* NPO suggestions */
+    var t2=term;
+    var hits=DATA.filter(function(r){
+      var idl=r.id.toLowerCase(),nml=r.name.toLowerCase();
+      return idl.indexOf(t2)===0||idl.indexOf(t2)>=0||nml.indexOf(t2)>=0;
+    });
+    if(!hits.length&&!places.length){closeSg();return;}
+    var html='';
+    if(hits.length)html+='<div class="sg-head">'+hits.length.toLocaleString('en-IN')+' matching — click to select'+(hits.length>8?' · <i>scroll for more ↓</i>':'')+'</div>';
+    places.forEach(function(p){
+      html+='<div class="sg-item sg-place" data-fill="'+esc(p.fill)+'">📍&nbsp;<b>'+esc(p.label)+'</b>&nbsp;<span>— '+esc(p.sub)+'</span></div>';
+    });
+    hits.slice(0,50).forEach(function(r){
+      html+='<div class="sg-item" data-id="'+esc(r.id)+'"><span><span class="sg-id">'+esc(r.id)+'</span><span class="sg-name">'+esc(r.name)+'</span><span class="sg-sub">'+esc(r.district)+', '+esc(r.state)+' · '+esc(r.sector)+'</span></span><span class="pill">'+esc(r.type)+'</span></div>';
+    });
+    sgBox.innerHTML=html;sgBox.hidden=false;
+  }
+  input.addEventListener('input',function(){clearTimeout(sgTimer);sgTimer=setTimeout(buildSg,140);});
+  input.addEventListener('focus',function(){if(input.value.trim().length>=2)buildSg();});
+  sgBox.addEventListener('mousedown',function(ev){
+    var it=ev.target.closest('.sg-item');if(!it)return;ev.preventDefault();
+    var id=it.getAttribute('data-id');
+    if(id){input.value=id;doSearch();return;}
+    var fill=it.getAttribute('data-fill');
+    if(fill){
+      var v=input.value;
+      var m=v.match(/^(.*?)([A-Za-zऀ-ॿ'-]+)\s*$/);
+      input.value=(m?m[1]:v.replace(/\s+$/,' '))+fill+' ';
+      input.focus();buildSg();
+    }
+  });
+  document.addEventListener('click',function(ev){ if(!ev.target.closest('.ai-inputwrap'))closeSg(); });
 })();
 
 /* ---------- Live ID ticker in hero ---------- */
