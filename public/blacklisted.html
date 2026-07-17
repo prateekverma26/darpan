@@ -596,6 +596,39 @@
     .chakra{animation:none;} *{scroll-behavior:auto;}
     .bfill{transition:none;}
   }
+
+  /* ===== mobile nav drawer (hamburger) ===== */
+  .mnav,.mnav-backdrop{display:none;}
+  @media(max-width:960px){
+    html{overflow-x:hidden;}
+    .menu-toggle{display:inline-flex !important;align-items:center;justify-content:center;
+      width:44px;height:44px;padding:0;font-size:1.4rem;line-height:1;flex:0 0 auto;
+      background:#fff;border:1.5px solid var(--saffron);border-radius:10px;color:var(--saffron);cursor:pointer;transition:.15s;}
+    .menu-toggle:hover{background:var(--saffron);color:#fff;}
+    .mnav-backdrop{display:block;position:fixed;inset:0;background:rgba(11,23,51,.5);
+      opacity:0;visibility:hidden;transition:opacity .3s ease,visibility .3s ease;z-index:60;}
+    body.mnav-open .mnav-backdrop{opacity:1;visibility:visible;}
+    .mnav{display:flex;flex-direction:column;gap:2px;position:fixed;top:0;right:0;bottom:0;
+      width:min(300px,84vw);background:var(--surface);padding:18px 16px 28px;
+      transform:translateX(105%);transition:transform .32s cubic-bezier(.22,1,.36,1);
+      box-shadow:-24px 0 60px -24px rgba(16,34,76,.5);z-index:61;overflow-y:auto;
+      -webkit-overflow-scrolling:touch;}
+    body.mnav-open .mnav{transform:none;}
+    .mnav-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;}
+    .mnav-head span{font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);font-weight:700;}
+    .mnav-close{width:40px;height:40px;border:0;background:var(--paper);border-radius:9px;
+      font-size:1.05rem;color:var(--navy);cursor:pointer;display:grid;place-items:center;}
+    .mnav-close:hover{background:var(--saffron-soft);color:var(--saffron);}
+    .mnav a{padding:13px 14px;border-radius:10px;font-weight:600;font-size:1rem;color:var(--navy-2);text-decoration:none;}
+    .mnav a:hover{background:var(--paper);}
+    .mnav a.active{background:var(--saffron-soft);color:var(--saffron);}
+    .mnav .mnav-login{margin-top:14px;background:var(--saffron);color:#fff;text-align:center;font-weight:700;}
+    .mnav .mnav-login:hover{background:var(--saffron-2);color:#fff;}
+    body.mnav-open{overflow:hidden;}
+  }
+  @media(max-width:960px) and (prefers-reduced-motion:reduce){
+    .mnav{transition:none;} .mnav-backdrop{transition:none;}
+  }
 </style>
 </head>
 <body>
@@ -672,6 +705,20 @@
     </div>
   </div>
 </header>
+
+<!-- ============ MOBILE NAV DRAWER ============ -->
+<div class="mnav-backdrop" id="mnavBackdrop" aria-hidden="true"></div>
+<aside class="mnav" id="mnav" aria-label="Mobile navigation" aria-hidden="true">
+  <div class="mnav-head">
+    <span data-en="Menu" data-hi="मेन्यू">Menu</span>
+    <button class="mnav-close" id="mnavClose" aria-label="Close menu">&#10005;</button>
+  </div>
+    <a href="/ngo-darpan.html" data-en="Home" data-hi="मुखपृष्ठ">Home</a>
+    <a href="/about.html" data-en="About Us" data-hi="हमारे बारे में">About Us</a>
+    <a href="/npo-directory.html" data-en="NPO Directory" data-hi="एनपीओ निर्देशिका">NPO Directory</a>
+    <a href="/grants.html" data-en="Grant-in-aid Portals" data-hi="अनुदान सहायता पोर्टल">Grant-in-aid Portals</a>
+  <a href="/login.html" class="mnav-login" data-en="Login / Signup" data-hi="लॉग इन / साइन अप">Login / Signup</a>
+</aside>
 
 <!-- ============ BLACKLISTED NPO BANNER ============ -->
 <section class="page-hero">
@@ -1314,6 +1361,24 @@ function labelMapStates(svg,container){
   slider.addEventListener('mouseenter',stop);
   slider.addEventListener('mouseleave',start);
   document.addEventListener('visibilitychange',()=>document.hidden?stop():start());
+})();
+</script>
+
+<script>
+(function(){
+  var t=document.querySelector('.menu-toggle');
+  var m=document.getElementById('mnav');
+  var b=document.getElementById('mnavBackdrop');
+  var c=document.getElementById('mnavClose');
+  if(!t||!m)return;
+  function open(){document.body.classList.add('mnav-open');m.setAttribute('aria-hidden','false');b.setAttribute('aria-hidden','false');t.setAttribute('aria-expanded','true');}
+  function close(){document.body.classList.remove('mnav-open');m.setAttribute('aria-hidden','true');b.setAttribute('aria-hidden','true');t.setAttribute('aria-expanded','false');}
+  t.setAttribute('aria-controls','mnav');t.setAttribute('aria-expanded','false');
+  t.addEventListener('click',function(){document.body.classList.contains('mnav-open')?close():open();});
+  if(b)b.addEventListener('click',close);
+  if(c)c.addEventListener('click',close);
+  m.querySelectorAll('a').forEach(function(a){a.addEventListener('click',close);});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape'||e.key==='Esc')close();});
 })();
 </script>
 </body>
