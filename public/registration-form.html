@@ -110,10 +110,20 @@
     transition:border-color .15s ease,box-shadow .15s ease;}
   .ctrl:focus-within{border-color:var(--saffron);box-shadow:0 0 0 3px rgba(232,89,12,.13);}
   .ctrl input,.ctrl select{flex:1;width:100%;font:inherit;font-size:.92rem;color:var(--navy);border:0;background:transparent;
-    padding:12px 14px;border-radius:10px;outline:none;}
-  .ctrl input::placeholder{color:#9AA6C0;}
+    padding:15px 14px;border-radius:10px;outline:none;}
+  .ctrl input::placeholder{color:transparent;}
   .ctrl select{appearance:none;-webkit-appearance:none;color:var(--navy);cursor:pointer;padding-right:38px;}
-  .ctrl select:invalid{color:#9AA6C0;}
+  /* ---------- floating labels ---------- */
+  .flabel{position:absolute;left:14px;top:50%;transform:translateY(-50%);color:#9AA6C0;font-size:.92rem;font-weight:400;
+    pointer-events:none;transition:top .14s ease,font-size .14s ease,transform .14s ease,color .14s ease;
+    max-width:calc(100% - 46px);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;z-index:1;}
+  .flabel .req{color:#D93511;font-weight:800;margin-left:1px;}
+  .ctrl input:focus ~ .flabel,
+  .ctrl input:not(:placeholder-shown) ~ .flabel,
+  .ctrl select:focus ~ .flabel,
+  .ctrl select:valid ~ .flabel,
+  .fld.auto .flabel{top:0;left:11px;transform:translateY(-50%);font-size:.74rem;font-weight:600;color:var(--muted);
+    letter-spacing:.01em;background:var(--surface);padding:0 6px;border-radius:7px;max-width:calc(100% - 24px);}
   .ctrl.sel::after{content:"";position:absolute;right:14px;top:50%;transform:translateY(-50%);width:11px;height:7px;pointer-events:none;
     background:no-repeat center/contain url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='11' height='7' viewBox='0 0 11 7'%3E%3Cpath d='M1 1l4.5 4.5L10 1' fill='none' stroke='%2310224C' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");}
   .ctrl .verify-btn{flex:0 0 auto;border:0;border-left:1px solid var(--line);background:transparent;color:var(--saffron);
@@ -127,10 +137,14 @@
   .ctrl.has-info input{padding-right:40px;}
 
   /* auto-filled from Entity Locker */
+  .fld.wide{grid-column:1 / -1;}
   .fld.auto .ctrl{background:#F3FBF7;border-color:#CBE9D9;}
   .fld.auto .ctrl input{color:var(--navy);font-weight:600;}
-  .auto-tag{position:absolute;top:-8px;right:10px;background:#E9F8F0;color:#0B6B4A;border:1px solid #BBE7D2;border-radius:100px;
-    font-size:.62rem;font-weight:800;letter-spacing:.03em;padding:2px 8px;z-index:2;display:inline-flex;align-items:center;gap:4px;}
+  .fld.auto .flabel{color:var(--green);font-weight:800;}
+  .fld-top{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:5px;}
+  .fld-top .mini-lbl{margin-bottom:0;}
+  .auto-tag{background:#E9F8F0;color:#0B6B4A;border:1px solid #BBE7D2;border-radius:100px;
+    font-size:.62rem;font-weight:800;letter-spacing:.03em;padding:2px 8px;display:inline-flex;align-items:center;gap:4px;flex:0 0 auto;}
   .auto-tag svg{width:10px;height:10px;}
 
   .fld-help{display:flex;align-items:center;gap:6px;font-size:.76rem;color:var(--muted);margin-top:6px;}
@@ -204,7 +218,7 @@
         <!-- auto-fill note -->
         <div class="auto-banner">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="9"/></svg>
-          <span>Some details were securely fetched from <b>Entity Locker</b> and are marked below. Please review them and complete the remaining fields.</span>
+          <span>Fields highlighted in <b>green</b> were securely auto-filled from <b>Entity Locker</b>. Please review them and complete the remaining fields.</span>
         </div>
 
         <!-- Declaration -->
@@ -228,21 +242,23 @@
         <div class="sec-title">Create an Account</div>
         <div class="form-grid">
           <div class="fld auto">
-            <span class="auto-tag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Entity Locker</span>
-            <div class="ctrl"><input type="text" value="PRATEEK WELFARE FOUNDATION" placeholder="Name of Organization (As per PAN) *" readonly></div>
-          </div>
-          <div class="fld auto">
-            <span class="auto-tag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Entity Locker</span>
             <div class="ctrl">
-              <input type="email" value="contact@prateekwelfare.org" placeholder="Email ID *" readonly>
-              <span class="verified"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Verified</span>
+              <input type="text" value="PRATEEK WELFARE FOUNDATION" placeholder=" " readonly>
+              <label class="flabel">Name of Organization (As per PAN) <span class="req">*</span></label>
             </div>
           </div>
           <div class="fld auto">
-            <span class="auto-tag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Entity Locker</span>
             <div class="ctrl">
-              <input type="tel" value="98••••••10" placeholder="Mobile Number *" readonly>
+              <input type="email" value="contact@prateekwelfare.org" placeholder=" " readonly>
               <span class="verified"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Verified</span>
+              <label class="flabel">Email ID <span class="req">*</span></label>
+            </div>
+          </div>
+          <div class="fld auto">
+            <div class="ctrl">
+              <input type="tel" value="98••••••10" placeholder=" " readonly>
+              <span class="verified"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Verified</span>
+              <label class="flabel">Mobile Number <span class="req">*</span></label>
             </div>
           </div>
         </div>
@@ -251,60 +267,61 @@
         <div class="sec-title">NPO Registration Details</div>
         <div class="form-grid">
           <div class="fld auto">
-            <span class="auto-tag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Entity Locker</span>
-            <div class="ctrl"><input type="text" value="AAACP1234Q" placeholder="Organization PAN Number *" readonly></div>
+            <div class="ctrl"><input type="text" value="AAACP1234Q" placeholder=" " readonly><label class="flabel">Organization PAN Number <span class="req">*</span></label></div>
           </div>
           <div class="fld auto">
-            <span class="auto-tag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Entity Locker</span>
-            <div class="ctrl"><input type="text" value="12-04-2018" placeholder="Pan Incorporation Date *" readonly></div>
+            <div class="ctrl"><input type="text" value="12-04-2018" placeholder=" " readonly><label class="flabel">Pan Incorporation Date <span class="req">*</span></label></div>
           </div>
           <div class="fld">
-            <div class="ctrl"><input type="text" placeholder="Registration Number *"></div>
+            <div class="ctrl"><input type="text" placeholder=" "><label class="flabel">Registration Number <span class="req">*</span></label></div>
           </div>
 
           <div class="fld">
             <div class="ctrl has-cal">
-              <input type="text" placeholder="Date of Registration *" onfocus="this.type='date'" onblur="if(!this.value)this.type='text'">
+              <input type="text" placeholder=" " onfocus="this.type='date'" onblur="if(!this.value)this.type='text'">
               <svg class="cal" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4.5" width="18" height="17" rx="2"/><path d="M3 9h18M8 2.5v4M16 2.5v4"/></svg>
+              <label class="flabel">Date of Registration <span class="req">*</span></label>
             </div>
             <div class="fld-help"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 7.6v.01" stroke-linecap="round"/></svg>Must be today or earlier</div>
           </div>
           <div class="fld">
-            <span class="mini-lbl">Registration Renewed <span class="req">*</span></span>
             <div class="ctrl sel">
-              <select><option value="yes" selected>YES</option><option value="no">NO</option></select>
+              <select required><option value="yes" selected>YES</option><option value="no">NO</option></select>
+              <label class="flabel">Registration Renewed <span class="req">*</span></label>
             </div>
           </div>
           <div class="fld">
             <div class="ctrl has-cal">
-              <input type="text" placeholder="Last Renewal Date *" onfocus="this.type='date'" onblur="if(!this.value)this.type='text'">
+              <input type="text" placeholder=" " onfocus="this.type='date'" onblur="if(!this.value)this.type='text'">
               <svg class="cal" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4.5" width="18" height="17" rx="2"/><path d="M3 9h18M8 2.5v4M16 2.5v4"/></svg>
+              <label class="flabel">Last Renewal Date <span class="req">*</span></label>
             </div>
             <div class="fld-help"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 7.6v.01" stroke-linecap="round"/></svg>Must be after Registration Date</div>
           </div>
 
           <div class="fld">
-            <div class="ctrl sel"><select required><option value="" disabled selected hidden>NPO Type *</option><option>Trust</option><option>Society</option><option>Section 8 Company</option></select></div>
+            <div class="ctrl sel"><select required><option value="" disabled selected hidden></option><option>Trust</option><option>Society</option><option>Section 8 Company</option></select><label class="flabel">NPO Type <span class="req">*</span></label></div>
           </div>
           <div class="fld">
-            <div class="ctrl sel"><select required><option value="" disabled selected hidden>State of Registration *</option><option>Delhi</option><option>Maharashtra</option><option>Tamil Nadu</option><option>Uttar Pradesh</option></select></div>
+            <div class="ctrl sel"><select required><option value="" disabled selected hidden></option><option>Delhi</option><option>Maharashtra</option><option>Tamil Nadu</option><option>Uttar Pradesh</option></select><label class="flabel">State of Registration <span class="req">*</span></label></div>
           </div>
           <div class="fld">
-            <div class="ctrl sel"><select required><option value="" disabled selected hidden>District of Registration *</option><option>Central</option><option>North</option><option>South</option></select></div>
+            <div class="ctrl sel"><select required><option value="" disabled selected hidden></option><option>Central</option><option>North</option><option>South</option></select><label class="flabel">District of Registration <span class="req">*</span></label></div>
           </div>
 
           <div class="fld">
-            <div class="ctrl sel"><select required><option value="" disabled selected hidden>Act Name *</option><option>Indian Trusts Act, 1882</option><option>Societies Registration Act, 1860</option><option>Companies Act, 2013</option></select></div>
+            <div class="ctrl sel"><select required><option value="" disabled selected hidden></option><option>Indian Trusts Act, 1882</option><option>Societies Registration Act, 1860</option><option>Companies Act, 2013</option></select><label class="flabel">Act Name <span class="req">*</span></label></div>
           </div>
           <div class="fld">
-            <div class="ctrl sel"><select required><option value="" disabled selected hidden>Registering Authority *</option><option>Registrar of Societies</option><option>Sub-Registrar</option><option>Registrar of Companies</option></select></div>
+            <div class="ctrl sel"><select required><option value="" disabled selected hidden></option><option>Registrar of Societies</option><option>Sub-Registrar</option><option>Registrar of Companies</option></select><label class="flabel">Registering Authority <span class="req">*</span></label></div>
           </div>
           <div class="fld"></div>
 
-          <div class="fld">
+          <div class="fld wide">
             <div class="ctrl has-info">
-              <input type="number" placeholder="Total Number of Office Bearers including Members *" min="1">
+              <input type="number" placeholder=" " min="1">
               <svg class="info-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="9.2"/><path d="M12 11v5M12 7.6v.01"/></svg>
+              <label class="flabel">Total Number of Office Bearers including Members <span class="req">*</span></label>
             </div>
           </div>
         </div>
