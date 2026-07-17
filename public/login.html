@@ -64,6 +64,9 @@
     box-shadow:0 24px 60px -28px rgba(16,34,76,.35);}
   .card-body{padding:30px 34px 26px;}
   .eyebrow{font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);font-weight:700;}
+  .eyebrow-row{display:flex;align-items:center;justify-content:space-between;gap:12px;}
+  .reg-form-link{font-size:.8rem;font-weight:800;color:var(--saffron);text-decoration:underline;text-underline-offset:3px;white-space:nowrap;transition:color .15s ease;}
+  .reg-form-link:hover{color:var(--saffron-2);}
   .card-head{display:flex;align-items:center;gap:14px;margin:4px 0 18px;}
   .card-head h1{font-family:var(--display);font-weight:800;font-size:1.45rem;letter-spacing:-.01em;color:var(--navy);margin:0;white-space:nowrap;}
   .card-head .rule{flex:1;height:1px;background:var(--line);}
@@ -240,7 +243,10 @@
     <div class="card-zone">
       <div class="card">
         <div class="card-body">
-          <div class="eyebrow">Let's get you started</div>
+          <div class="eyebrow-row">
+            <span class="eyebrow">Let's get you started</span>
+            <a class="reg-form-link" href="/registration-form.html">Registration Form</a>
+          </div>
           <div class="card-head">
             <h1>Login an Account</h1>
             <span class="rule" aria-hidden="true"></span>
