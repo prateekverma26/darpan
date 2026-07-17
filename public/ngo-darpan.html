@@ -202,14 +202,23 @@
   /* ---------- Registry stats ---------- */
   .registry{background-color:var(--surface);background-image:var(--dots);background-size:var(--dots-size);border-top:1px solid var(--line);border-bottom:1px solid var(--line);}
   .stat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
-  .stat{display:flex;align-items:center;gap:16px;padding:8px 6px;}
-  .stat-ic{flex:0 0 auto;width:58px;height:58px;border-radius:50%;overflow:hidden;
-    display:grid;place-items:center;box-shadow:0 10px 22px -12px rgba(16,34,76,.45);}
-  .stat-ic img{width:100%;height:100%;object-fit:cover;display:block;}
+  .stat{display:flex;align-items:center;gap:16px;padding:22px 24px;
+    border:1px solid var(--line);border-radius:var(--r);overflow:hidden;
+    box-shadow:0 12px 30px -20px rgba(16,34,76,.35);
+    background-color:var(--surface);
+    background-image:linear-gradient(120deg,rgba(91,141,239,.13) 0%,rgba(91,141,239,0) 52%);
+    background-repeat:no-repeat;}
+  .stat.active{background-image:linear-gradient(120deg,rgba(240,183,50,.16) 0%,rgba(240,183,50,0) 52%);}
+  .stat.black{background-image:linear-gradient(120deg,rgba(238,75,30,.13) 0%,rgba(238,75,30,0) 52%);}
+  .stat-ic{flex:0 0 auto;width:56px;height:56px;border-radius:50%;display:grid;place-items:center;}
+  .stat-ic img{width:32px;height:32px;object-fit:contain;border-radius:9px;display:block;}
+  .stat .stat-ic{background:#ffffff;}          /* total DARPAN — blue tint */
+  .stat.active .stat-ic{background:#ffffff;}    /* active — gold tint */
+  .stat.black .stat-ic{background:#ffffff;}     /* blacklisted — red tint */
   .stat-txt{min-width:0;}
   .stat .num{font-family:var(--display);font-weight:800;font-size:1.95rem;line-height:1.05;color:var(--navy-ink);letter-spacing:-.01em;}
   .stat .lbl{font-size:.86rem;color:var(--muted);font-weight:500;margin-top:3px;}
-  @media(max-width:560px){ .stat .num{font-size:1.7rem;} .stat-ic{width:52px;height:52px;} }
+  @media(max-width:560px){ .stat .num{font-size:1.7rem;} .stat-ic{width:50px;height:50px;} .stat-ic img{width:28px;height:28px;} }
 
   .breakdown{margin-top:26px;background:var(--paper);border:1px solid var(--line);border-radius:var(--r);padding:22px 24px;}
   .breakdown h3{margin:0 0 16px;font-size:.9rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:600;}
