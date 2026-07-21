@@ -112,6 +112,59 @@
   .btn-go:disabled{background:#CBD5DC;color:#7A8794;cursor:not-allowed;}
   .btn-go:disabled:hover{background:#CBD5DC;}
 
+  /* ---------- consent popup ---------- */
+  .cs-modal{position:fixed;inset:0;z-index:70;display:flex;align-items:center;justify-content:center;padding:18px;
+    background:rgba(11,27,63,.5);opacity:0;visibility:hidden;
+    transition:opacity .3s ease,visibility 0s linear .3s;}
+  .cs-modal.open{opacity:1;visibility:visible;transition:opacity .3s ease,visibility 0s;}
+  .cs-dialog{width:100%;max-width:560px;max-height:92vh;background:#fff;border-radius:10px;overflow:hidden;
+    display:flex;flex-direction:column;box-shadow:0 26px 64px -18px rgba(11,27,63,.45);
+    transform:translateY(14px) scale(.97);opacity:0;transition:transform .32s cubic-bezier(.34,1.24,.5,1),opacity .28s ease;}
+  .cs-modal.open .cs-dialog{transform:none;opacity:1;}
+  .cs-body{padding:16px;overflow-y:auto;flex:1;background:#fff;}
+
+  .cs-card{border:1px solid #E3E7EE;border-radius:9px;margin-bottom:13px;background:#fff;}
+  .cs-head{width:100%;display:flex;align-items:flex-start;gap:12px;background:none;border:0;
+    font:inherit;text-align:left;padding:14px 14px;cursor:pointer;}
+  .cs-ic{flex:0 0 auto;width:26px;height:26px;display:grid;place-items:center;color:#6B7280;}
+  .cs-ic svg{width:20px;height:20px;}
+  .cs-av{flex:0 0 auto;width:31px;height:31px;border-radius:50%;background:#22B04B;color:#fff;
+    display:grid;place-items:center;font-size:.78rem;font-weight:700;}
+  .cs-htxt{flex:1;min-width:0;}
+  .cs-htxt b{display:block;font-size:.86rem;font-weight:700;color:#1B2430;line-height:1.4;}
+  .cs-htxt i{font-size:.84rem;color:#4B5563;font-style:italic;}
+  .cs-htxt small{display:block;font-size:.78rem;color:#6B7280;margin-top:2px;}
+  .cs-chev{flex:0 0 auto;width:16px;height:16px;color:#4B5563;margin-top:4px;transition:transform .25s ease;}
+  .cs-head[aria-expanded="true"] .cs-chev{transform:rotate(180deg);}
+  .cs-panel{padding:0 14px 12px;}
+  .cs-panel[hidden]{display:none;}
+
+  .cs-sec{display:flex;align-items:center;gap:11px;padding:10px 0 8px;}
+  .cs-sec svg{width:19px;height:19px;color:#6B7280;flex:0 0 auto;}
+  .cs-sec span{font-size:.83rem;font-weight:600;color:#374151;}
+  .cs-div{height:1px;background:#EAEDF2;margin:8px 0;}
+
+  .cs-chk{display:flex;align-items:flex-start;gap:11px;padding:6px 0 6px 3px;cursor:pointer;}
+  .cs-chk input{accent-color:#22C55E;width:15px;height:15px;margin:2px 0 0;flex:0 0 auto;cursor:pointer;}
+  .cs-chk span{font-size:.82rem;color:#4B5563;line-height:1.45;word-break:break-word;}
+  .cs-chk input:checked ~ span{color:#374151;}
+
+  .cs-note{font-size:.77rem;color:#4B5563;line-height:1.6;margin:14px 2px 2px;}
+  /* keep the requester name intact so the notice stays at two lines */
+  .cs-note b{color:#1B2430;font-weight:700;white-space:nowrap;}
+
+  .cs-foot{display:flex;align-items:center;justify-content:space-between;gap:14px;
+    padding:12px 16px;background:#F1F3F6;border-top:1px solid #E3E7EE;}
+  .cs-deny{font:inherit;font-size:.92rem;font-weight:600;color:#1B4A9C;background:#E8EBF0;
+    border:1px solid #1B4A9C;border-radius:5px;padding:10px 30px;cursor:pointer;
+    transition:background .15s ease,color .15s ease;}
+  .cs-deny:hover{background:#DCE4F2;}
+  .cs-allow{font:inherit;font-size:.92rem;font-weight:600;color:#fff;background:#1B4A9C;border:0;
+    border-radius:5px;padding:11px 38px;cursor:pointer;transition:background .15s ease;}
+  .cs-allow:hover:not(:disabled){background:#163D82;}
+  .cs-allow:disabled{background:#AFBBCE;cursor:not-allowed;}
+  @media(prefers-reduced-motion:reduce){ .cs-modal,.cs-dialog{transition-duration:.01ms;} }
+
   .signup{font-size:.92rem;color:#3C4450;margin:21px 0 0;text-align:center;}
   .signup a{color:var(--blue);}
   .signup a:hover{text-decoration:underline;}
@@ -277,6 +330,94 @@
 
   <p class="signup">Do not have an account? <a href="#">Sign Up</a></p>
 </main>
+
+<!-- Consent popup — share documents with the requesting application -->
+<div class="cs-modal" id="consentModal" role="dialog" aria-modal="true" aria-labelledby="csEntityName">
+  <div class="cs-dialog">
+    <div class="cs-body">
+
+      <!-- entity + documents -->
+      <div class="cs-card">
+        <button type="button" class="cs-head" data-acc aria-expanded="true">
+          <span class="cs-ic">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="11" height="18" rx="1.5"/><path d="M14 8h6a1 1 0 0 1 1 1v11a1 1 0 0 1-1 1h-6"/><path d="M6.5 7h4M6.5 11h4M6.5 15h4M17 12h1M17 16h1"/></svg>
+          </span>
+          <span class="cs-htxt">
+            <b id="csEntityName">PROD TESTING AMAZON SELLER SERVICES Private limited -</b>
+            <i>EntityLocker</i>
+          </span>
+          <svg class="cs-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </button>
+        <div class="cs-panel">
+
+          <div class="cs-sec">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="3.2"/><path d="M5 20a7 7 0 0 1 14 0"/></svg>
+            <span>Issued document</span>
+          </div>
+          <label class="cs-chk"><input type="checkbox" data-consent> <span>Company Master Details ( XX053234 )</span></label>
+          <label class="cs-chk"><input type="checkbox" data-consent> <span>Company Master Details ( XX017900 )</span></label>
+          <label class="cs-chk"><input type="checkbox" data-consent checked> <span>GSTN Details ( XX18J1ZE )</span></label>
+          <label class="cs-chk"><input type="checkbox" data-consent checked> <span>Organisation PAN Verification Record ( XXA3918J )</span></label>
+          <label class="cs-chk"><input type="checkbox" data-consent checked> <span>Udyam Certificate ( XX290910 )</span></label>
+
+          <div class="cs-div"></div>
+
+          <div class="cs-sec">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="13" rx="2"/><path d="M3 10h18M8 6V4.5h8V6"/></svg>
+            <span>Entity Vault</span>
+          </div>
+          <label class="cs-chk"><input type="checkbox" data-consent checked> <span>GSTIN-list.pdf</span></label>
+          <label class="cs-chk"><input type="checkbox" data-consent checked> <span>Requester-EntityLockerAPISpecification_07_10_24(2).pdf</span></label>
+          <label class="cs-chk"><input type="checkbox" data-consent> <span>qr_img.png</span></label>
+          <label class="cs-chk"><input type="checkbox" data-consent> <span>sample.pdf</span></label>
+        </div>
+      </div>
+
+      <!-- account -->
+      <div class="cs-card">
+        <button type="button" class="cs-head" data-acc aria-expanded="false">
+          <span class="cs-av">AS</span>
+          <span class="cs-htxt">
+            <b>A Saravanambika <i>DigiLocker</i></b>
+            <small>Issued Document, Profile, Drive</small>
+          </span>
+          <svg class="cs-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </button>
+        <div class="cs-panel" hidden>
+          <label class="cs-chk"><input type="checkbox" data-consent> <span>Profile — name, date of birth, gender</span></label>
+          <label class="cs-chk"><input type="checkbox" data-consent> <span>Drive — documents saved in DigiLocker</span></label>
+        </div>
+      </div>
+
+      <!-- purpose -->
+      <div class="cs-card">
+        <button type="button" class="cs-head" data-acc aria-expanded="false">
+          <span class="cs-ic">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="3.5" width="17" height="17" rx="3"/><path d="M9.6 9.4a2.5 2.5 0 1 1 3 2.45V13"/><path d="M12.6 16.2v.01"/></svg>
+          </span>
+          <span class="cs-htxt">
+            <b>Purpose</b>
+            <small>Know Your Customer</small>
+          </span>
+          <svg class="cs-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </button>
+        <div class="cs-panel" hidden>
+          <p class="cs-note" style="margin:6px 2px 2px;">The requesting application will use the selected documents to verify your entity as part of its Know Your Customer process.</p>
+        </div>
+      </div>
+
+      <p class="cs-note">
+        Consent Validity is subject to applicable laws.<br>
+        By clicking 'Allow', you are giving consent to share with <b>UAT-StagingLocalDemo</b>
+      </p>
+    </div>
+
+    <div class="cs-foot">
+      <button type="button" class="cs-deny" id="csDeny">Deny</button>
+      <button type="button" class="cs-allow" id="csAllow">Allow</button>
+    </div>
+  </div>
+</div>
 
 <!-- ============ FOOTER ============ -->
 <footer class="site-foot">
@@ -461,8 +602,53 @@
       pin.focus();
       return;
     }
+    openConsent();
+  });
+
+  /* ---------- consent popup ---------- */
+  var consentModal = document.getElementById('consentModal');
+  var csAllow      = document.getElementById('csAllow');
+  var csBoxes      = consentModal.querySelectorAll('input[data-consent]');
+
+  function openConsent(){
+    consentModal.classList.add('open');
+    document.body.style.overflow = 'hidden';
+    refreshAllow();
+  }
+  function closeConsent(){
+    consentModal.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  /* Allow is only available while at least one document is ticked */
+  function refreshAllow(){
+    var any = false;
+    for(var i=0;i<csBoxes.length;i++){ if(csBoxes[i].checked){ any = true; break; } }
+    csAllow.disabled = !any;
+  }
+  for(var ci=0; ci<csBoxes.length; ci++) csBoxes[ci].addEventListener('change', refreshAllow);
+
+  /* collapsible cards */
+  var csHeads = consentModal.querySelectorAll('.cs-head[data-acc]');
+  for(var hi=0; hi<csHeads.length; hi++){
+    csHeads[hi].addEventListener('click', function(){
+      var open = this.getAttribute('aria-expanded') === 'true';
+      this.setAttribute('aria-expanded', String(!open));
+      var panel = this.nextElementSibling;
+      if(panel) panel.hidden = open;
+    });
+  }
+
+  document.getElementById('csDeny').addEventListener('click', closeConsent);
+  csAllow.addEventListener('click', function(){
+    if(csAllow.disabled) return;
+    closeConsent();
     window.location.href = AFTER_SIGNIN;
   });
+  document.addEventListener('keydown', function(e){
+    if(e.key === 'Escape' && consentModal.classList.contains('open')) closeConsent();
+  });
+  refreshAllow();
 
   /* text resize controls */
   var STEP = 1, MIN = 0.85, MAX = 1.3;
