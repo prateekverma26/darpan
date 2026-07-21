@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<!-- DEMO / PROTOTYPE ONLY — static mock of the EntityLocker sign-in flow for the
+     NGO DARPAN redesign concept. No credentials are transmitted, validated or
+     stored; the PIN screen is triggered locally by the demo number 9999999999. -->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>EntityLocker — Sign In (Demo)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --topbar:#0B2158;
+    --footer:#0F1D35;
+    --orange:#F79A1E;
+    --orange-dk:#E08812;
+    --green:#7BC67E;
+    --green-dk:#6BB56F;
+    --navy:#0B1B3F;
+    --ink:#1F2933;
+    --muted:#6B7280;
+    --line:#D8DEE7;
+    --blue:#1E6FD9;
+    --page:#FFFFFF;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{font-family:'Poppins',system-ui,-apple-system,'Segoe UI',sans-serif;
+    color:var(--ink);background:var(--page);line-height:1.5;-webkit-font-smoothing:antialiased;
+    display:flex;flex-direction:column;min-height:100vh;}
+  a{color:inherit;text-decoration:none;}
+  img{display:block;max-width:100%;}
+  .wrap{width:100%;max-width:1290px;margin:0 auto;padding:0 24px;}
+
+  /* ---------------- top strip ---------------- */
+  .gov-strip{background:var(--topbar);color:#fff;font-size:.78rem;}
+  .gov-strip .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:26px;}
+  .gov-left{display:flex;align-items:center;gap:7px;}
+  .gov-flag{width:19px;height:13px;border-radius:1px;flex:0 0 auto;}
+  .gov-right{display:flex;align-items:center;gap:18px;}
+  .gov-right button{font:inherit;color:#fff;background:none;border:0;cursor:pointer;padding:0;}
+  .gov-right .txt-sz{display:flex;align-items:center;gap:14px;}
+  .ext{font-size:.62rem;opacity:.85;vertical-align:super;margin-left:2px;}
+  .lang-btn{display:flex;align-items:center;}
+  .lang-btn svg{width:20px;height:20px;}
+
+  /* ---------------- header ---------------- */
+  .site-head{background:#fff;border-bottom:1px solid #EAEDF2;
+    box-shadow:0 2px 5px -3px rgba(11,27,63,.22);}
+  .site-head .wrap{display:flex;align-items:center;min-height:62px;}
+  .site-head img{height:40px;width:auto;}
+
+  /* ---------------- main / card ---------------- */
+  main{flex:1;display:flex;flex-direction:column;align-items:center;
+    padding:52px 20px 64px;background:#fff;}
+  .card{width:100%;max-width:446px;background:#fff;border-radius:9px;
+    padding:30px 32px 34px;box-shadow:0 2px 16px rgba(16,32,64,.13);}
+  .card.pinned{box-shadow:0 2px 16px rgba(16,32,64,.13),0 4px 0 -1px var(--navy);}
+  .card h1{font-size:1.42rem;font-weight:600;color:#1B1B1B;margin:0 0 24px;letter-spacing:-.01em;}
+
+  /* tabs */
+  .tabs{display:flex;margin-bottom:26px;border-radius:5px;overflow:hidden;}
+  .tab{flex:1;font:inherit;font-size:.95rem;font-weight:600;padding:12px 8px;cursor:pointer;
+    border:0;background:#fff;color:var(--orange);transition:background .15s ease,color .15s ease;}
+  .tab[aria-selected="true"]{background:var(--orange);color:#1B1B1B;}
+
+  /* fields */
+  .field{margin-bottom:6px;position:relative;}
+  .field input{width:100%;font:inherit;font-size:.95rem;color:var(--ink);
+    border:1px solid var(--line);border-radius:5px;padding:12px 15px;background:#fff;
+    transition:border-color .15s ease,box-shadow .15s ease;}
+  .field input::placeholder{color:#9AA3AF;}
+  .field input:focus{outline:none;border-color:#5B9BE8;box-shadow:0 0 0 3px rgba(30,111,217,.12);}
+  .field.has-eye input{padding-right:46px;}
+  .eye{position:absolute;top:50%;right:12px;transform:translateY(-50%);
+    background:none;border:0;padding:4px;cursor:pointer;color:#3A4553;display:grid;place-items:center;}
+  .eye svg{width:19px;height:19px;}
+  .hint{font-size:.82rem;color:#5C6470;margin:0 0 26px;}
+  .hint-blue{font-size:.86rem;font-weight:600;color:var(--blue);margin:8px 0 26px;}
+  .note{font-size:.78rem;font-weight:500;color:var(--blue);margin:9px 0 0;}
+  .forgot{display:inline-flex;align-items:center;gap:5px;font-size:.86rem;color:var(--blue);margin:11px 0 0;}
+  .forgot:hover{text-decoration:underline;}
+  .forgot svg{width:14px;height:14px;}
+  .err{display:none;font-size:.82rem;font-weight:500;color:#C62828;margin:9px 0 0;}
+  .err.show{display:block;}
+
+  /* selected entity row */
+  .entity{display:flex;align-items:center;gap:11px;background:#EAF1FB;border:1px solid #D5E3F7;
+    border-radius:7px;padding:11px 13px;margin-bottom:15px;}
+  .entity-ic{width:29px;height:29px;border-radius:50%;background:#FFF3DF;border:1px solid #F3D9A9;
+    display:grid;place-items:center;flex:0 0 auto;font-size:.9rem;}
+  .entity-name{flex:1;min-width:0;font-size:.86rem;font-weight:500;color:var(--orange);
+    text-transform:uppercase;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+  .entity-radio{width:17px;height:17px;border-radius:50%;border:2px solid #1E6FD9;flex:0 0 auto;
+    display:grid;place-items:center;}
+  .entity-radio::after{content:"";width:9px;height:9px;border-radius:50%;background:#1E6FD9;}
+
+  /* buttons */
+  .btn-go{width:100%;font:inherit;font-size:1.05rem;font-weight:500;color:#2A2A2A;
+    background:var(--green);border:0;border-radius:5px;padding:13px;cursor:pointer;margin-top:22px;
+    transition:background .15s ease,transform .08s ease;}
+  .btn-go:hover{background:var(--green-dk);}
+  .btn-go:active{transform:translateY(1px);}
+  /* darkens once the field holds a complete entry */
+  .btn-go.ready{background:#28a745;color:#fff;}
+  .btn-go.ready:hover{background:#218838;}
+
+  .signup{font-size:.92rem;color:#3C4450;margin:21px 0 0;text-align:center;}
+  .signup a{color:var(--blue);}
+  .signup a:hover{text-decoration:underline;}
+
+  .screen[hidden]{display:none;}
+
+  /* ---------------- footer ---------------- */
+  .site-foot{background:var(--footer);color:#DCE2EC;font-size:.87rem;padding:34px 0 20px;}
+  .foot-grid{display:grid;grid-template-columns:1.35fr .8fr .95fr 1.15fr;gap:34px;}
+  .foot-brand img.el{height:38px;width:auto;margin-bottom:16px;}
+  .dl-badge{background:#fff;border-radius:4px;padding:7px 13px;display:inline-block;margin-bottom:17px;}
+  .dl-badge img{height:17px;width:auto;}
+  .updated{font-size:.85rem;color:#B9C2D0;}
+  .updated b{color:#fff;font-weight:600;}
+  .foot-col a{display:block;padding:5px 0;color:#DCE2EC;}
+  .foot-col a:hover{color:#fff;text-decoration:underline;}
+  .powered{display:flex;align-items:center;gap:11px;margin-bottom:15px;}
+  .powered span{font-size:.85rem;color:#C6CEDB;}
+  .powered img{height:29px;width:auto;}
+  .dic{font-size:.87rem;font-weight:600;color:#fff;margin:0 0 3px;}
+  .meity{font-size:.87rem;color:#C6CEDB;margin:0;}
+  .foot-rule{height:1px;background:rgba(255,255,255,.16);margin:26px 0 16px;}
+  .foot-base{display:flex;align-items:center;justify-content:space-between;gap:20px;
+    flex-wrap:wrap;font-size:.85rem;color:#C6CEDB;}
+  .foot-base nav{display:flex;gap:22px;}
+  .foot-base a:hover{color:#fff;text-decoration:underline;}
+
+  /* accessibility fab */
+  .a11y-fab{position:fixed;right:20px;bottom:96px;width:44px;height:44px;border-radius:50%;
+    background:var(--orange);border:0;cursor:pointer;color:#fff;display:grid;place-items:center;
+    box-shadow:0 3px 10px rgba(0,0,0,.24);z-index:20;}
+  .a11y-fab svg{width:25px;height:25px;}
+
+  /* ---------------- responsive ---------------- */
+  @media(max-width:900px){
+    .foot-grid{grid-template-columns:1fr 1fr;gap:28px;}
+  }
+  @media(max-width:600px){
+    .wrap{padding:0 16px;}
+    .gov-strip{font-size:.72rem;}
+    .gov-right{gap:12px;}
+    .gov-right .txt-sz{gap:9px;}
+    main{padding:30px 14px 44px;}
+    .card{padding:24px 20px 28px;}
+    .card h1{font-size:1.25rem;}
+    .foot-grid{grid-template-columns:1fr;gap:24px;}
+    .foot-base{flex-direction:column;align-items:flex-start;gap:12px;}
+    .foot-base nav{flex-wrap:wrap;gap:16px;}
+    .a11y-fab{bottom:20px;}
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ GOVERNMENT OF INDIA STRIP ============ -->
+<div class="gov-strip">
+  <div class="wrap">
+    <div class="gov-left">
+      <svg class="gov-flag" viewBox="0 0 30 20" aria-hidden="true">
+        <rect width="30" height="6.67" fill="#FF9933"/>
+        <rect y="6.67" width="30" height="6.67" fill="#fff"/>
+        <rect y="13.33" width="30" height="6.67" fill="#138808"/>
+        <circle cx="15" cy="10" r="2.6" fill="none" stroke="#000080" stroke-width=".7"/>
+      </svg>
+      <a href="https://www.india.gov.in" target="_blank" rel="noopener">Government of India<span class="ext">&#9099;</span></a>
+    </div>
+    <div class="gov-right">
+      <a href="#main">Skip To Main Content</a>
+      <div class="txt-sz">
+        <button type="button" id="fontUp" aria-label="Increase text size">A+</button>
+        <button type="button" id="fontReset" aria-label="Normal text size">A</button>
+        <button type="button" id="fontDown" aria-label="Decrease text size">A-</button>
+      </div>
+      <button type="button" class="lang-btn" aria-label="Switch language">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M4 5h9M8.5 5v2c0 3.5-1.7 6.5-4.5 8"/><path d="M6 11c1.6 2.5 3.8 4.2 6.5 5"/>
+          <path d="M13.5 20l4-10 4 10M15 17h5"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ============ HEADER ============ -->
+<header class="site-head">
+  <div class="wrap">
+    <a href="#"><img src="/icons/EntityLockerLogo.png" alt="EntityLocker — Document Wallet to Empower Entities"></a>
+  </div>
+</header>
+
+<!-- ============ MAIN ============ -->
+<main id="main">
+
+  <!-- ---- SCREEN 1: mobile number ---- -->
+  <section class="card screen" id="screenMobile">
+    <h1>Sign In to your account!</h1>
+
+    <div class="tabs" role="tablist">
+      <button type="button" class="tab" role="tab" aria-selected="true" id="tabMobile">Mobile</button>
+      <button type="button" class="tab" role="tab" aria-selected="false" id="tabAadhaar">Aadhaar/Username</button>
+    </div>
+
+    <form id="mobileForm" novalidate>
+
+      <div id="paneMobile">
+        <div class="field">
+          <input type="tel" id="mobile" inputmode="numeric" maxlength="10" autocomplete="off"
+                 placeholder="Mobile number*" aria-label="Mobile number">
+        </div>
+        <p class="hint">Enter your registered Mobile number</p>
+      </div>
+
+      <div id="paneAadhaar" hidden>
+        <div class="field has-eye">
+          <input type="password" id="aadhaar" maxlength="36" autocomplete="off"
+                 placeholder="Aadhaar/Username*" aria-label="Aadhaar or Username">
+          <button type="button" class="eye" id="aadhaarEye" aria-label="Show Aadhaar or Username">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/>
+              <path d="M3 3l18 18"/>
+            </svg>
+          </button>
+        </div>
+        <p class="hint-blue">Aadhaar/Username</p>
+      </div>
+
+      <p class="err" id="mobileErr" role="alert"></p>
+      <button type="submit" class="btn-go">Next</button>
+    </form>
+  </section>
+
+  <!-- ---- SCREEN 2: security PIN ---- -->
+  <section class="card pinned screen" id="screenPin" hidden>
+    <h1>Sign In to your account!</h1>
+
+    <div class="entity">
+      <span class="entity-ic" aria-hidden="true">&#128188;</span>
+      <span class="entity-name">Prod Testing Amazon Selle***</span>
+      <span class="entity-radio" role="img" aria-label="Selected entity"></span>
+    </div>
+
+    <form id="pinForm" novalidate>
+      <div class="field has-eye">
+        <input type="password" id="pin" inputmode="numeric" maxlength="6" autocomplete="off"
+               placeholder="6 digit security PIN*" aria-label="6 digit security PIN">
+        <button type="button" class="eye" id="pinEye" aria-label="Show PIN">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/>
+            <path d="M3 3l18 18"/>
+          </svg>
+        </button>
+      </div>
+      <p class="note">*EntityLocker PIN is same as Personal DigiLocker Account PIN</p>
+      <a class="forgot" href="#">Forgot security PIN?
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/>
+        </svg>
+      </a>
+      <p class="err" id="pinErr" role="alert"></p>
+      <button type="submit" class="btn-go">Sign In</button>
+    </form>
+  </section>
+
+  <p class="signup">Do not have an account? <a href="#">Sign Up</a></p>
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer class="site-foot">
+  <div class="wrap">
+    <div class="foot-grid">
+
+      <div class="foot-brand">
+        <img class="el" src="/icons/EntityLocker_Logo_white.png" alt="EntityLocker">
+        <div class="dl-badge"><img src="/icons/digilocker_services.png" alt="A DigiLocker Service"></div>
+        <p class="updated">Last Updated : <b>31 Jan, 2024</b></p>
+      </div>
+
+      <nav class="foot-col" aria-label="Footer primary">
+        <a href="#">Home</a>
+        <a href="#">About Us</a>
+        <a href="#">FAQ</a>
+        <a href="#">Tender</a>
+        <a href="#">Statistics</a>
+      </nav>
+
+      <nav class="foot-col" aria-label="Footer resources">
+        <a href="#">Resources</a>
+        <a href="#">Sitemap</a>
+        <a href="#">Partners<span class="ext">&#9099;</span></a>
+        <a href="#">Support<span class="ext">&#9099;</span></a>
+        <a href="#">Go to DigiLocker<span class="ext">&#9099;</span></a>
+      </nav>
+
+      <div class="foot-meta">
+        <div class="powered">
+          <span>Powered by</span>
+          <img src="/icons/Digital_India_Logo.png" alt="Digital India">
+        </div>
+        <p class="dic">Digital India Corporation (DIC)</p>
+        <p class="meity">Ministry of Electronics &amp; IT (MeitY)</p>
+      </div>
+
+    </div>
+
+    <div class="foot-rule"></div>
+
+    <div class="foot-base">
+      <span>Copyright &copy; 2026, Website maintained by National eGovernance Division (NeGD)<span class="ext">&#9099;</span></span>
+      <nav aria-label="Footer legal">
+        <a href="#">Contact Us</a>
+        <a href="#">Terms Of Service</a>
+        <a href="#">Privacy Policy</a>
+      </nav>
+    </div>
+  </div>
+</footer>
+
+<button type="button" class="a11y-fab" aria-label="Accessibility options">
+  <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+    <circle cx="12" cy="4" r="2"/>
+    <path d="M20 8.5c-2.4.9-5.1 1.4-8 1.4S6.4 9.4 4 8.5" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" fill="none"/>
+    <path d="M12 9.4v5m0 0-2.4 6.2M12 14.4l2.4 6.2" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" fill="none"/>
+  </svg>
+</button>
+
+<script>
+(function(){
+  'use strict';
+
+  /* --- demo credential: only this number advances to the PIN screen --- */
+  var DEMO_MOBILE = '9999999999';
+  var DEMO_PIN     = '999999';
+  var AFTER_SIGNIN = '/registration-form.html';   /* lands here after a valid PIN */
+
+  var screenMobile = document.getElementById('screenMobile');
+  var screenPin    = document.getElementById('screenPin');
+  var mobile       = document.getElementById('mobile');
+  var aadhaar      = document.getElementById('aadhaar');
+  var mobileErr    = document.getElementById('mobileErr');
+  var pin          = document.getElementById('pin');
+  var pinErr       = document.getElementById('pinErr');
+  var paneMobile   = document.getElementById('paneMobile');
+  var paneAadhaar  = document.getElementById('paneAadhaar');
+
+  var mode = 'mobile';   /* 'mobile' | 'aadhaar' */
+  var nextBtn = document.querySelector('#mobileForm .btn-go');
+
+  function showErr(el, msg){ el.textContent = msg; el.classList.add('show'); }
+  function clearErr(el){ el.textContent = ''; el.classList.remove('show'); }
+
+  /* Next turns darker green once the active field holds a complete entry:
+     a full 10-digit mobile, or any non-empty Aadhaar/Username. */
+  function refreshNext(){
+    var complete = mode === 'mobile'
+      ? mobile.value.length === 10
+      : aadhaar.value.trim() !== '';
+    nextBtn.classList.toggle('ready', complete);
+  }
+
+  /* mobile + pin accept digits only; Aadhaar/Username is free text */
+  var signInBtn = document.querySelector('#pinForm .btn-go');
+
+  [mobile, pin].forEach(function(input){
+    input.addEventListener('input', function(){
+      this.value = this.value.replace(/\D/g, '');
+      clearErr(this === mobile ? mobileErr : pinErr);
+      if(this === mobile) refreshNext();
+      if(this === pin) signInBtn.classList.toggle('ready', pin.value.length === 6);
+    });
+  });
+  aadhaar.addEventListener('input', function(){ clearErr(mobileErr); refreshNext(); });
+
+  /* tabs — swap the input pane */
+  var tabMobile  = document.getElementById('tabMobile');
+  var tabAadhaar = document.getElementById('tabAadhaar');
+  function selectTab(next){
+    mode = next;
+    var onMobile = next === 'mobile';
+    tabMobile.setAttribute('aria-selected', String(onMobile));
+    tabAadhaar.setAttribute('aria-selected', String(!onMobile));
+    paneMobile.hidden = !onMobile;
+    paneAadhaar.hidden = onMobile;
+    clearErr(mobileErr);
+    refreshNext();
+    (onMobile ? mobile : aadhaar).focus();
+  }
+  tabMobile.addEventListener('click', function(){ selectTab('mobile'); });
+  tabAadhaar.addEventListener('click', function(){ selectTab('aadhaar'); });
+
+  /* screen 1 -> screen 2 */
+  document.getElementById('mobileForm').addEventListener('submit', function(e){
+    e.preventDefault();
+    if(mode === 'mobile'){
+      var val = mobile.value.trim();
+      if(val.length !== 10){
+        showErr(mobileErr, 'Please enter a valid 10 digit mobile number.');
+        mobile.focus();
+        return;
+      }
+      if(val !== DEMO_MOBILE){
+        showErr(mobileErr, 'Demo: use ' + DEMO_MOBILE + ' to continue.');
+        mobile.focus();
+        return;
+      }
+    } else {
+      if(aadhaar.value.trim() === ''){
+        showErr(mobileErr, 'Please enter your Aadhaar number or Username.');
+        aadhaar.focus();
+        return;
+      }
+    }
+    screenMobile.hidden = true;
+    screenPin.hidden = false;
+    pin.focus();
+  });
+
+  /* Aadhaar/Username visibility toggle */
+  document.getElementById('aadhaarEye').addEventListener('click', function(){
+    var shown = aadhaar.type === 'text';
+    aadhaar.type = shown ? 'password' : 'text';
+    this.setAttribute('aria-label', shown ? 'Show Aadhaar or Username' : 'Hide Aadhaar or Username');
+    aadhaar.focus();
+  });
+
+  /* PIN visibility */
+  document.getElementById('pinEye').addEventListener('click', function(){
+    var shown = pin.type === 'text';
+    pin.type = shown ? 'password' : 'text';
+    this.setAttribute('aria-label', shown ? 'Show PIN' : 'Hide PIN');
+    pin.focus();
+  });
+
+  /* screen 2 submit — demo only, nothing is sent anywhere */
+  document.getElementById('pinForm').addEventListener('submit', function(e){
+    e.preventDefault();
+    if(pin.value.length !== 6){
+      showErr(pinErr, 'Please enter your 6 digit security PIN.');
+      pin.focus();
+      return;
+    }
+    if(pin.value !== DEMO_PIN){
+      showErr(pinErr, 'Demo: use ' + DEMO_PIN + ' as the security PIN.');
+      pin.focus();
+      return;
+    }
+    window.location.href = AFTER_SIGNIN;
+  });
+
+  /* text resize controls */
+  var STEP = 1, MIN = 0.85, MAX = 1.3;
+  function setScale(v){
+    STEP = Math.min(MAX, Math.max(MIN, v));
+    document.documentElement.style.fontSize = (STEP * 100) + '%';
+  }
+  document.getElementById('fontUp').addEventListener('click', function(){ setScale(STEP + 0.1); });
+  document.getElementById('fontDown').addEventListener('click', function(){ setScale(STEP - 0.1); });
+  document.getElementById('fontReset').addEventListener('click', function(){ setScale(1); });
+})();
+</script>
+</body>
+</html>

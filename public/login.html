@@ -344,8 +344,9 @@
     btn.textContent=otp?'Send OTP':'Login Now';
   }));
 
-  /* EntityLocker sign-in (opens the external EntityLocker flow) */
-  const ENTITY_LOCKER_URL='https://entityaccounts.dl6.in/signin/smart_v2/8ae888241150100cc65aa02aa0f890d4d17fc800464c77e1298e56951fd583d8--en';
+  /* EntityLocker sign-in — points at the local demo flow.
+     Swap for the live EntityLocker URL when wiring the real integration. */
+  const ENTITY_LOCKER_URL='/entitylocker-signin.html';
   document.getElementById('entityLockerBtn').addEventListener('click',()=>{
     window.open(ENTITY_LOCKER_URL,'_blank','noopener');
   });
