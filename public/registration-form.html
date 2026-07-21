@@ -797,7 +797,7 @@
         <div class="actions">
           <button type="button" class="btn-cancel" id="backBtn3">Back</button>
           <button type="button" class="btn-draft" id="draftBtn3">Save As Draft</button>
-          <button type="submit" class="btn-esign" id="esignBtn" disabled>Submit</button>
+          <button type="submit" class="btn-esign" id="esignBtn">Submit</button>
         </div>
       </form>
     </div>
@@ -1468,10 +1468,13 @@
     });
   });
 
-  /* Submit stays disabled until every required witness field is valid */
+  /* Witness field validation. Gating is switched off for now so Submit is
+     always clickable — restore it by setting GATE_SUBMIT back to true. */
+  var GATE_SUBMIT = false;
   var wReq=['wName','wDob','wGender','wParentType','wParentName','wAadhaar','wMobile',
             'wState','wDistrict','wSubDist','wPin','wAddr'];
   function checkWitness(){
+    if(!GATE_SUBMIT){ esignBtn.disabled=false; return; }
     var ok=true;
     for(var i=0;i<wReq.length;i++){
       var el=document.getElementById(wReq[i]);
