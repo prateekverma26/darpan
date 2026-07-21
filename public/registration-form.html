@@ -249,8 +249,11 @@
   .success-dialog h3{font-family:var(--display);font-weight:800;font-size:1.45rem;color:#22C55E;margin:0 0 14px;}
   .succ-sub{font-weight:700;font-size:1.02rem;color:var(--navy);margin:0 0 22px;line-height:1.5;white-space:nowrap;}
   .succ-file{display:flex;align-items:center;justify-content:center;gap:10px;margin-bottom:20px;flex-wrap:wrap;}
-  .succ-chip{display:inline-flex;align-items:center;gap:10px;background:#F4F6FA;border-radius:9px;
-    padding:11px 20px;font-size:.92rem;font-weight:600;color:var(--navy);}
+  .succ-chip{display:inline-flex;align-items:center;gap:10px;background:#F4F6FA;border:0;border-radius:9px;
+    padding:11px 20px;font-family:inherit;font-size:.92rem;font-weight:600;color:var(--navy);
+    cursor:pointer;transition:background .15s ease;}
+  .succ-chip:hover{background:var(--saffron-soft);}
+  .succ-chip:active{transform:translateY(1px);}
   .succ-chip img{width:20px;height:20px;display:block;}
   .succ-dl{display:grid;place-items:center;width:44px;height:42px;background:#F4F6FA;border:0;border-radius:9px;
     cursor:pointer;transition:background .15s ease,transform .12s ease;}
@@ -259,8 +262,22 @@
   .succ-dl img{width:20px;height:20px;display:block;}
   .succ-link{display:inline-block;width:100%;text-align:right;font-weight:800;font-size:.95rem;color:#1E3A8A;}
   .succ-link:hover{color:var(--saffron);text-decoration:underline;}
+  /* ---------- full-screen certificate viewer ---------- */
+  .cert-modal{position:fixed;inset:0;z-index:90;display:flex;align-items:center;justify-content:center;
+    padding:22px;overflow:auto;background:rgba(8,17,38,.92);opacity:0;visibility:hidden;
+    transition:opacity .28s ease,visibility 0s linear .28s;}
+  .cert-modal.open{opacity:1;visibility:visible;transition:opacity .28s ease,visibility 0s;}
+  .cert-modal img{max-width:100%;max-height:calc(100vh - 44px);width:auto;height:auto;
+    object-fit:contain;border-radius:6px;box-shadow:0 22px 60px rgba(0,0,0,.55);margin:auto;
+    transform:scale(.96);transition:transform .3s cubic-bezier(.34,1.2,.5,1);}
+  .cert-modal.open img{transform:scale(1);}
+  .cert-close{position:fixed;top:16px;right:20px;z-index:2;width:42px;height:42px;border-radius:50%;
+    border:0;background:rgba(255,255,255,.16);color:#fff;font-size:1.55rem;line-height:1;
+    cursor:pointer;display:grid;place-items:center;transition:background .15s ease;}
+  .cert-close:hover{background:rgba(255,255,255,.3);}
+
   @media(prefers-reduced-motion:reduce){
-    .success-modal,.success-dialog{transition-duration:.01ms;}
+    .success-modal,.success-dialog,.cert-modal,.cert-modal img{transition-duration:.01ms;}
   }
   /* below the dialog's width the headline has to wrap again */
   @media(max-width:660px){
@@ -811,6 +828,12 @@
   </div>
 </main>
 
+<!-- Full-screen certificate viewer -->
+<div class="cert-modal" id="certModal" role="dialog" aria-modal="true" aria-label="DARPAN Certificate of Registration">
+  <button type="button" class="cert-close" id="certClose" aria-label="Close certificate">&times;</button>
+  <img src="/icons/certificate.png" alt="DARPAN Certificate of Registration">
+</div>
+
 <!-- Success popup — DARPAN ID generated -->
 <div class="success-modal" id="successModal" role="dialog" aria-modal="true" aria-labelledby="succTitle">
   <div class="success-dialog">
@@ -819,7 +842,7 @@
     <h3 id="succTitle">Congratulations</h3>
     <p class="succ-sub">Your DARPAN ID has been successfully generated.</p>
     <div class="succ-file">
-      <span class="succ-chip"><img src="/assets/pdf.png" alt="PDF"> Darpan_certificate</span>
+      <button type="button" class="succ-chip" id="succChip"><img src="/assets/pdf.png" alt="PDF"> Darpan_certificate</button>
       <button type="button" class="succ-dl" id="succDownload" aria-label="Download certificate">
         <img src="/assets/download.png" alt="">
       </button>
@@ -1506,11 +1529,26 @@
 
   document.getElementById('succClose').addEventListener('click',successClose);
   successModal.addEventListener('click',function(e){ if(e.target===successModal) successClose(); });
+
+  /* ---------- full-screen certificate viewer ---------- */
+  var certModal=document.getElementById('certModal');
+  function certOpen(){ certModal.classList.add('open'); document.body.style.overflow='hidden'; }
+  function certClose(){
+    certModal.classList.remove('open');
+    /* the success popup underneath keeps the scroll lock while it is open */
+    if(!successModal.classList.contains('open')) document.body.style.overflow='';
+  }
+
+  document.getElementById('succDownload').addEventListener('click',certOpen);
+  document.getElementById('succChip').addEventListener('click',certOpen);
+  document.getElementById('certClose').addEventListener('click',certClose);
+  certModal.addEventListener('click',function(e){ if(e.target===certModal) certClose(); });
+
+  /* Esc closes the certificate first, then the success popup */
   document.addEventListener('keydown',function(e){
-    if(e.key==='Escape' && successModal.classList.contains('open')) successClose();
-  });
-  document.getElementById('succDownload').addEventListener('click',function(){
-    alert('Darpan_certificate.pdf download starts here (demo).');
+    if(e.key!=='Escape') return;
+    if(certModal.classList.contains('open')) certClose();
+    else if(successModal.classList.contains('open')) successClose();
   });
   document.getElementById('succCheck').addEventListener('click',function(e){
     e.preventDefault();
