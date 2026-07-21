@@ -78,7 +78,8 @@
   .eye{position:absolute;top:50%;right:12px;transform:translateY(-50%);
     background:none;border:0;padding:4px;cursor:pointer;color:#3A4553;display:grid;place-items:center;}
   .eye svg{width:19px;height:19px;}
-  .hint{font-size:.82rem;color:#5C6470;margin:0 0 26px;}
+
+  .hint{font-size:.82rem;font-weight:500;color:var(--blue);margin:0 0 26px;}
   .hint-blue{font-size:.86rem;font-weight:600;color:var(--blue);margin:8px 0 26px;}
   .note{font-size:.78rem;font-weight:500;color:var(--blue);margin:9px 0 0;}
   .forgot{display:inline-flex;align-items:center;gap:5px;font-size:.86rem;color:var(--blue);margin:11px 0 0;}
@@ -107,6 +108,9 @@
   /* darkens once the field holds a complete entry */
   .btn-go.ready{background:#28a745;color:#fff;}
   .btn-go.ready:hover{background:#218838;}
+  /* disabled until the mobile number is verified */
+  .btn-go:disabled{background:#CBD5DC;color:#7A8794;cursor:not-allowed;}
+  .btn-go:disabled:hover{background:#CBD5DC;}
 
   .signup{font-size:.92rem;color:#3C4450;margin:21px 0 0;text-align:center;}
   .signup a{color:var(--blue);}
@@ -235,7 +239,7 @@
       </div>
 
       <p class="err" id="mobileErr" role="alert"></p>
-      <button type="submit" class="btn-go">Next</button>
+      <button type="submit" class="btn-go" id="nextBtn" disabled>Next</button>
     </form>
   </section>
 
@@ -358,22 +362,25 @@
   function showErr(el, msg){ el.textContent = msg; el.classList.add('show'); }
   function clearErr(el){ el.textContent = ''; el.classList.remove('show'); }
 
-  /* Next turns darker green once the active field holds a complete entry:
+  /* Next activates once the active field holds a complete entry:
      a full 10-digit mobile, or any non-empty Aadhaar/Username. */
   function refreshNext(){
     var complete = mode === 'mobile'
       ? mobile.value.length === 10
       : aadhaar.value.trim() !== '';
+    nextBtn.disabled = !complete;
     nextBtn.classList.toggle('ready', complete);
   }
 
-  /* mobile + pin accept digits only; Aadhaar/Username is free text */
+  /* mobile + pin accept digits only; Aadhaar/Username is free text.
+     Next / Sign In darken to solid green once their field is complete. */
   var signInBtn = document.querySelector('#pinForm .btn-go');
 
   [mobile, pin].forEach(function(input){
+    var errFor = input === mobile ? mobileErr : pinErr;
     input.addEventListener('input', function(){
       this.value = this.value.replace(/\D/g, '');
-      clearErr(this === mobile ? mobileErr : pinErr);
+      clearErr(errFor);
       if(this === mobile) refreshNext();
       if(this === pin) signInBtn.classList.toggle('ready', pin.value.length === 6);
     });
@@ -419,6 +426,7 @@
         return;
       }
     }
+    /* both paths go straight to the security PIN (mPIN) screen */
     screenMobile.hidden = true;
     screenPin.hidden = false;
     pin.focus();
