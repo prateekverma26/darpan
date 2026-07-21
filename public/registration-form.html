@@ -221,7 +221,6 @@
   .ctrl.area textarea:focus ~ .flabel,
   .ctrl.area textarea:not(:placeholder-shown) ~ .flabel{top:0;left:11px;transform:translateY(-50%);font-size:.74rem;
     font-weight:600;color:var(--muted);background:var(--surface);padding:0 6px;border-radius:7px;max-width:calc(100% - 24px);}
-  .char-left{display:block;text-align:right;font-size:.7rem;color:var(--saffron);margin-top:5px;}
 
   .sub-head{position:relative;display:inline-block;font-weight:800;font-size:.94rem;color:var(--navy);
     margin:18px 0 12px;padding-bottom:6px;}
@@ -612,7 +611,6 @@
               <textarea id="fRegAddr" maxlength="150" placeholder=" "></textarea>
               <label class="flabel">Address <span class="req">*</span></label>
             </div>
-            <span class="char-left" id="regAddrLeft">150 characters left</span>
           </div>
         </div>
 
@@ -640,7 +638,6 @@
               <textarea id="fCorrAddr" maxlength="150" placeholder=" "></textarea>
               <label class="flabel">Address <span class="req">*</span></label>
             </div>
-            <span class="char-left" id="corrAddrLeft">150 characters left</span>
           </div>
         </div>
 
@@ -794,7 +791,6 @@
               <textarea id="wAddr" maxlength="150" placeholder=" "></textarea>
               <label class="flabel">Enter Address <span class="req">*</span></label>
             </div>
-            <span class="char-left" id="wAddrLeft">150 characters left</span>
           </div>
         </div>
 
@@ -1212,15 +1208,6 @@
   });
   corrDist.addEventListener('change',function(){ fillOptions(corrSub, subDistrictsFor(this.value)); });
 
-  /* character counters */
-  function counter(taId,outId){
-    var ta=document.getElementById(taId), out=document.getElementById(outId);
-    if(!ta||!out)return;
-    ta.addEventListener('input',function(){ out.textContent=(150-this.value.length)+' characters left'; });
-  }
-  counter('fRegAddr','regAddrLeft');
-  counter('fCorrAddr','corrAddrLeft');
-
   /* "same as registered" — copy across and lock the correspondence block */
   var sameAddr = document.getElementById('sameAddr');
   sameAddr.addEventListener('change',function(){
@@ -1235,7 +1222,6 @@
       corrState.selectedIndex=1; corrDist.selectedIndex=1; corrSub.selectedIndex=1;
       document.getElementById('fCorrPin').value=document.getElementById('fRegPin').value;
       document.getElementById('fCorrAddr').value=document.getElementById('fRegAddr').value;
-      document.getElementById('corrAddrLeft').textContent=(150-document.getElementById('fCorrAddr').value.length)+' characters left';
     }
     var els=document.querySelectorAll('#corrGrid input, #corrGrid select, #corrGrid textarea');
     for(var i=0;i<els.length;i++) els[i].disabled=on;
@@ -1474,7 +1460,6 @@
   });
   wDistrict.addEventListener('change',function(){ fillOptions(wSubDist, subDistrictsFor(this.value)); checkWitness(); });
 
-  counter('wAddr','wAddrLeft');
 
   /* digits-only fields */
   [['wAadhaar',12],['wMobile',10],['wPin',6]].forEach(function(p){
