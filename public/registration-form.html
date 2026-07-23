@@ -203,6 +203,15 @@
   .fld.auto .ctrl{background:#F3FBF7;border-color:#CBE9D9;}
   .fld.auto .ctrl input{color:var(--navy);font-weight:600;}
   .fld.auto .flabel{color:var(--green);font-weight:800;}
+  /* fields the RC establishes — auto-filled and not editable */
+  .fld.rc-fixed .ctrl{background:#EEF1F6;border-color:#D5DCE8;}
+  .fld.rc-fixed .ctrl input,.fld.rc-fixed .ctrl select{color:#46536B;cursor:not-allowed;-webkit-text-fill-color:#46536B;}
+  .fld.rc-fixed .verify-btn{display:none;}
+  .fld.rc-fixed .flabel{color:#6B7688;}
+  .rc-lock{position:absolute;top:-8px;right:10px;z-index:2;display:inline-flex;align-items:center;gap:4px;
+    background:#EEF1F6;border:1px solid #D5DCE8;border-radius:100px;padding:1px 8px 1px 6px;
+    font-size:.62rem;font-weight:700;color:#6B7688;}
+  .rc-lock svg{width:10px;height:10px;}
   .fld-top{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:5px;}
   .fld-top .mini-lbl{margin-bottom:0;}
   .auto-tag{background:#E9F8F0;color:#0B6B4A;border:1px solid #BBE7D2;border-radius:100px;
@@ -1045,6 +1054,34 @@
     return out;
   }
 
+  /* Demo auto-fill for fields an RC does not carry (email, mobile, PAN
+     incorporation date). Shown as if fetched alongside the RC so stakeholders
+     see every field populated and locked. In production these come from the
+     EntityLocker session (email/mobile) and PAN verification (PAN date). */
+  var RC_DEMO = { pan:'AABAA4821P', email:'apskif.federation@gmail.com', mobile:'9440012345', panDate:'2016-08-12' };
+
+  /* Every auto-filled field is locked (non-editable): the ones read straight
+     from the certificate and the demo stand-ins alike, since all of them will
+     be sourced from the RC / verification services in production. */
+  var RC_LOCKED = ['fOrgName','fRegNo','fRegDate','fNpoType','fState','fDistrict',
+                   'fActName','fAuthority','fMembers','fPan','fPanDate','fEmail','fMobile'];
+
+  function lockRcFields(lock){
+    for(var i=0;i<RC_LOCKED.length;i++){
+      var el=document.getElementById(RC_LOCKED[i]); if(!el) continue;
+      if(el.tagName==='SELECT') el.disabled=lock; else el.readOnly=lock;
+      var f=el.closest('.fld'); if(!f) continue;
+      f.classList.toggle('rc-fixed',lock);
+      var badge=f.querySelector('.rc-lock');
+      if(lock && !badge){
+        badge=document.createElement('span');
+        badge.className='rc-lock';
+        badge.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>From RC';
+        f.appendChild(badge);
+      } else if(!lock && badge){ badge.remove(); }
+    }
+  }
+
   function fillFromRC(d){
     setText('fOrgName',d.orgName);
     setText('fRegNo',d.regNo);
@@ -1055,6 +1092,12 @@
     setSelect('fActName',d.actName);
     setSelect('fAuthority',d.authority);
     setText('fMembers',d.members);
+    /* not in the RC itself — demo stand-ins (see note above) */
+    setText('fPan',RC_DEMO.pan);
+    setText('fEmail',RC_DEMO.email);
+    setText('fMobile',RC_DEMO.mobile);
+    setDate('fPanDate',RC_DEMO.panDate);
+    lockRcFields(true);
   }
 
   async function readPdf(file){
@@ -1111,6 +1154,7 @@
     uName.textContent='Upload here...'; uName.classList.remove('has');
     if(uRemove)uRemove.hidden=true;
     if(statusEl){ statusEl.hidden=true; statusEl.textContent=''; statusEl.className='parse-status'; }
+    lockRcFields(false);   /* release the RC-locked fields before clearing */
     clearAutoFilled();
     setProgress(0);
     lockFields(true);   /* removing the RC returns the form to its locked default */

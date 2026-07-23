@@ -452,6 +452,13 @@
   /* soft top light line */
   footer::after{content:"";position:absolute;top:0;left:0;right:0;height:1px;z-index:0;pointer-events:none;
     background:linear-gradient(90deg,transparent,rgba(232,89,12,.6),rgba(255,255,255,.25),transparent);}
+  /* faint oversized DARPAN watermark behind the footer content.
+     A top-to-bottom gradient mask fades it out, so only the upper half reads. */
+  .foot-watermark{position:absolute;left:50%;bottom:-.12em;top:auto;transform:translateX(-50%);z-index:0;
+    font-family:var(--display);font-weight:800;font-size:clamp(6rem,19vw,17rem);line-height:1;
+    letter-spacing:.05em;white-space:nowrap;color:#fff;opacity:.04;pointer-events:none;user-select:none;
+    -webkit-mask-image:linear-gradient(180deg,#000 0%,rgba(0,0,0,.78) 55%,transparent 88%);
+    mask-image:linear-gradient(180deg,#000 0%,rgba(0,0,0,.78) 55%,transparent 88%);}
   footer .wrap{position:relative;z-index:1;}
   .foot-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:36px;}
   .foot-brand b{font-family:var(--display);font-weight:800;font-size:1.3rem;color:#fff;}
@@ -872,43 +879,43 @@
         <div class="grant-track" id="grantTrack">
 
           <div class="grant-slide">
-            <a class="grant-card" href="#">रसायन एवं पेट्रो-रसायन विभाग</a>
-            <a class="grant-card" href="#">उच्चतर शिक्षा विभाग</a>
-            <a class="grant-card" href="#">पूर्वोत्तर क्षेत्र विकास मंत्रालय</a>
-            <a class="grant-card" href="#">सामाजिक न्याय एवं अधिकारिता मंत्रालय</a>
-            <a class="grant-card" href="#">जनजातीय कार्य मंत्रालय</a>
+            <a class="grant-card" href="#" data-en="Department of Chemicals &amp; Petrochemicals" data-hi="रसायन एवं पेट्रो-रसायन विभाग">Department of Chemicals &amp; Petrochemicals</a>
+            <a class="grant-card" href="#" data-en="Department of Higher Education" data-hi="उच्चतर शिक्षा विभाग">Department of Higher Education</a>
+            <a class="grant-card" href="#" data-en="Ministry of Development of North Eastern Region" data-hi="पूर्वोत्तर क्षेत्र विकास मंत्रालय">Ministry of Development of North Eastern Region</a>
+            <a class="grant-card" href="#" data-en="Ministry of Social Justice and Empowerment" data-hi="सामाजिक न्याय एवं अधिकारिता मंत्रालय">Ministry of Social Justice and Empowerment</a>
+            <a class="grant-card" href="#" data-en="Ministry of Tribal Affairs" data-hi="जनजातीय कार्य मंत्रालय">Ministry of Tribal Affairs</a>
           </div>
 
           <div class="grant-slide">
-            <a class="grant-card" href="#">जैव प्रौद्योगिकी विभाग</a>
-            <a class="grant-card" href="#">विकास आयुक्त हस्तशिल्प (वस्त्र मंत्रालय)</a>
-            <a class="grant-card" href="#">नई रोशनी (अल्पसंख्यक कार्य मंत्रालय)</a>
-            <a class="grant-card" href="#">स्फूर्ति एमएसएमई</a>
-            <a class="grant-card" href="#">कानूनी साक्षरता अधिकार न्याय विभाग</a>
+            <a class="grant-card" href="#" data-en="Department of Biotechnology" data-hi="जैव प्रौद्योगिकी विभाग">Department of Biotechnology</a>
+            <a class="grant-card" href="#" data-en="Development Commissioner Handicrafts (Ministry of Textiles)" data-hi="विकास आयुक्त हस्तशिल्प (वस्त्र मंत्रालय)">Development Commissioner Handicrafts (Ministry of Textiles)</a>
+            <a class="grant-card" href="#" data-en="Nai Roshni (Ministry of Minority Affairs)" data-hi="नई रोशनी (अल्पसंख्यक कार्य मंत्रालय)">Nai Roshni (Ministry of Minority Affairs)</a>
+            <a class="grant-card" href="#" data-en="SFURTI - MSME" data-hi="स्फूर्ति एमएसएमई">SFURTI - MSME</a>
+            <a class="grant-card" href="#" data-en="Legal Literacy &amp; Rights - Department of Justice" data-hi="कानूनी साक्षरता अधिकार न्याय विभाग">Legal Literacy &amp; Rights - Department of Justice</a>
           </div>
 
           <div class="grant-slide">
-            <a class="grant-card" href="#">राष्ट्रीय प्राधिकरण रासायनिक हथियार, कन्वेंशन कैबिनेट सचिवालय</a>
-            <a class="grant-card" href="#">अटल नवाचार मिशन - नीति आयोग</a>
-            <a class="grant-card" href="#">पीएम सूर्यघर योजना (नवीन एवं नवीकरणीय ऊर्जा मंत्रालय)</a>
-            <a class="grant-card" href="#">सूचना एवं प्रसारण मंत्रालय</a>
-            <a class="grant-card" href="#">आर्थिक कार्य विभाग</a>
+            <a class="grant-card" href="#" data-en="National Authority Chemical Weapons Convention - Cabinet Secretariat" data-hi="राष्ट्रीय प्राधिकरण रासायनिक हथियार, कन्वेंशन कैबिनेट सचिवालय">National Authority Chemical Weapons Convention - Cabinet Secretariat</a>
+            <a class="grant-card" href="#" data-en="Atal Innovation Mission - NITI Aayog" data-hi="अटल नवाचार मिशन - नीति आयोग">Atal Innovation Mission - NITI Aayog</a>
+            <a class="grant-card" href="#" data-en="PM Suryaghar Yojana (Ministry of New and Renewable Energy)" data-hi="पीएम सूर्यघर योजना (नवीन एवं नवीकरणीय ऊर्जा मंत्रालय)">PM Suryaghar Yojana (Ministry of New and Renewable Energy)</a>
+            <a class="grant-card" href="#" data-en="Ministry of Information &amp; Broadcasting" data-hi="सूचना एवं प्रसारण मंत्रालय">Ministry of Information &amp; Broadcasting</a>
+            <a class="grant-card" href="#" data-en="Department of Economic Affairs" data-hi="आर्थिक कार्य विभाग">Department of Economic Affairs</a>
           </div>
 
           <div class="grant-slide">
-            <a class="grant-card" href="#">जन शिक्षण संस्थान – कौशल विकास मंत्रालय</a>
-            <a class="grant-card" href="#">नगरपालिका कर्मचारियों के लिए प्रशिक्षण केन्द्र – आवासन एवं शहरी कार्य मंत्रालय</a>
-            <a class="grant-card" href="#">खान मंत्रालय</a>
-            <a class="grant-card" href="#">औषध विभाग</a>
-            <a class="grant-card" href="#">दिव्यांगजन सशक्तिकरण विभाग</a>
+            <a class="grant-card" href="#" data-en="Jan Shikshan Sansthan - Ministry of Skill Development" data-hi="जन शिक्षण संस्थान – कौशल विकास मंत्रालय">Jan Shikshan Sansthan - Ministry of Skill Development</a>
+            <a class="grant-card" href="#" data-en="Training Centres for Municipal Employees - Ministry of Housing and Urban Affairs" data-hi="नगरपालिका कर्मचारियों के लिए प्रशिक्षण केन्द्र – आवासन एवं शहरी कार्य मंत्रालय">Training Centres for Municipal Employees - Ministry of Housing and Urban Affairs</a>
+            <a class="grant-card" href="#" data-en="Ministry of Mines" data-hi="खान मंत्रालय">Ministry of Mines</a>
+            <a class="grant-card" href="#" data-en="Department of Pharmaceuticals" data-hi="औषध विभाग">Department of Pharmaceuticals</a>
+            <a class="grant-card" href="#" data-en="Department of Empowerment of Persons with Disabilities" data-hi="दिव्यांगजन सशक्तिकरण विभाग">Department of Empowerment of Persons with Disabilities</a>
           </div>
 
           <div class="grant-slide">
-            <a class="grant-card" href="#">एनपीसीबीवीआई – स्वास्थ्य एवं परिवार कल्याण मंत्रालय</a>
-            <a class="grant-card" href="#">राष्ट्रीय जल मिशन – जल शक्ति मंत्रालय</a>
-            <a class="grant-card" href="#">एमपीलैड्स – सांख्यिकी और कार्यक्रम कार्यान्वयन मंत्रालय</a>
-            <a class="grant-card" href="#">आयुर्वेद, योग और प्राकृतिक चिकित्सा, यूनानी, सिद्ध और होम्योपैथी मंत्रालय (आयुष)</a>
-            <a class="grant-card" href="#">एचएसआरटी – पर्यटन मंत्रालय</a>
+            <a class="grant-card" href="#" data-en="NPCBVI - Ministry of Health &amp; Family Welfare" data-hi="एनपीसीबीवीआई – स्वास्थ्य एवं परिवार कल्याण मंत्रालय">NPCBVI - Ministry of Health &amp; Family Welfare</a>
+            <a class="grant-card" href="#" data-en="National Water Mission - Ministry of Jal Shakti" data-hi="राष्ट्रीय जल मिशन – जल शक्ति मंत्रालय">National Water Mission - Ministry of Jal Shakti</a>
+            <a class="grant-card" href="#" data-en="MPLADS - Ministry of Statistics and Programme Implementation" data-hi="एमपीलैड्स – सांख्यिकी और कार्यक्रम कार्यान्वयन मंत्रालय">MPLADS - Ministry of Statistics and Programme Implementation</a>
+            <a class="grant-card" href="#" data-en="Ministry of Ayurveda, Yoga and Naturopathy, Unani, Siddha and Homoeopathy (AYUSH)" data-hi="आयुर्वेद, योग और प्राकृतिक चिकित्सा, यूनानी, सिद्ध और होम्योपैथी मंत्रालय (आयुष)">Ministry of Ayurveda, Yoga and Naturopathy, Unani, Siddha and Homoeopathy (AYUSH)</a>
+            <a class="grant-card" href="#" data-en="HSRT - Ministry of Tourism" data-hi="एचएसआरटी – पर्यटन मंत्रालय">HSRT - Ministry of Tourism</a>
           </div>
 
         </div>
@@ -962,6 +969,7 @@
 
 <!-- ============ FOOTER ============ -->
 <footer>
+  <span class="foot-watermark" aria-hidden="true">DARPAN</span>
   <div class="wrap">
     <div class="foot-grid">
       <div class="foot-brand">

@@ -70,9 +70,14 @@
     background:
       radial-gradient(900px 460px at 50% -160px, rgba(242,201,76,.13), transparent 62%),
       linear-gradient(180deg,var(--forest) 0%, var(--forest-ink) 140%);
-    color:var(--on-forest);position:relative;
+    color:var(--on-forest);position:relative;overflow:hidden;
   }
   .forest::before{content:"";position:absolute;inset:0;background-image:var(--chevron);opacity:.9;pointer-events:none;}
+  /* faint oversized DARPAN watermark behind the footer content */
+  .forest::after{content:"DARPAN";position:absolute;left:50%;top:46%;transform:translate(-50%,-50%);
+    font-family:var(--serif);font-weight:700;font-size:clamp(6rem,19vw,17rem);line-height:1;
+    letter-spacing:.05em;white-space:nowrap;color:#fff;opacity:.035;
+    pointer-events:none;user-select:none;z-index:0;}
   .forest .wrap{position:relative;z-index:1;}
 
   /* ---------- Tricolour hairline (thin, gold-forward) ---------- */
