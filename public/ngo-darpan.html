@@ -277,17 +277,17 @@
     background:rgba(11,23,51,.58);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);
     opacity:0;visibility:hidden;transition:opacity .4s ease-in-out,visibility .4s ease-in-out;}
   .advisory-overlay.open{opacity:1;visibility:visible;}
-  .advisory-card{position:relative;width:min(640px,100%);
+  .advisory-card{position:relative;width:min(544px,100%);
     background:var(--surface);border:1px solid var(--line);border-radius:18px;
     box-shadow:0 30px 80px -20px rgba(11,23,51,.6);
     transform:translateY(26px) scale(.955);opacity:0;transition:transform .42s ease-in-out,opacity .42s ease-in-out;}
   .advisory-overlay.open .advisory-card{transform:none;opacity:1;}
-  .advisory-head{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:18px 22px;border-radius:17px 17px 0 0;
+  .advisory-head{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:13px 18px;border-radius:17px 17px 0 0;
     background:linear-gradient(100deg,var(--navy) 0%, var(--navy-2) 34%, var(--saffron-2) 82%, var(--saffron) 100%);}
   .advisory-head .adv-title{display:flex;align-items:center;gap:13px;min-width:0;}
-  .advisory-ic{width:40px;height:40px;flex:0 0 auto;border-radius:11px;background:#fff;color:var(--saffron);
+  .advisory-ic{width:34px;height:34px;flex:0 0 auto;border-radius:9px;background:#fff;color:var(--saffron);
     display:grid;place-items:center;box-shadow:0 6px 14px -6px rgba(11,23,51,.5);}
-  .advisory-ic svg{width:23px;height:23px;}
+  .advisory-ic svg{width:20px;height:20px;}
   /* megaphone gives a little "announcing" wiggle while the card is open */
   @keyframes advRing{
     0%,66%,100%{transform:rotate(0deg);}
@@ -296,17 +296,18 @@
   }
   .advisory-overlay.open .advisory-ic svg{transform-origin:56% 62%;animation:advRing 2.8s ease-in-out .45s infinite;}
   @media(prefers-reduced-motion:reduce){ .advisory-overlay.open .advisory-ic svg{animation:none;} }
-  .advisory-head h2{font-family:var(--display);font-weight:800;font-size:1.3rem;color:#fff;margin:0;letter-spacing:-.01em;}
+  .advisory-head h2{font-family:var(--display);font-weight:800;font-size:1.12rem;color:#fff;margin:0;letter-spacing:-.01em;}
   .advisory-close{position:absolute;top:-14px;right:-14px;z-index:2;width:38px;height:38px;border-radius:50%;border:2px solid var(--saffron);cursor:pointer;box-shadow:0 10px 24px -8px rgba(0,0,0,.5);
     background:rgba(255,255,255,.94);color:var(--navy);display:grid;place-items:center;transition:background .15s ease,transform .18s ease;}
   .advisory-close:hover{background:#fff;transform:rotate(90deg);}
   .advisory-close svg{width:18px;height:18px;}
-  .advisory-body{position:relative;border-radius:0 0 17px 17px;padding:24px 26px 26px;border-top:3px solid var(--navy);
+  .advisory-body{position:relative;border-radius:0 0 17px 17px;padding:17px 20px 19px;border-top:3px solid var(--navy);
     background-color:var(--surface);background-image:var(--dots);background-size:var(--dots-size);}
-  .advisory-body p{margin:0 0 13px;color:var(--muted);font-size:.94rem;line-height:1.6;position:relative;z-index:1;}
+  .advisory-body p{margin:0 0 9px;color:var(--muted);font-size:.83rem;line-height:1.5;position:relative;z-index:1;}
   .advisory-body p:last-child{margin-bottom:0;}
+  .advisory-body p.adv-lead{color:var(--navy);font-weight:800;font-style:italic;padding-bottom:9px;margin-bottom:10px;border-bottom:1px solid var(--line);}
   .advisory-body strong{color:var(--navy);font-weight:700;}
-  .advisory-wm{position:absolute;right:-8px;bottom:-16px;width:180px;height:180px;color:var(--navy);opacity:.06;pointer-events:none;z-index:0;}
+  .advisory-wm{position:absolute;right:-8px;bottom:-16px;width:140px;height:140px;color:var(--navy);opacity:.06;pointer-events:none;z-index:0;}
   @media (max-width:560px){ .advisory-head h2{font-size:1.12rem;} .advisory-body{padding:20px;} }
   @media (prefers-reduced-motion:reduce){
     .advisory-overlay,.advisory-card{transition:opacity .2s ease;}
@@ -549,6 +550,7 @@
     </div>
     <div class="advisory-body">
       <svg class="advisory-wm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round" aria-hidden="true"><path d="M3 10v4h3l9 5V5L6 10H3Z"/><path d="M18 9a4 4 0 0 1 0 6"/><path d="M6 14v4a2 2 0 0 0 4 0v-2"/></svg>
+      <p class="adv-lead" data-en="Going forward, all NGO registrations on the NGO Darpan Portal will be carried out through Entity Locker. Additionally, you will have the facility to download your NGO Darpan Certificate directly from Entity Locker." data-hi="अब से, एनजीओ दर्पण पोर्टल पर सभी एनजीओ पंजीकरण एंटिटी लॉकर के माध्यम से किए जाएंगे। इसके अतिरिक्त, आपके पास अपना एनजीओ दर्पण प्रमाणपत्र सीधे एंटिटी लॉकर से डाउनलोड करने की सुविधा होगी।">Going forward, all NGO registrations on the NGO Darpan Portal will be carried out through Entity Locker. Additionally, you will have the facility to download your NGO Darpan Certificate directly from Entity Locker.</p>
       <p data-en="It is hereby brought to the notice of all NPOs that <strong>use of the NITI Aayog name/logo or the National Emblem, in any manner, is strictly prohibited.</strong>" data-hi="सभी एनपीओ के ध्यान में यह लाया जाता है कि <strong>नीति आयोग के नाम/लोगो या राष्ट्रीय प्रतीक का किसी भी रूप में उपयोग सख्त वर्जित है।</strong>">It is hereby brought to the notice of all NPOs that <strong>use of the NITI Aayog name/logo or the National Emblem, in any manner, is strictly prohibited.</strong></p>
       <p data-en="The Darpan ID generated upon registration on the Darpan Portal does not confer any right, endorsement, affiliation, or recognition by NITI Aayog or to use the NITI Aayog name/logo or the National Emblem, in any form or manner." data-hi="दर्पण पोर्टल पर पंजीकरण से प्राप्त दर्पण आईडी किसी भी प्रकार का अधिकार, समर्थन, संबद्धता या नीति आयोग द्वारा मान्यता प्रदान नहीं करती, और न ही नीति आयोग के नाम/लोगो या राष्ट्रीय प्रतीक के उपयोग की अनुमति देती है।">The Darpan ID generated upon registration on the Darpan Portal does not confer any right, endorsement, affiliation, or recognition by NITI Aayog or to use the NITI Aayog name/logo or the National Emblem, in any form or manner.</p>
       <p data-en="All concerned NPOs are requested to take note of the above and ensure due compliance. In case of any inadvertent or existing use, the same may be discontinued immediately." data-hi="सभी संबंधित एनपीओ से अनुरोध है कि उपरोक्त का संज्ञान लें और अनुपालन सुनिश्चित करें। किसी भी अनजाने या मौजूदा उपयोग की स्थिति में इसे तुरंत बंद कर दें।">All concerned NPOs are requested to take note of the above and ensure due compliance. In case of any inadvertent or existing use, the same may be discontinued immediately.</p>
@@ -671,12 +673,12 @@
 <!-- ============ DISCLAIMER MARQUEE ============ -->
 <div class="marquee" role="marquee" aria-label="Important disclaimer">
   <div class="marquee-track">
-    <span data-en="Niti Aayog does not issue any Physical Darpan certificate, it only provides Darpan registration ID to NPOs on the basis of self-declared affidavit." data-hi="नीति आयोग कोई भौतिक दर्पण प्रमाणपत्र जारी नहीं करता, यह केवल स्व-घोषित शपथ-पत्र के आधार पर एनपीओ को दर्पण पंजीकरण आईडी प्रदान करता है।">Niti Aayog does not issue any Physical Darpan certificate, it only provides Darpan registration ID to NPOs on the basis of self-declared affidavit.</span>
-    <span data-en="Niti Aayog does not issue any Physical Darpan certificate, it only provides Darpan registration ID to NPOs on the basis of self-declared affidavit." data-hi="नीति आयोग कोई भौतिक दर्पण प्रमाणपत्र जारी नहीं करता, यह केवल स्व-घोषित शपथ-पत्र के आधार पर एनपीओ को दर्पण पंजीकरण आईडी प्रदान करता है।">Niti Aayog does not issue any Physical Darpan certificate, it only provides Darpan registration ID to NPOs on the basis of self-declared affidavit.</span>
-    <span data-en="Niti Aayog does not issue any Physical Darpan certificate, it only provides Darpan registration ID to NPOs on the basis of self-declared affidavit." data-hi="नीति आयोग कोई भौतिक दर्पण प्रमाणपत्र जारी नहीं करता, यह केवल स्व-घोषित शपथ-पत्र के आधार पर एनपीओ को दर्पण पंजीकरण आईडी प्रदान करता है।">Niti Aayog does not issue any Physical Darpan certificate, it only provides Darpan registration ID to NPOs on the basis of self-declared affidavit.</span>
-    <span aria-hidden="true" data-en="Niti Aayog does not issue any Physical Darpan certificate, it only provides Darpan registration ID to NPOs on the basis of self-declared affidavit." data-hi="नीति आयोग कोई भौतिक दर्पण प्रमाणपत्र जारी नहीं करता, यह केवल स्व-घोषित शपथ-पत्र के आधार पर एनपीओ को दर्पण पंजीकरण आईडी प्रदान करता है।">Niti Aayog does not issue any Physical Darpan certificate, it only provides Darpan registration ID to NPOs on the basis of self-declared affidavit.</span>
-    <span aria-hidden="true" data-en="Niti Aayog does not issue any Physical Darpan certificate, it only provides Darpan registration ID to NPOs on the basis of self-declared affidavit." data-hi="नीति आयोग कोई भौतिक दर्पण प्रमाणपत्र जारी नहीं करता, यह केवल स्व-घोषित शपथ-पत्र के आधार पर एनपीओ को दर्पण पंजीकरण आईडी प्रदान करता है।">Niti Aayog does not issue any Physical Darpan certificate, it only provides Darpan registration ID to NPOs on the basis of self-declared affidavit.</span>
-    <span aria-hidden="true" data-en="Niti Aayog does not issue any Physical Darpan certificate, it only provides Darpan registration ID to NPOs on the basis of self-declared affidavit." data-hi="नीति आयोग कोई भौतिक दर्पण प्रमाणपत्र जारी नहीं करता, यह केवल स्व-घोषित शपथ-पत्र के आधार पर एनपीओ को दर्पण पंजीकरण आईडी प्रदान करता है।">Niti Aayog does not issue any Physical Darpan certificate, it only provides Darpan registration ID to NPOs on the basis of self-declared affidavit.</span>
+    <span data-en="Important Notice: Going forward, all NGO registrations on the NGO Darpan Portal will be carried out through Entity Locker. Additionally, you will have the facility to download your NGO Darpan Certificate directly from Entity Locker." data-hi="महत्वपूर्ण सूचना: अब से, एनजीओ दर्पण पोर्टल पर सभी एनजीओ पंजीकरण एंटिटी लॉकर के माध्यम से किए जाएंगे। इसके अतिरिक्त, आपके पास अपना एनजीओ दर्पण प्रमाणपत्र सीधे एंटिटी लॉकर से डाउनलोड करने की सुविधा होगी।">Important Notice: Going forward, all NGO registrations on the NGO Darpan Portal will be carried out through Entity Locker. Additionally, you will have the facility to download your NGO Darpan Certificate directly from Entity Locker.</span>
+    <span data-en="Important Notice: Going forward, all NGO registrations on the NGO Darpan Portal will be carried out through Entity Locker. Additionally, you will have the facility to download your NGO Darpan Certificate directly from Entity Locker." data-hi="महत्वपूर्ण सूचना: अब से, एनजीओ दर्पण पोर्टल पर सभी एनजीओ पंजीकरण एंटिटी लॉकर के माध्यम से किए जाएंगे। इसके अतिरिक्त, आपके पास अपना एनजीओ दर्पण प्रमाणपत्र सीधे एंटिटी लॉकर से डाउनलोड करने की सुविधा होगी।">Important Notice: Going forward, all NGO registrations on the NGO Darpan Portal will be carried out through Entity Locker. Additionally, you will have the facility to download your NGO Darpan Certificate directly from Entity Locker.</span>
+    <span data-en="Important Notice: Going forward, all NGO registrations on the NGO Darpan Portal will be carried out through Entity Locker. Additionally, you will have the facility to download your NGO Darpan Certificate directly from Entity Locker." data-hi="महत्वपूर्ण सूचना: अब से, एनजीओ दर्पण पोर्टल पर सभी एनजीओ पंजीकरण एंटिटी लॉकर के माध्यम से किए जाएंगे। इसके अतिरिक्त, आपके पास अपना एनजीओ दर्पण प्रमाणपत्र सीधे एंटिटी लॉकर से डाउनलोड करने की सुविधा होगी।">Important Notice: Going forward, all NGO registrations on the NGO Darpan Portal will be carried out through Entity Locker. Additionally, you will have the facility to download your NGO Darpan Certificate directly from Entity Locker.</span>
+    <span aria-hidden="true" data-en="Important Notice: Going forward, all NGO registrations on the NGO Darpan Portal will be carried out through Entity Locker. Additionally, you will have the facility to download your NGO Darpan Certificate directly from Entity Locker." data-hi="महत्वपूर्ण सूचना: अब से, एनजीओ दर्पण पोर्टल पर सभी एनजीओ पंजीकरण एंटिटी लॉकर के माध्यम से किए जाएंगे। इसके अतिरिक्त, आपके पास अपना एनजीओ दर्पण प्रमाणपत्र सीधे एंटिटी लॉकर से डाउनलोड करने की सुविधा होगी।">Important Notice: Going forward, all NGO registrations on the NGO Darpan Portal will be carried out through Entity Locker. Additionally, you will have the facility to download your NGO Darpan Certificate directly from Entity Locker.</span>
+    <span aria-hidden="true" data-en="Important Notice: Going forward, all NGO registrations on the NGO Darpan Portal will be carried out through Entity Locker. Additionally, you will have the facility to download your NGO Darpan Certificate directly from Entity Locker." data-hi="महत्वपूर्ण सूचना: अब से, एनजीओ दर्पण पोर्टल पर सभी एनजीओ पंजीकरण एंटिटी लॉकर के माध्यम से किए जाएंगे। इसके अतिरिक्त, आपके पास अपना एनजीओ दर्पण प्रमाणपत्र सीधे एंटिटी लॉकर से डाउनलोड करने की सुविधा होगी।">Important Notice: Going forward, all NGO registrations on the NGO Darpan Portal will be carried out through Entity Locker. Additionally, you will have the facility to download your NGO Darpan Certificate directly from Entity Locker.</span>
+    <span aria-hidden="true" data-en="Important Notice: Going forward, all NGO registrations on the NGO Darpan Portal will be carried out through Entity Locker. Additionally, you will have the facility to download your NGO Darpan Certificate directly from Entity Locker." data-hi="महत्वपूर्ण सूचना: अब से, एनजीओ दर्पण पोर्टल पर सभी एनजीओ पंजीकरण एंटिटी लॉकर के माध्यम से किए जाएंगे। इसके अतिरिक्त, आपके पास अपना एनजीओ दर्पण प्रमाणपत्र सीधे एंटिटी लॉकर से डाउनलोड करने की सुविधा होगी।">Important Notice: Going forward, all NGO registrations on the NGO Darpan Portal will be carried out through Entity Locker. Additionally, you will have the facility to download your NGO Darpan Certificate directly from Entity Locker.</span>
   </div>
 </div>
 

@@ -146,7 +146,8 @@
   .ctrl input:not(:placeholder-shown) ~ .flabel,
   .ctrl select:focus ~ .flabel,
   .ctrl select:valid ~ .flabel,
-  .fld.auto .flabel{top:0;left:11px;transform:translateY(-50%);font-size:.74rem;font-weight:600;color:var(--muted);
+  .fld.auto .flabel,
+  .fld.rc-fixed .flabel{top:0;left:11px;transform:translateY(-50%);font-size:.74rem;font-weight:600;color:var(--muted);
     letter-spacing:.01em;background:var(--surface);padding:0 6px;border-radius:7px;max-width:calc(100% - 24px);}
   .ctrl.sel::after{content:"";position:absolute;right:14px;top:50%;transform:translateY(-50%);width:11px;height:7px;pointer-events:none;
     background:no-repeat center/contain url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='11' height='7' viewBox='0 0 11 7'%3E%3Cpath d='M1 1l4.5 4.5L10 1' fill='none' stroke='%2310224C' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");}
@@ -208,10 +209,10 @@
   .fld.rc-fixed .ctrl input,.fld.rc-fixed .ctrl select{color:#46536B;cursor:not-allowed;-webkit-text-fill-color:#46536B;}
   .fld.rc-fixed .verify-btn{display:none;}
   .fld.rc-fixed .flabel{color:#6B7688;}
-  .rc-lock{position:absolute;top:-8px;right:10px;z-index:2;display:inline-flex;align-items:center;gap:4px;
-    background:#EEF1F6;border:1px solid #D5DCE8;border-radius:100px;padding:1px 8px 1px 6px;
-    font-size:.62rem;font-weight:700;color:#6B7688;}
-  .rc-lock svg{width:10px;height:10px;}
+  .rc-lock{position:absolute;top:-9px;right:9px;z-index:2;display:inline-flex;align-items:center;
+    background:#fff;border:1px solid #E3E7EE;border-radius:6px;padding:2px 4px;line-height:0;
+    box-shadow:0 1px 2px rgba(16,34,76,.08);}
+  .rc-lock img{width:15px;height:15px;display:block;object-fit:contain;}
   .fld-top{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:5px;}
   .fld-top .mini-lbl{margin-bottom:0;}
   .auto-tag{background:#E9F8F0;color:#0B6B4A;border:1px solid #BBE7D2;border-radius:100px;
@@ -357,6 +358,19 @@
   .btn-draft{font:inherit;font-weight:700;font-size:.95rem;color:var(--navy);background:#fff;border:1px solid var(--line);
     border-radius:10px;padding:12px 24px;cursor:pointer;transition:background .15s ease;}
   .btn-draft:hover{background:#F1F4F9;}
+
+  /* ---------- step 5: review (read-only) ---------- */
+  .rv-sec{margin:0 0 22px;}
+  .rv-h{font-family:var(--display);font-weight:800;font-size:1rem;color:var(--navy);margin:0 0 12px;
+    padding-bottom:7px;border-bottom:1px solid var(--line);}
+  .rv-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:15px 26px;}
+  .rv-item{display:flex;flex-direction:column;gap:3px;min-width:0;}
+  .rv-item.wide{grid-column:1 / -1;}
+  .rv-lbl{font-size:.72rem;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:.02em;}
+  .rv-val{font-size:.9rem;color:var(--navy);font-weight:600;word-break:break-word;}
+  .rv-empty{font-size:.86rem;color:var(--muted);margin:0;}
+  @media(max-width:760px){ .rv-grid{grid-template-columns:1fr 1fr;} }
+  @media(max-width:520px){ .rv-grid{grid-template-columns:1fr;} }
 
   /* ---------- locked (disabled until RC uploaded) ---------- */
   .form-grid.locked{opacity:.55;}
@@ -627,6 +641,12 @@
         </div>
         <div class="form-grid">
           <div class="fld">
+            <div class="ctrl sel"><select id="fRegState" required><option value="" disabled selected hidden></option></select><label class="flabel">State <span class="req">*</span></label></div>
+          </div>
+          <div class="fld">
+            <div class="ctrl sel"><select id="fRegDistrict" required><option value="" disabled selected hidden></option></select><label class="flabel">District <span class="req">*</span></label></div>
+          </div>
+          <div class="fld">
             <div class="ctrl sel"><select id="fRegSubDist" required><option value="" disabled selected hidden></option></select><label class="flabel">Sub-District <span class="req">*</span></label></div>
           </div>
           <div class="fld">
@@ -825,9 +845,25 @@
         <div class="actions">
           <button type="button" class="btn-cancel" id="backBtn3">Back</button>
           <button type="button" class="btn-draft" id="draftBtn3">Save As Draft</button>
-          <button type="submit" class="btn-esign" id="esignBtn">Submit</button>
+          <button type="submit" class="btn-next" id="esignBtn">Next
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+          </button>
         </div>
       </form>
+
+      <!-- ============ STEP 5 — Review & Confirm ============ -->
+      <div id="reviewScreen" hidden>
+        <div class="sec-title">Review &amp; Confirm</div>
+        <div class="note-line">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 7.6v.01" stroke-linecap="round"/></svg>
+          Please review every detail below. Use “Edit Details” to make changes, or “Final Submit” to complete your registration.
+        </div>
+        <div id="reviewBody"></div>
+        <div class="actions">
+          <button type="button" class="btn-cancel" id="editDetailsBtn">Edit Details</button>
+          <button type="button" class="btn-next" id="finalSubmitBtn">Final Submit</button>
+        </div>
+      </div>
     </div>
 
     <div class="panel-foot">
@@ -843,6 +879,23 @@
 <div class="cert-modal" id="certModal" role="dialog" aria-modal="true" aria-label="DARPAN Certificate of Registration">
   <button type="button" class="cert-close" id="certClose" aria-label="Close certificate">&times;</button>
   <img src="/icons/certificate.png" alt="DARPAN Certificate of Registration">
+</div>
+
+<!-- Final submission confirmation -->
+<div class="otp-modal" id="confirmModal" role="dialog" aria-modal="true" aria-labelledby="confirmTitle">
+  <div class="otp-dialog" style="max-width:428px;">
+    <div class="otp-head">
+      <h3 id="confirmTitle">Confirm Submission</h3>
+      <button type="button" class="otp-close" id="confirmClose" aria-label="Close">&times;</button>
+    </div>
+    <div class="otp-body">
+      <p class="otp-to">Are you sure you want to submit your NGO DARPAN registration? Once submitted, the details cannot be changed.</p>
+      <div class="otp-actions" style="display:flex;gap:10px;">
+        <button type="button" class="btn-draft" id="confirmCancel" style="flex:1;">Cancel</button>
+        <button type="button" class="otp-verify" id="confirmYes" style="flex:1;">Yes, Submit</button>
+      </div>
+    </div>
+  </div>
 </div>
 
 <!-- Success popup — DARPAN ID generated -->
@@ -1060,11 +1113,10 @@
      EntityLocker session (email/mobile) and PAN verification (PAN date). */
   var RC_DEMO = { pan:'AABAA4821P', email:'apskif.federation@gmail.com', mobile:'9440012345', panDate:'2016-08-12' };
 
-  /* Every auto-filled field is locked (non-editable): the ones read straight
-     from the certificate and the demo stand-ins alike, since all of them will
-     be sourced from the RC / verification services in production. */
-  var RC_LOCKED = ['fOrgName','fRegNo','fRegDate','fNpoType','fState','fDistrict',
-                   'fActName','fAuthority','fMembers','fPan','fPanDate','fEmail','fMobile'];
+  /* Only these auto-filled fields are locked (non-editable) — the identity,
+     contact and PAN values that come from authoritative sources. The rest are
+     still auto-filled from the RC but remain editable for correction. */
+  var RC_LOCKED = ['fOrgName','fEmail','fMobile','fPan','fPanDate','fState'];
 
   function lockRcFields(lock){
     for(var i=0;i<RC_LOCKED.length;i++){
@@ -1076,7 +1128,7 @@
       if(lock && !badge){
         badge=document.createElement('span');
         badge.className='rc-lock';
-        badge.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>From RC';
+        badge.innerHTML='<img src="/icons/entity_locker.png" alt="Fetched via EntityLocker">';
         f.appendChild(badge);
       } else if(!lock && badge){ badge.remove(); }
     }
@@ -1239,25 +1291,47 @@
   var form3 = document.getElementById('regForm3');
   var form4 = document.getElementById('regForm4');
 
+  var reviewScreen = document.getElementById('reviewScreen');
+
   function goStep(n){
     form1.hidden = n!==1;
     form2.hidden = n!==2;
     form3.hidden = n!==3;
     form4.hidden = n!==4;
+    reviewScreen.hidden = true;
     for(var i=0;i<steps.length;i++) steps[i].classList.toggle('active', i === n-1);
     setProgress(n);
     window.scrollTo({top:0,behavior:'smooth'});
   }
 
+  /* Registered-address State & District come from the RC (mirrored from
+     Step 1). Show them prefilled and locked, like the other RC fields. */
+  function setFixedSelect(id, value){
+    var s=document.getElementById(id); if(!s) return;
+    fillOptions(s, value ? [value] : []);
+    if(value){ s.value=value; }
+    s.disabled=true;
+    var f=s.closest('.fld'); if(!f) return;
+    f.classList.add('rc-fixed');
+    if(value && !f.querySelector('.rc-lock')){
+      var b=document.createElement('span'); b.className='rc-lock';
+      b.innerHTML='<img src="/icons/entity_locker.png" alt="Fetched via EntityLocker">';
+      f.appendChild(b);
+    }
+  }
+
   /* step 1 -> step 2 */
   form1.addEventListener('submit',function(e){
     e.preventDefault();
-    /* registered-address sub-district follows the district captured in Step 1 */
+    /* registered address: State & District from the RC, then Sub-District list */
+    var s1 = document.getElementById('fState');
     var d1 = document.getElementById('fDistrict');
+    setFixedSelect('fRegState', s1 && s1.value);
+    setFixedSelect('fRegDistrict', d1 && d1.value);
     fillOptions(document.getElementById('fRegSubDist'), subDistrictsFor(d1 && d1.value));
 
     /* correspondence state list mirrors Step 1's state dropdown */
-    var s1 = document.getElementById('fState'), corrState = document.getElementById('fCorrState');
+    var corrState = document.getElementById('fCorrState');
     if(s1 && corrState && corrState.options.length <= 1){
       var list=[]; for(var i=0;i<s1.options.length;i++){ var o=s1.options[i]; if(!(o.value===''&&o.disabled)) list.push(o.value||o.text); }
       fillOptions(corrState, list);
@@ -1562,14 +1636,135 @@
 
   document.getElementById('backBtn3').addEventListener('click',function(){ goStep(3); });
   document.getElementById('draftBtn3').addEventListener('click',function(){ alert('Draft saved (demo).'); });
+
+  /* ================= STEP 5 — Review & Confirm ================= */
+  var reviewBody = document.getElementById('reviewBody');
+
+  function rv(id){ var el=document.getElementById(id); return el && el.value ? String(el.value).trim() : ''; }
+  function radioVal(name){ var r=document.querySelector('input[name="'+name+'"]:checked'); return r ? r.value : ''; }
+  function fmtDate(v){ if(!v) return ''; var m=/^(\d{4})-(\d{2})-(\d{2})$/.exec(v); return m ? m[3]+'-'+m[2]+'-'+m[1] : v; }
+  function fileName(inputId){ var el=document.getElementById(inputId); return el && el.files && el.files.length ? el.files[0].name : ''; }
+  function cap(s){ return s ? s.charAt(0).toUpperCase()+s.slice(1) : ''; }
+
+  function rvSection(title, pairs){
+    var h='<div class="rv-sec"><div class="rv-h">'+esc(title)+'</div><div class="rv-grid">';
+    for(var i=0;i<pairs.length;i++){
+      var wide=pairs[i][2]?' wide':'';
+      h+='<div class="rv-item'+wide+'"><span class="rv-lbl">'+esc(pairs[i][0])+'</span>'+
+         '<span class="rv-val">'+(pairs[i][1]?esc(pairs[i][1]):'—')+'</span></div>';
+    }
+    return h+'</div></div>';
+  }
+
+  function rvMembers(){
+    var h='<div class="rv-sec"><div class="rv-h">Member Details ('+members.length+')</div>';
+    if(!members.length) return h+'<p class="rv-empty">No members added.</p></div>';
+    h+='<div class="tbl-wrap"><table class="mem-tbl"><thead><tr><th>Sr.</th><th>Name</th>'+
+       '<th>Designation</th><th>PAN</th><th>Mobile</th><th>Email</th></tr></thead><tbody>';
+    for(var i=0;i<members.length;i++){
+      var m=members[i];
+      h+='<tr><td>'+(i+1)+'</td><td>'+(m.name?esc(m.name):'—')+'</td><td>'+(m.desig?esc(m.desig):'—')+'</td>'+
+         '<td><span class="mask">'+mask(m.pan)+'</span></td><td><span class="mask">'+mask(m.mobile)+'</span></td>'+
+         '<td>'+(m.email?esc(m.email):'—')+'</td></tr>';
+    }
+    return h+'</tbody></table></div></div>';
+  }
+
+  function buildReview(){
+    var html='';
+    html+=rvSection('Organization Details',[
+      ['Name of Organization', rv('fOrgName'), true],
+      ['Organization PAN', rv('fPan')],
+      ['PAN Incorporation Date', fmtDate(rv('fPanDate'))],
+      ['Email ID', rv('fEmail')],
+      ['Mobile Number', rv('fMobile')],
+      ['Registration Number', rv('fRegNo')],
+      ['Date of Registration', fmtDate(rv('fRegDate'))],
+      ['Registration Renewed', rv('fRenewed')],
+      ['Last Renewal Date', fmtDate(rv('fRenewDate'))],
+      ['NPO Type', rv('fNpoType')],
+      ['State of Registration', rv('fState')],
+      ['District of Registration', rv('fDistrict')],
+      ['Act Name', rv('fActName')],
+      ['Registering Authority', rv('fAuthority')],
+      ['Total Office Bearers', rv('fMembers')]
+    ]);
+    html+=rvSection('NPO Registration Details',[
+      ['NPO Registration Validity Available', rv('fValidityAvail')],
+      ['Date of NPO Registration Validity', fmtDate(rv('fValidityDate'))],
+      ['FCRA Available', rv('fFcraAvail')],
+      ['FCRA Registration Number', rv('fFcraNo')],
+      ['FCRA Date of Registration', fmtDate(rv('fFcraDate'))],
+      ['FCRA Expiry Date', fmtDate(rv('fFcraExpiry'))],
+      ['NPO URL', rv('fNpoUrl')]
+    ]);
+    html+=rvSection('Registered Address',[
+      ['State', rv('fRegState')],
+      ['District', rv('fRegDistrict')],
+      ['Sub-District', rv('fRegSubDist')],
+      ['Pincode', rv('fRegPin')],
+      ['Address', rv('fRegAddr'), true]
+    ]);
+    html+=rvSection('Correspondence Address',[
+      ['State', rv('fCorrState')],
+      ['District', rv('fCorrDistrict')],
+      ['Sub-District', rv('fCorrSubDist')],
+      ['Pincode', rv('fCorrPin')],
+      ['Address', rv('fCorrAddr'), true]
+    ]);
+    html+=rvSection('Parent Organization & Documents',[
+      ['Parent Organization', cap(radioVal('parentOrg'))],
+      ['Registration Certificate', fileName('uFile')],
+      ['MoU / Supporting Document', fileName('mouFile')]
+    ]);
+    html+=rvMembers();
+    html+=rvSection('Witness Details',[
+      ['Name', rv('wName')],
+      ['Date of Birth', fmtDate(rv('wDob'))],
+      ['Gender', rv('wGender')],
+      ['Parent Type', rv('wParentType')],
+      ['Parent Name', rv('wParentName')],
+      ['Aadhaar Number', rv('wAadhaar')],
+      ['Mobile', rv('wMobile')],
+      ['State', rv('wState')],
+      ['District', rv('wDistrict')],
+      ['Sub-District', rv('wSubDist')],
+      ['Pincode', rv('wPin')],
+      ['Address', rv('wAddr'), true]
+    ]);
+    reviewBody.innerHTML=html;
+  }
+
+  function showReview(){
+    form1.hidden=form2.hidden=form3.hidden=form4.hidden=true;
+    reviewScreen.hidden=false;
+    buildReview();
+    setProgress(4);
+    window.scrollTo({top:0,behavior:'smooth'});
+  }
+
+  /* step 4 -> review */
+  form4.addEventListener('submit',function(e){
+    e.preventDefault();
+    showReview();
+  });
+  document.getElementById('editDetailsBtn').addEventListener('click',function(){ goStep(1); });
+
   /* ---------- success popup ---------- */
   var successModal=document.getElementById('successModal');
   function successOpen(){ successModal.classList.add('open'); document.body.style.overflow='hidden'; }
   function successClose(){ successModal.classList.remove('open'); document.body.style.overflow=''; }
 
-  form4.addEventListener('submit',function(e){
-    e.preventDefault();
-    setProgress(4);
+  /* ---------- final-submit confirmation ---------- */
+  var confirmModal=document.getElementById('confirmModal');
+  function confirmOpen(){ confirmModal.classList.add('open'); document.body.style.overflow='hidden'; }
+  function confirmCloseFn(){ confirmModal.classList.remove('open'); document.body.style.overflow=''; }
+  document.getElementById('finalSubmitBtn').addEventListener('click',confirmOpen);
+  document.getElementById('confirmCancel').addEventListener('click',confirmCloseFn);
+  document.getElementById('confirmClose').addEventListener('click',confirmCloseFn);
+  confirmModal.addEventListener('click',function(e){ if(e.target===confirmModal) confirmCloseFn(); });
+  document.getElementById('confirmYes').addEventListener('click',function(){
+    confirmCloseFn();
     successOpen();
   });
 
@@ -1590,11 +1785,12 @@
   document.getElementById('certClose').addEventListener('click',certClose);
   certModal.addEventListener('click',function(e){ if(e.target===certModal) certClose(); });
 
-  /* Esc closes the certificate first, then the success popup */
+  /* Esc closes the topmost open layer */
   document.addEventListener('keydown',function(e){
     if(e.key!=='Escape') return;
     if(certModal.classList.contains('open')) certClose();
     else if(successModal.classList.contains('open')) successClose();
+    else if(confirmModal.classList.contains('open')) confirmCloseFn();
   });
   document.getElementById('succCheck').addEventListener('click',function(e){
     e.preventDefault();

@@ -35,6 +35,8 @@
   .notice{display:flex;align-items:stretch;background:#FBDCCB;color:#5A2408;font-size:.88rem;}
   .notice .tag{flex:0 0 auto;display:flex;align-items:center;background:#D93511;color:#fff;font-weight:800;font-size:.8rem;padding:8px 14px;}
   .notice .txt{padding:8px 16px;align-self:center;}
+  .notice .txt-line{display:block;}
+  .notice .txt-line.lead{font-weight:800;margin-bottom:3px;}
   .notice b{color:#3F1704;}
 
   /* ---------- split shell ---------- */
@@ -240,7 +242,10 @@
 <!-- ============ IMPORTANT NOTICE ============ -->
 <div class="notice">
   <span class="tag">Important Notice:</span>
-  <span class="txt">If registration is not completed within <b>30 days</b> from initiation, the profile will be <b>permanently removed</b> from the portal, and the user will need to <b>reapply</b></span>
+  <span class="txt">
+    <span class="txt-line lead">Going forward, all NGO registrations on the NGO Darpan Portal will be carried out through Entity Locker. Additionally, you will have the facility to download your NGO Darpan Certificate directly from Entity Locker.</span>
+    <span class="txt-line">If registration is not completed within <b>30 days</b> from initiation, the profile will be <b>permanently removed</b> from the portal, and the user will need to <b>reapply</b></span>
+  </span>
 </div>
 
 <div class="split">
@@ -255,7 +260,6 @@
         <div class="card-body">
           <div class="eyebrow-row">
             <span class="eyebrow">Let's get you started</span>
-            <a class="reg-form-link" href="/registration-form.html">Registration Form</a>
           </div>
           <div class="card-head">
             <h1>Login an Account</h1>

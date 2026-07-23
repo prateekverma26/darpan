@@ -261,7 +261,7 @@
     btn.textContent=r.value==='yes'?'Sign in with Entity Locker →':'Create Entity Locker account →';
     note.style.display='none';
   }));
-  const EL_SIGNIN='https://entityaccounts.dl6.in/signin/smart_v2/d9ffdfc0dcf9ad0a4be7fd3d5e313b856db18c489251842e9fcd62e6fc79d4cb--en';
+  const EL_SIGNIN='/entitylocker-signin.html';
   const EL_ORGREG='https://entityaccounts.dl6.in/orgreg/pan/d9ffdfc0dcf9ad0a4be7fd3d5e313b856db18c489251842e9fcd62e6fc79d4cb--en';
   document.getElementById('regForm').addEventListener('submit',e=>{
     e.preventDefault();
@@ -269,8 +269,14 @@
     if(!sel)return;
     note.style.display='block';
     note.style.background='#DDF0E8';note.style.border='1px solid #A9D9C4';note.style.color='#0E7C5A';
-    note.textContent='Opening Entity Locker in a new tab…';
-    window.open(sel.value==='yes' ? EL_SIGNIN : EL_ORGREG, '_blank', 'noopener');
+    if(sel.value==='yes'){
+      /* existing account -> local Entity Locker sign-in flow */
+      note.textContent='Redirecting to Entity Locker sign-in…';
+      window.location.href=EL_SIGNIN;
+    } else {
+      note.textContent='Opening Entity Locker in a new tab…';
+      window.open(EL_ORGREG, '_blank', 'noopener');
+    }
   });
 })();
 </script>
